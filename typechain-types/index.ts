@@ -24,6 +24,8 @@ export type { ClaimTopicsFacet } from "./contracts/faces/ClaimTopicsFacet";
 export { ClaimTopicsFacet__factory } from "./factories/contracts/faces/ClaimTopicsFacet__factory";
 export type { ComplianceFacet } from "./contracts/faces/ComplianceFacet";
 export { ComplianceFacet__factory } from "./factories/contracts/faces/ComplianceFacet__factory";
+export type { DiamondCutFacet } from "./contracts/faces/DiamondCutFacet";
+export { DiamondCutFacet__factory } from "./factories/contracts/faces/DiamondCutFacet__factory";
 export type { IdentityFacet } from "./contracts/faces/IdentityFacet";
 export { IdentityFacet__factory } from "./factories/contracts/faces/IdentityFacet__factory";
 export type { RolesFacet } from "./contracts/faces/RolesFacet";

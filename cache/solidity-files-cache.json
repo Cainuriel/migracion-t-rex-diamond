@@ -190,8 +190,8 @@
       ]
     },
     "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\InitDiamond.sol": {
-      "lastModificationDate": 1749746559663,
-      "contentHash": "325e6ed3edbd0cd7792036fc9d804900",
+      "lastModificationDate": 1749760256665,
+      "contentHash": "8a8b4b20b346ac60544b919cc374d399",
       "sourceName": "contracts/InitDiamond.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -220,7 +220,8 @@
       "imports": [
         "./interfaces/IDiamondCut.sol",
         "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol",
-        "./libraries/LibDiamond.sol"
+        "./libraries/LibDiamond.sol",
+        "./libraries/LibAppStorage.sol"
       ],
       "versionPragmas": [
         "0.8.17"
@@ -681,6 +682,45 @@
       ],
       "artifacts": [
         "ClaimTopicsFacet"
+      ]
+    },
+    "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\faces\\DiamondCutFacet.sol": {
+      "lastModificationDate": 1749758998440,
+      "contentHash": "0e72c98bc0ce06ccb55fd8ebd3c55f1f",
+      "sourceName": "contracts/faces/DiamondCutFacet.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../interfaces/IDiamondCut.sol",
+        "../libraries/LibDiamond.sol"
+      ],
+      "versionPragmas": [
+        "0.8.17"
+      ],
+      "artifacts": [
+        "DiamondCutFacet"
       ]
     }
   }

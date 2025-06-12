@@ -46,6 +46,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ComplianceFacet__factory>;
     getContractFactory(
+      name: "DiamondCutFacet",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.DiamondCutFacet__factory>;
+    getContractFactory(
       name: "IdentityFacet",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IdentityFacet__factory>;
@@ -111,6 +115,11 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.ComplianceFacet>;
     getContractAt(
+      name: "DiamondCutFacet",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.DiamondCutFacet>;
+    getContractAt(
       name: "IdentityFacet",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
@@ -174,6 +183,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.ComplianceFacet>;
     deployContract(
+      name: "DiamondCutFacet",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.DiamondCutFacet>;
+    deployContract(
       name: "IdentityFacet",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.IdentityFacet>;
@@ -238,6 +251,11 @@ declare module "hardhat/types/runtime" {
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.ComplianceFacet>;
+    deployContract(
+      name: "DiamondCutFacet",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.DiamondCutFacet>;
     deployContract(
       name: "IdentityFacet",
       args: any[],

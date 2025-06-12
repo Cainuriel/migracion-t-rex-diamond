@@ -3,6 +3,7 @@
 /* eslint-disable */
 export { ClaimTopicsFacet__factory } from "./ClaimTopicsFacet__factory";
 export { ComplianceFacet__factory } from "./ComplianceFacet__factory";
+export { DiamondCutFacet__factory } from "./DiamondCutFacet__factory";
 export { IdentityFacet__factory } from "./IdentityFacet__factory";
 export { RolesFacet__factory } from "./RolesFacet__factory";
 export { TokenFacet__factory } from "./TokenFacet__factory";
