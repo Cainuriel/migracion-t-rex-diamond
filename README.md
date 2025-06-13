@@ -123,5 +123,11 @@ InitDiamond.sol
 
 ---
 
-   
+##  Recursos Adicionales
+
+- [Documentación T-REX](../docs/)
+- [Tests del sistema](../test/)
+- [Contratos fuente](../contracts/)
+- [EIP-2535 Diamond Standard](https://eips.ethereum.org/EIPS/eip-2535)
+- [T-REX Standard](https://github.com/TokenySolutions/T-REX)
 
