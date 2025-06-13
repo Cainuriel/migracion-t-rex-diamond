@@ -1,55 +1,55 @@
-# Diamond.sol - Contrato Principal del Patrón Diamond
+# Diamond.sol - Main Contract of the Diamond Pattern
 
-## 🎯 **Propósito**
+## **Purpose**
 
-El `Diamond.sol` es el **contrato principal** que implementa el patrón Diamond (EIP-2535) para el sistema T-REX. Actúa como un **proxy inteligente** que delega llamadas a diferentes facets según el selector de función.
+`Diamond.sol` is the **main contract** implementing the Diamond pattern (EIP-2535) for the T-REX system. It acts as a **smart proxy** that delegates calls to different facets based on the function selector.
 
 ---
 
-## 🏗️ **Arquitectura**
+## **Architecture**
 
 ```
 Diamond.sol (Proxy Core)
-    ├── Constructor: Registra DiamondCutFacet
-    ├── fallback(): Delega llamadas a facets
-    ├── receive(): Recibe ETH
-    └── LibDiamond: Gestiona routing y storage
+    ├── Constructor: Registers DiamondCutFacet
+    ├── fallback(): Delegates calls to facets
+    ├── receive(): Receives ETH
+    └── LibDiamond: Manages routing and storage
 ```
 
 ---
 
-## 🔧 **Funcionalidades Principales**
+## **Main Functionalities**
 
-### **1. Constructor - Inicialización**
+### **1. Constructor - Initialization**
 ```solidity
 constructor(address diamondCutFacet) {
     LibDiamond.setContractOwner(msg.sender);
     
-    // Registra el primer facet (DiamondCutFacet)
+    // Registers the first facet (DiamondCutFacet)
     bytes4[] memory functionSelectors = new bytes4[](1);
     functionSelectors[0] = IDiamondCut.diamondCut.selector;
     
-    // Ejecuta el primer "cut" para registrar upgradeability
+    // Executes the first "cut" to register upgradeability
     LibDiamond.diamondCut(cut, address(0), new bytes(0));
 }
 ```
 
-**¿Qué hace?**
-- ✅ Establece el owner del Diamond
-- ✅ Registra automáticamente el `DiamondCutFacet`
-- ✅ Habilita la capacidad de upgrade desde el inicio
+**What does it do?**
+- ✅ Sets the owner of the Diamond
+- ✅ Automatically registers the `DiamondCutFacet`
+- ✅ Enables upgradeability from the start
 
-### **2. fallback() - Router Principal**
+### **2. fallback() - Main Router**
 ```solidity
 fallback() external payable {
-    // 1. Obtiene el storage del Diamond
+    // 1. Gets the Diamond's storage
     LibDiamond.DiamondStorage storage ds;
     
-    // 2. Busca qué facet maneja esta función
+    // 2. Finds which facet handles this function
     address facet = ds.selectorToFacetAndPosition[msg.sig].facetAddress;
     require(facet != address(0), "Diamond: Function does not exist");
     
-    // 3. Delega la llamada al facet correspondiente
+    // 3. Delegates the call to the corresponding facet
     assembly {
         calldatacopy(0, 0, calldatasize())
         let result := delegatecall(gas(), facet, 0, calldatasize(), 0, 0)
@@ -61,177 +61,177 @@ fallback() external payable {
 }
 ```
 
-**¿Cómo funciona el routing?**
-1. **Captura la llamada**: Cualquier función no definida llega aquí
-2. **Busca el facet**: Usa `msg.sig` para encontrar el facet correspondiente
-3. **Delega**: Usa `delegatecall` para ejecutar en el contexto del Diamond
-4. **Retorna**: Pasa la respuesta al caller original
+**How does the routing work?**
+1. **Captures the call**: Any undefined function arrives here
+2. **Finds the facet**: Uses `msg.sig` to find the corresponding facet
+3. **Delegates**: Uses `delegatecall` to execute in the Diamond's context
+4. **Returns**: Passes the response to the original caller
 
-### **3. receive() - Recepción de ETH**
+### **3. receive() - Receiving ETH**
 ```solidity
 receive() external payable {}
 ```
-- ✅ Permite al Diamond recibir ETH directamente
-- ✅ Necesario para operaciones que requieren fondos
+- ✅ Allows the Diamond to receive ETH directly
+- ✅ Necessary for operations requiring funds
 
 ---
 
-## 🔄 **Flujo de Operación**
+## 🔄 **Operation Flow**
 
-### **Ejemplo: Llamada a `token.transfer(to, amount)`**
+### **Example: Calling `token.transfer(to, amount)`**
 
 ```mermaid
 graph LR
-    A[Usuario] --> B[Diamond.sol]
+    A[User] --> B[Diamond.sol]
     B --> C[fallback()]
-    C --> D[Busca selector]
+    C --> D[Find selector]
     D --> E[TokenFacet]
-    E --> F[Ejecuta transfer]
-    F --> G[Retorna resultado]
+    E --> F[Execute transfer]
+    F --> G[Return result]
     G --> A
 ```
 
-1. **Usuario llama**: `diamond.transfer(address, uint256)`
-2. **Diamond recibe**: No tiene función `transfer`, va a `fallback()`
-3. **Busca facet**: `msg.sig` = `transfer(address,uint256)` → `TokenFacet`
-4. **Delega**: `delegatecall` a `TokenFacet.transfer()`
-5. **Ejecuta**: Transfer se ejecuta en contexto del Diamond
-6. **Retorna**: Resultado vuelve al usuario
+1. **User calls**: `diamond.transfer(address, uint256)`
+2. **Diamond receives**: No `transfer` function, goes to `fallback()`
+3. **Finds facet**: `msg.sig` = `transfer(address,uint256)` → `TokenFacet`
+4. **Delegates**: `delegatecall` to `TokenFacet.transfer()`
+5. **Executes**: Transfer runs in the Diamond's context
+6. **Returns**: Result goes back to the user
 
 ---
 
-## 🎯 **Casos de Uso en T-REX**
+## **Use Cases in T-REX**
 
-### **1. Operaciones de Token**
+### **1. Token Operations**
 ```javascript
-// Estas llamadas van a TokenFacet
+// These calls go to TokenFacet
 await diamond.transfer(recipient, amount);
 await diamond.mint(investor, tokens);
 await diamond.balanceOf(account);
 ```
 
-### **2. Gestión de Identidades**
+### **2. Identity Management**
 ```javascript
-// Estas llamadas van a IdentityFacet
+// These calls go to IdentityFacet
 await diamond.registerIdentity(investor, identityContract, country);
 await diamond.isVerified(investor);
 ```
 
 ### **3. Compliance**
 ```javascript
-// Estas llamadas van a ComplianceFacet
+// These calls go to ComplianceFacet
 await diamond.setMaxBalance(limit);
 await diamond.canTransfer(from, to, amount);
 ```
 
 ### **4. Upgrades**
 ```javascript
-// Esta llamada va a DiamondCutFacet
+// This call goes to DiamondCutFacet
 await diamond.diamondCut(cuts, initAddress, initData);
 ```
 
 ---
 
-## 🛡️ **Características de Seguridad**
+## **Security Features**
 
-### **1. Delegatecall Seguro**
+### **1. Safe Delegatecall**
 ```solidity
-// Valida que el facet existe
+// Validates that the facet exists
 require(facet != address(0), "Diamond: Function does not exist");
 
-// Usa delegatecall (mantiene contexto del Diamond)
+// Uses delegatecall (keeps Diamond's context)
 delegatecall(gas(), facet, 0, calldatasize(), 0, 0)
 ```
 
 ### **2. Storage Separation**
-- ✅ **Diamond Storage**: Para routing de funciones
-- ✅ **App Storage**: Para datos de la aplicación
-- ✅ **Sin colisiones**: Cada storage en slot específico
+- ✅ **Diamond Storage**: For function routing
+- ✅ **App Storage**: For application data
+- ✅ **No collisions**: Each storage in a specific slot
 
 ### **3. Ownership Control**
-- ✅ Solo el owner puede hacer diamond cuts
-- ✅ Ownership transferible vía `LibDiamond`
-- ✅ Control granular por facet
+- ✅ Only the owner can perform diamond cuts
+- ✅ Ownership transferable via `LibDiamond`
+- ✅ Granular control per facet
 
 ---
 
-## ⚡ **Ventajas del Diseño**
+## **Design Advantages**
 
-### **1. Modularidad**
+### **1. Modularity**
 ```diff
-+ ✅ Cada funcionalidad en su propio facet
-+ ✅ Fácil mantenimiento y testing
-+ ✅ Separación clara de responsabilidades
++ ✅ Each functionality in its own facet
++ ✅ Easy maintenance and testing
++ ✅ Clear separation of responsibilities
 ```
 
 ### **2. Upgradeability**
 ```diff
-+ ✅ Añadir nuevas funciones sin redeployar
-+ ✅ Corregir bugs en facets específicos
-+ ✅ Remover funcionalidades obsoletas
++ ✅ Add new functions without redeploying
++ ✅ Fix bugs in specific facets
++ ✅ Remove obsolete functionalities
 ```
 
-### **3. Eficiencia de Gas**
+### **3. Gas Efficiency**
 ```diff
-+ ✅ Un solo contrato para todas las operaciones
-+ ✅ Sin overhead de múltiples contratos
-+ ✅ Storage optimizado
++ ✅ Single contract for all operations
++ ✅ No overhead from multiple contracts
++ ✅ Optimized storage
 ```
 
-### **4. Compatibilidad**
+### **4. Compatibility**
 ```diff
-+ ✅ Compatible con herramientas existentes
-+ ✅ Interfaces estándar (ERC20, ERC3643)
-+ ✅ Integración transparente
++ ✅ Compatible with existing tools
++ ✅ Standard interfaces (ERC20, ERC3643)
++ ✅ Transparent integration
 ```
 
 ---
 
-## 🚨 **Consideraciones Importantes**
+## **Important Considerations**
 
 ### **1. Delegatecall Risks**
-- ⚠️ Los facets pueden modificar el storage del Diamond
-- ⚠️ Necesario confiar en la implementación de facets
-- ⚠️ Testing exhaustivo es crítico
+- ⚠️ Facets can modify the Diamond's storage
+- ⚠️ Trust in facet implementation is required
+- ⚠️ Thorough testing is critical
 
 ### **2. Function Selector Collisions**
-- ⚠️ Diferentes facets no pueden tener mismos selectores
-- ⚠️ `LibDiamond` valida esto automáticamente
-- ⚠️ Planificación cuidadosa de interfaces
+- ⚠️ Different facets cannot have the same selectors
+- ⚠️ `LibDiamond` validates this automatically
+- ⚠️ Careful interface planning is needed
 
 ### **3. Complexity**
-- ⚠️ Más complejo que contratos tradicionales
-- ⚠️ Debugging puede ser más difícil
-- ⚠️ Requiere entendimiento del patrón Diamond
+- ⚠️ More complex than traditional contracts
+- ⚠️ Debugging can be harder
+- ⚠️ Requires understanding of the Diamond pattern
 
 ---
 
-## 📋 **Integración con el Ecosistema T-REX**
+## **Integration with the T-REX Ecosystem**
 
-### **En el contexto T-REX:**
-1. **Cumplimiento regulatorio**: Facets modulares para diferentes jurisdicciones
-2. **Identity management**: Integración OnChain-ID vía IdentityFacet
-3. **Compliance automation**: Reglas automáticas vía ComplianceFacet
-4. **Future-proofing**: Capacidad de añadir nuevos requirements
+### **In the T-REX context:**
+1. **Regulatory compliance**: Modular facets for different jurisdictions
+2. **Identity management**: OnChain-ID integration via IdentityFacet
+3. **Compliance automation**: Automated rules via ComplianceFacet
+4. **Future-proofing**: Ability to add new requirements
 
 ### **Deployment flow:**
 ```javascript
 1. Deploy Diamond.sol
 2. Deploy DiamondCutFacet
-3. Deploy otros facets (Token, Identity, Compliance...)
-4. Execute diamond cuts para registrar facets
+3. Deploy other facets (Token, Identity, Compliance...)
+4. Execute diamond cuts to register facets
 5. Initialize via InitDiamond
 ```
 
 ---
 
-## 🎯 **Conclusión**
+## **Conclusion**
 
-El `Diamond.sol` es el **corazón arquitectural** del sistema T-REX modular. Proporciona:
+`Diamond.sol` is the **architectural core** of the modular T-REX system. It provides:
 
-- ✅ **Flexibilidad**: Upgrades sin redeployar
-- ✅ **Modularidad**: Funcionalidades separadas
-- ✅ **Eficiencia**: Un solo punto de entrada
-- ✅ **Escalabilidad**: Fácil añadir funcionalidades
+- ✅ **Flexibility**: Upgrades without redeploying
+- ✅ **Modularity**: Separated functionalities
+- ✅ **Efficiency**: Single entry point
+- ✅ **Scalability**: Easy to add functionalities
 
-Es la **base fundamental** que permite que el T-REX sea adaptable a cambios regulatorios y requirements futuros.
+It is the **fundamental base** that enables T-REX to adapt to regulatory changes and future requirements.
