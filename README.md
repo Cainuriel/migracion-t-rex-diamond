@@ -103,4 +103,10 @@ Diamond.sol (Core)
 
 ---
 
+### **Documentación Smart Contracts**
 
+- [Carpeta `docs/`](./docs/)
+
+   
+### testing
+``` npm run test ``` ``` npm run coverage ```
