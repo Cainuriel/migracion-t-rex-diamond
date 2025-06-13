@@ -18,7 +18,6 @@
 - 🔹 **Deploy script** con configuración automática de owner como agent
 - 🔹 **Verification script** con 25+ checks comprehensivos
 - 🔹 **Interaction script** con 11 comandos operacionales
-- 🔹 **Manejo de BigInt** para compatibilidad JSON
 - 🔹 **Sistema de variables de entorno** para facilidad de uso
 
 ###  **Documentación**
@@ -125,9 +124,6 @@ InitDiamond.sol
 
 ##  Recursos Adicionales
 
-- [Documentación T-REX](../docs/)
-- [Tests del sistema](../test/)
-- [Contratos fuente](../contracts/)
 - [EIP-2535 Diamond Standard](https://eips.ethereum.org/EIPS/eip-2535)
 - [T-REX Standard](https://github.com/TokenySolutions/T-REX)
 
