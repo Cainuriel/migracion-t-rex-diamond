@@ -103,10 +103,28 @@ Diamond.sol (Core)
 
 ---
 
-### **Documentación Smart Contracts**
-
-- [Carpeta `docs/`](./docs/)
-
    
 ### testing
-``` npm run test ``` ``` npm run coverage ```
+``` npm run test ``` 
+``` npm run coverage ```
+
+## Resumen del Proyecto 
+
+**sistema T-REX Diamond** que incluye:
+
+###  **Contratos Core**
+- 🔹 **Diamond Pattern (EIP-2535)** con upgradeabilidad modular
+- 🔹 **7 Facets especializados** (Token, Roles, Identity, Compliance, etc.)
+- 🔹 **Sistema de storage unificado** con AppStorage
+- 🔹 **Arquitectura T-REX (ERC-3643)** para security tokens
+
+###  **Scripts**
+- 🔹 **Deploy script** con configuración automática de owner como agent
+- 🔹 **Verification script** con 25+ checks comprehensivos
+- 🔹 **Interaction script** con 11 comandos operacionales
+- 🔹 **Manejo de BigInt** para compatibilidad JSON
+- 🔹 **Sistema de variables de entorno** para facilidad de uso
+
+###  **Documentación**
+- 🔹 **Documentación técnica** detallada por cada contrato en la carpeta docs (En inglés): [Ver carpeta `docs/`](./docs/)
+- 🔹 **Documentación de scripts**: consulta el [README de la carpeta `scripts/`](./scripts/README.md) para detalles de uso y ejemplos.

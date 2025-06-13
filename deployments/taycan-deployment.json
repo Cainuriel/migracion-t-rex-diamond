@@ -1,0 +1,28 @@
+{
+  "network": "taycan",
+  "deployer": "0x542dD28258357Cc0a4d3EdC4F6eDA03d93106744",
+  "timestamp": "2025-06-13T08:17:15.912Z",
+  "contracts": {
+    "Diamond": "0x7C0F03E02DBBB3Ccde52106583C070003C5864fE",
+    "DiamondCutFacet": "0x61E3BEE097eA254460a36d4A3FA5ccCb09260e21",
+    "TokenFacet": "0x68cb9195B8b53bb85e01f4bADaf676d199b9A82d",
+    "RolesFacet": "0x9408B0a79C01e7c5673F400bC7753AC583d5642A",
+    "IdentityFacet": "0xdB1bd97A113a8d547625eADcAe89022A58E03A2B",
+    "ComplianceFacet": "0x66A3BF899a530A736893Adf0bf4D8A86A722A213",
+    "ClaimTopicsFacet": "0x463e1A5Da826d666Ce41a205265561F1Bc5F2Db3",
+    "TrustedIssuersFacet": "0x49498255f775c22c0bF157095e50759D7db269E6",
+    "InitDiamond": "0x60F5707756df85670D2440c148b7FF88Ea38f6ef"
+  },
+  "configuration": {
+    "tokenName": "T-REX Security Token",
+    "tokenSymbol": "TREX",
+    "initialOwner": "0x542dD28258357Cc0a4d3EdC4F6eDA03d93106744",
+    "complianceRules": {
+      "maxBalance": "1000000000000000000000000",
+      "minBalance": "1000000000000000000000",
+      "maxInvestors": 100
+    },
+    "initialAgents": [],
+    "ownerAsAgent": true
+  }
+}

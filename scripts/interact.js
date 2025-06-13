@@ -9,16 +9,24 @@ const path = require('path');
 async function main() {
   console.log("🔧 T-REX Diamond Interaction Script\n");
 
-  // Get command line arguments
+  // Get command line arguments - try multiple methods
   const args = process.argv.slice(2);
-  const command = args[0];
+  let command = args[0];
+  let cmdArgs = args.slice(1);
 
-  if (!command) {
-    console.log("📚 AVAILABLE COMMANDS:");
+  // Alternative: use environment variables if no direct args
+  if (!command && process.env.TREX_COMMAND) {
+    command = process.env.TREX_COMMAND;
+    cmdArgs = process.env.TREX_ARGS ? process.env.TREX_ARGS.split(' ') : [];
+    console.log("📝 Using environment variables for command");
+  }
+
+  if (!command) {    console.log("📚 AVAILABLE COMMANDS:");
     console.log("   setup-issuer <issuerAddress> <topicId>     - Add a trusted issuer");
     console.log("   register-investor <investorAddr> <idAddr>  - Register investor identity");
     console.log("   mint <recipientAddr> <amount>              - Mint tokens to recipient");
     console.log("   set-agent <agentAddr> <true/false>         - Set agent status");
+    console.log("   check-agent <agentAddr>                    - Check if address is authorized agent");
     console.log("   freeze <investorAddr>                      - Freeze investor account");
     console.log("   unfreeze <investorAddr>                    - Unfreeze investor account");
     console.log("   compliance-rules                           - View compliance rules");
@@ -26,10 +34,13 @@ async function main() {
     console.log("   investor-info <investorAddr>               - View investor information");
     console.log("   transfer-ownership <newOwnerAddr>          - Transfer ownership");
     console.log("");
-    console.log("📋 USAGE EXAMPLES:");
-    console.log("   npm run interact setup-issuer 0x123... 1");
-    console.log("   npm run interact mint 0x456... 1000");
-    console.log("   npm run interact token-info");
+    console.log("📋 USAGE OPTIONS:");
+    console.log("   Option 1 - Direct node execution:");
+    console.log("     node scripts/interact.js setup-issuer 0x123... 1");
+    console.log("   Option 2 - Using environment variables:");
+    console.log("     $env:TREX_COMMAND='setup-issuer'; $env:TREX_ARGS='0x123... 1'; npm run interact:localhost");
+    console.log("   Option 3 - Interactive mode:");
+    console.log("     npm run interact:localhost (then follow prompts)");
     return;
   }
 
@@ -59,32 +70,64 @@ async function main() {
   const compliance = await ethers.getContractAt("ComplianceFacet", diamondAddress);
   const claimTopics = await ethers.getContractAt("ClaimTopicsFacet", diamondAddress);
   const trustedIssuers = await ethers.getContractAt("TrustedIssuersFacet", diamondAddress);
-
   // Execute command
   try {
+    console.log(`⚡ Executing command: ${command} ${cmdArgs.join(' ')}\n`);
+    
     switch (command) {
       case "setup-issuer":
-        await setupIssuer(trustedIssuers, args[1], args[2]);
+        if (cmdArgs.length < 2) {
+          console.log("❌ Usage: setup-issuer <issuerAddress> <topicId>");
+          return;
+        }
+        await setupIssuer(trustedIssuers, cmdArgs[0], cmdArgs[1]);
         break;
       
       case "register-investor":
-        await registerInvestor(identity, args[1], args[2]);
+        if (cmdArgs.length < 2) {
+          console.log("❌ Usage: register-investor <investorAddr> <identityAddr>");
+          return;
+        }
+        await registerInvestor(identity, cmdArgs[0], cmdArgs[1]);
         break;
       
       case "mint":
-        await mintTokens(token, args[1], args[2]);
+        if (cmdArgs.length < 2) {
+          console.log("❌ Usage: mint <recipientAddr> <amount>");
+          return;
+        }
+        await mintTokens(token, cmdArgs[0], cmdArgs[1]);
+        break;
+        case "set-agent":
+        if (cmdArgs.length < 2) {
+          console.log("❌ Usage: set-agent <agentAddr> <true/false>");
+          return;
+        }
+        await setAgent(roles, cmdArgs[0], cmdArgs[1]);
         break;
       
-      case "set-agent":
-        await setAgent(roles, args[1], args[2]);
+      case "check-agent":
+        if (cmdArgs.length < 1) {
+          console.log("❌ Usage: check-agent <agentAddr>");
+          return;
+        }
+        await checkAgent(roles, cmdArgs[0]);
         break;
       
       case "freeze":
-        await freezeAccount(token, args[1]);
+        if (cmdArgs.length < 1) {
+          console.log("❌ Usage: freeze <investorAddr>");
+          return;
+        }
+        await freezeAccount(token, cmdArgs[0]);
         break;
       
       case "unfreeze":
-        await unfreezeAccount(token, args[1]);
+        if (cmdArgs.length < 1) {
+          console.log("❌ Usage: unfreeze <investorAddr>");
+          return;
+        }
+        await unfreezeAccount(token, cmdArgs[0]);
         break;
       
       case "compliance-rules":
@@ -96,11 +139,19 @@ async function main() {
         break;
       
       case "investor-info":
-        await viewInvestorInfo(identity, token, args[1]);
+        if (cmdArgs.length < 1) {
+          console.log("❌ Usage: investor-info <investorAddr>");
+          return;
+        }
+        await viewInvestorInfo(identity, token, cmdArgs[0]);
         break;
       
       case "transfer-ownership":
-        await transferOwnership(roles, args[1]);
+        if (cmdArgs.length < 1) {
+          console.log("❌ Usage: transfer-ownership <newOwnerAddr>");
+          return;
+        }
+        await transferOwnership(roles, cmdArgs[0]);
         break;
       
       default:
@@ -309,6 +360,26 @@ async function transferOwnership(roles, newOwnerAddress) {
   // Verify
   const verifyOwner = await roles.owner();
   console.log("   🔍 Verified - New Owner:", verifyOwner);
+}
+
+async function checkAgent(roles, agentAddress) {
+  if (!agentAddress) {
+    throw new Error("Usage: check-agent <agentAddress>");
+  }
+
+  console.log("🔍 Checking agent status...");
+  console.log("   Agent:", agentAddress);
+
+  const isAgent = await roles.isAgent(agentAddress);
+  const owner = await roles.owner();
+  
+  console.log("   📊 AGENT STATUS:");
+  console.log("   ├─ Status:", isAgent ? "✅ AUTHORIZED" : "❌ NOT AUTHORIZED");
+  console.log("   ├─ Can mint tokens:", isAgent ? "Yes" : "No");
+  console.log("   ├─ Can burn tokens:", isAgent ? "Yes" : "No");
+  console.log("   ├─ Can force transfer:", isAgent ? "Yes" : "No");
+  console.log("   ├─ Can freeze accounts:", isAgent ? "Yes" : "No");
+  console.log("   └─ Is owner:", (agentAddress.toLowerCase() === owner.toLowerCase()) ? "Yes" : "No");
 }
 
 // Execute main function

@@ -32,9 +32,9 @@ async function main() {
   const compliance = await ethers.getContractAt("ComplianceFacet", diamondAddress);
   const claimTopics = await ethers.getContractAt("ClaimTopicsFacet", diamondAddress);
   const trustedIssuers = await ethers.getContractAt("TrustedIssuersFacet", diamondAddress);
-
   let allChecks = [];
   let passedChecks = 0;
+  let owner = null; // Initialize owner variable
 
   // Helper function to verify a check
   function verify(description, condition, value = null) {
@@ -52,10 +52,8 @@ async function main() {
   try {
     // 1. Verify Diamond contract exists and is deployed
     const diamondCode = await ethers.provider.getCode(diamondAddress);
-    verify("Diamond contract deployed", diamondCode !== "0x");
-
-    // 2. Verify ownership
-    const owner = await roles.owner();
+    verify("Diamond contract deployed", diamondCode !== "0x");    // 2. Verify ownership
+    owner = await roles.owner(); // Assign to the outer scope variable
     verify("Owner is set", owner !== ethers.ZeroAddress, owner);
     verify("Owner matches deployer", owner === deploymentInfo.deployer);
 
@@ -76,7 +74,6 @@ async function main() {
 
   console.log("\n⚖️  COMPLIANCE VERIFICATION");
   console.log("=".repeat(50));
-
   try {
     // 4. Verify compliance rules
     const complianceRules = await compliance.complianceRules();
@@ -85,11 +82,11 @@ async function main() {
     const expectedMaxInvestors = deploymentInfo.configuration.complianceRules.maxInvestors;
 
     verify("Max balance rule set", 
-      complianceRules.maxBalance.toString() === expectedMaxBalance.toString(),
+      complianceRules.maxBalance.toString() === expectedMaxBalance,
       ethers.formatEther(complianceRules.maxBalance) + " tokens"
     );
     verify("Min balance rule set", 
-      complianceRules.minBalance.toString() === expectedMinBalance.toString(),
+      complianceRules.minBalance.toString() === expectedMinBalance,
       ethers.formatEther(complianceRules.minBalance) + " tokens"
     );
     verify("Max investors rule set", 
@@ -119,14 +116,27 @@ async function main() {
   } catch (error) {
     console.log("❌ Identity system verification failed:", error.message);
   }
-
   console.log("\n🔐 ACCESS CONTROL VERIFICATION");
   console.log("=".repeat(50));
 
-  try {
-    // 7. Verify agent system
-    const isOwnerAgent = await roles.isAgent(owner);
-    verify("Owner can act as agent", isOwnerAgent);
+  try {    // 7. Verify agent system
+    if (owner) {
+      const isOwnerAgent = await roles.isAgent(owner);
+      const ownerAsAgentConfig = deploymentInfo.configuration.ownerAsAgent;
+      
+      if (ownerAsAgentConfig) {
+        verify("Owner is registered as agent (as configured)", isOwnerAgent);
+      } else {
+        verify("Owner is registered as agent", isOwnerAgent);
+        if (!isOwnerAgent) {
+          console.log("💡 NOTE: Owner is not registered as agent. This is normal for T-REX.");
+          console.log("   The owner can configure the system but needs to be explicitly");
+          console.log("   registered as an agent to perform token operations like mint/burn.");
+        }
+      }
+    } else {
+      verify("Owner available for agent check", false, "Owner not determined");
+    }
 
     // Test agent functionality (if initial agents were set)
     if (deploymentInfo.configuration.initialAgents.length > 0) {
@@ -134,6 +144,8 @@ async function main() {
         const isAgent = await roles.isAgent(agentAddress);
         verify(`Agent ${agentAddress} is registered`, isAgent, agentAddress);
       }
+    } else {
+      console.log("💡 No initial agents configured in deployment.");
     }
 
   } catch (error) {

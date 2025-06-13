@@ -2,6 +2,24 @@ const { ethers } = require("hardhat");
 const fs = require('fs');
 const path = require('path');
 
+/**
+ * Helper function to convert BigInt values to strings for JSON serialization
+ */
+function serializeBigInts(obj) {
+  if (typeof obj === 'bigint') {
+    return obj.toString();
+  } else if (Array.isArray(obj)) {
+    return obj.map(serializeBigInts);
+  } else if (obj !== null && typeof obj === 'object') {
+    const serialized = {};
+    for (const [key, value] of Object.entries(obj)) {
+      serialized[key] = serializeBigInts(value);
+    }
+    return serialized;
+  }
+  return obj;
+}
+
 async function main() {
   console.log("🚀 Starting T-REX Diamond Deployment...\n");
   
@@ -22,11 +40,13 @@ async function main() {
       maxBalance: ethers.parseEther("1000000"), // 1M tokens max per investor
       minBalance: ethers.parseEther("1000"),    // 1K tokens minimum investment
       maxInvestors: 100                         // Max 100 investors
-    },
-    initialAgents: [
+    },    initialAgents: [
       // Add initial agent addresses here if needed
       // "0x...",
-    ]
+    ],
+    // Set to true if you want the deployer/owner to be automatically registered as an agent
+    // This allows the owner to perform token operations like mint/burn without additional setup
+    ownerAsAgent: true
   };
 
   console.log("⚙️  Deployment Configuration:");
@@ -266,10 +286,16 @@ async function main() {
   const currentOwner = await roles.owner();
   const tokenName = await token.name();
   const tokenSymbol = await token.symbol();
-  
-  console.log("   ✅ Owner:", currentOwner);
+    console.log("   ✅ Owner:", currentOwner);
   console.log("   ✅ Token Name:", tokenName);
   console.log("   ✅ Token Symbol:", tokenSymbol);
+
+  // Register owner as agent if requested
+  if (config.ownerAsAgent) {
+    console.log("   👤 Registering owner as agent...");
+    await roles.setAgent(deployer.address, true);
+    console.log("   ✅ Owner registered as agent:", deployer.address);
+  }
 
   // Set up initial agents if specified
   if (config.initialAgents.length > 0) {
@@ -278,6 +304,8 @@ async function main() {
       await roles.setAgent(agentAddress, true);
       console.log("   ✅ Agent added:", agentAddress);
     }
+  } else {
+    console.log("   💡 No additional initial agents configured.");
   }
 
   // Set up compliance rules
@@ -307,7 +335,6 @@ async function main() {
   // STEP 9: DEPLOYMENT SUMMARY
   // ========================================
   console.log("\n🎉 T-REX Diamond Deployment Complete!\n");
-  
   const deploymentInfo = {
     network: network.name,
     deployer: deployer.address,
@@ -323,7 +350,7 @@ async function main() {
       TrustedIssuersFacet: trustedIssuersFacetAddress,
       InitDiamond: initDiamondAddress
     },
-    configuration: config
+    configuration: serializeBigInts(config)
   };
 
   console.log("📋 DEPLOYMENT SUMMARY");
@@ -348,7 +375,6 @@ async function main() {
   console.log("   Max Balance:", ethers.formatEther(config.complianceRules.maxBalance), "tokens");
   console.log("   Min Balance:", ethers.formatEther(config.complianceRules.minBalance), "tokens");
   console.log("   Max Investors:", config.complianceRules.maxInvestors);
-
   // ========================================
   // STEP 10: SAVE DEPLOYMENT INFO
   // ========================================
@@ -359,6 +385,7 @@ async function main() {
     fs.mkdirSync(deploymentsDir, { recursive: true });
   }
   
+  // Note: Using serializeBigInts to convert BigInt values to strings for JSON compatibility
   const deploymentFile = path.join(deploymentsDir, `${network.name}-deployment.json`);
   fs.writeFileSync(deploymentFile, JSON.stringify(deploymentInfo, null, 2));
   console.log("   ✅ Deployment info saved to:", deploymentFile);
