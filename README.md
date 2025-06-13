@@ -1,18 +1,49 @@
 # MVP Diamond pattern T-REX
 
-## Esta implementación es **un MVP básico para estudio de un posible desarrollo posterior.** 
+## Esta implementación es **un MVP básico para el estudio de uso de T-REX con el patrón diamond.** 
 
 ---
+
+## Resumen del Proyecto 
+
+**sistema T-REX Diamond** que incluye:
+
+###  **Contratos Core**
+- 🔹 **Diamond Pattern (EIP-2535)** con upgradeabilidad modular
+- 🔹 **7 Facets especializados** (Token, Roles, Identity, Compliance, etc.)
+- 🔹 **Sistema de storage unificado** con AppStorage
+- 🔹 **Arquitectura T-REX (ERC-3643)** para security tokens
+
+###  **Scripts**
+- 🔹 **Deploy script** con configuración automática de owner como agent
+- 🔹 **Verification script** con 25+ checks comprehensivos
+- 🔹 **Interaction script** con 11 comandos operacionales
+- 🔹 **Manejo de BigInt** para compatibilidad JSON
+- 🔹 **Sistema de variables de entorno** para facilidad de uso
+
+###  **Documentación**
+- 🔹 **Documentación técnica** detallada por cada contrato en la carpeta docs (En inglés): [Ver carpeta](./docs/)
+- 🔹 **Documentación de scripts**: consultar la [documentación de despliegue, verificación e interacción`](./scripts/README.md) para detalles de uso y ejemplos.
+
+### testing
+``` npm run test ``` 
+``` npm run coverage ```
 
 ### **IMPLEMENTACIÓN**
 
 #### **1. Arquitectura Diamond Pattern**
 ```
 Diamond.sol (Core)
-├── LibDiamond.sol (Diamond storage & logic)
-├── LibAppStorage.sol (App storage accessor)
-├── DiamondCutFacet.sol (Upgradeability)
-└── Facets/
+InitDiamond.sol
+├── libraries/
+│   ├── LibDiamond.sol (Diamond storage & logic)
+│   └── LibAppStorage.sol (App storage accessor)
+├── interfaces/
+│   └── IDiamondCut.sol (Interface)
+├── storage/
+│   └── AppStorage.sol (App storage struct)
+└── facets/
+    ├── DiamondCutFacet.sol (Upgradeability)
     ├── TokenFacet.sol (ERC20 + ERC3643)
     ├── IdentityFacet.sol (OnChain-ID integration)
     ├── ComplianceFacet.sol (Compliance rules)
@@ -35,15 +66,9 @@ Diamond.sol (Core)
 - **Claim Topics**: Gestión de topics de verificación
 - **Trusted Issuers**: Gestión de emisores confiables
 
-#### **4. Seguridad y Best Practices**
-- **Modifiers**: `onlyOwner`, `onlyAgentOrOwner`
-- **Initializable pattern**: Previene re-inicialización
-- **Event logging**: Trazabilidad completa
-- **Input validation**: Checks de address(0), etc.
-
 ---
 
-### **ÁREAS DE MEJORA**
+### **ÁREAS A MEJORAR**
 
 #### **1. Funcionalidades T-REX Faltantes**
 ```solidity
@@ -66,11 +91,6 @@ Diamond.sol (Core)
 - Falta integración con jurisdicciones
 
 ---
-
-1. **Auditoría de seguridad**
-2. **Más funcionalidades T-REX**
-3. **Testing más exhaustivo**
-4. **Documentación completa**
 
 ---
 
@@ -104,27 +124,4 @@ Diamond.sol (Core)
 ---
 
    
-### testing
-``` npm run test ``` 
-``` npm run coverage ```
 
-## Resumen del Proyecto 
-
-**sistema T-REX Diamond** que incluye:
-
-###  **Contratos Core**
-- 🔹 **Diamond Pattern (EIP-2535)** con upgradeabilidad modular
-- 🔹 **7 Facets especializados** (Token, Roles, Identity, Compliance, etc.)
-- 🔹 **Sistema de storage unificado** con AppStorage
-- 🔹 **Arquitectura T-REX (ERC-3643)** para security tokens
-
-###  **Scripts**
-- 🔹 **Deploy script** con configuración automática de owner como agent
-- 🔹 **Verification script** con 25+ checks comprehensivos
-- 🔹 **Interaction script** con 11 comandos operacionales
-- 🔹 **Manejo de BigInt** para compatibilidad JSON
-- 🔹 **Sistema de variables de entorno** para facilidad de uso
-
-###  **Documentación**
-- 🔹 **Documentación técnica** detallada por cada contrato en la carpeta docs (En inglés): [Ver carpeta `docs/`](./docs/)
-- 🔹 **Documentación de scripts**: consulta el [README de la carpeta `scripts/`](./scripts/README.md) para detalles de uso y ejemplos.
