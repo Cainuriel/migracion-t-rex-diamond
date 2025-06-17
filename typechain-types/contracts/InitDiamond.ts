@@ -9,6 +9,7 @@ import type {
   Result,
   Interface,
   EventFragment,
+  AddressLike,
   ContractRunner,
   ContractMethod,
   Listener,
@@ -23,13 +24,42 @@ import type {
 } from "../common";
 
 export interface InitDiamondInterface extends Interface {
-  getFunction(nameOrSignature: "init"): FunctionFragment;
+  getFunction(
+    nameOrSignature: "getInitializationStatus" | "init"
+  ): FunctionFragment;
 
-  getEvent(nameOrSignatureOrTopic: "Initialized"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "DiamondInitialized" | "Initialized"
+  ): EventFragment;
 
-  encodeFunctionData(functionFragment: "init", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "getInitializationStatus",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "init",
+    values: [AddressLike, string, string]
+  ): string;
 
+  decodeFunctionResult(
+    functionFragment: "getInitializationStatus",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "init", data: BytesLike): Result;
+}
+
+export namespace DiamondInitializedEvent {
+  export type InputTuple = [owner: AddressLike, name: string, symbol: string];
+  export type OutputTuple = [owner: string, name: string, symbol: string];
+  export interface OutputObject {
+    owner: string;
+    name: string;
+    symbol: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
 }
 
 export namespace InitializedEvent {
@@ -87,16 +117,44 @@ export interface InitDiamond extends BaseContract {
     event?: TCEvent
   ): Promise<this>;
 
-  init: TypedContractMethod<[], [void], "nonpayable">;
+  getInitializationStatus: TypedContractMethod<
+    [],
+    [[boolean, boolean] & { roles: boolean; token: boolean }],
+    "view"
+  >;
+
+  init: TypedContractMethod<
+    [owner: AddressLike, name: string, symbol: string],
+    [void],
+    "nonpayable"
+  >;
 
   getFunction<T extends ContractMethod = ContractMethod>(
     key: string | FunctionFragment
   ): T;
 
   getFunction(
+    nameOrSignature: "getInitializationStatus"
+  ): TypedContractMethod<
+    [],
+    [[boolean, boolean] & { roles: boolean; token: boolean }],
+    "view"
+  >;
+  getFunction(
     nameOrSignature: "init"
-  ): TypedContractMethod<[], [void], "nonpayable">;
+  ): TypedContractMethod<
+    [owner: AddressLike, name: string, symbol: string],
+    [void],
+    "nonpayable"
+  >;
 
+  getEvent(
+    key: "DiamondInitialized"
+  ): TypedContractEvent<
+    DiamondInitializedEvent.InputTuple,
+    DiamondInitializedEvent.OutputTuple,
+    DiamondInitializedEvent.OutputObject
+  >;
   getEvent(
     key: "Initialized"
   ): TypedContractEvent<
@@ -106,6 +164,17 @@ export interface InitDiamond extends BaseContract {
   >;
 
   filters: {
+    "DiamondInitialized(address,string,string)": TypedContractEvent<
+      DiamondInitializedEvent.InputTuple,
+      DiamondInitializedEvent.OutputTuple,
+      DiamondInitializedEvent.OutputObject
+    >;
+    DiamondInitialized: TypedContractEvent<
+      DiamondInitializedEvent.InputTuple,
+      DiamondInitializedEvent.OutputTuple,
+      DiamondInitializedEvent.OutputObject
+    >;
+
     "Initialized(uint8)": TypedContractEvent<
       InitializedEvent.InputTuple,
       InitializedEvent.OutputTuple,

@@ -45,9 +45,8 @@ describe("IEIP2535Introspection Implementation", function () {
   describe("Selector Introspection", function () {
     it("TokenFacet should return correct selectors", async function () {
       const selectors = await tokenFacet.selectorsIntrospection();
-      
-      // Verify we have the expected number of selectors (14)
-      expect(selectors.length).to.equal(14);
+        // Verify we have the expected number of selectors (15)
+      expect(selectors.length).to.equal(15);
       
       // Verify specific selectors exist
       const expectedSelectors = [
@@ -61,10 +60,10 @@ describe("IEIP2535Introspection Implementation", function () {
         tokenFacet.interface.getFunction("transferFrom").selector,
         tokenFacet.interface.getFunction("allowance").selector,
         tokenFacet.interface.getFunction("mint").selector,
-        tokenFacet.interface.getFunction("burn").selector,
-        tokenFacet.interface.getFunction("forceTransfer").selector,
+        tokenFacet.interface.getFunction("burn").selector,        tokenFacet.interface.getFunction("forceTransfer").selector,
         tokenFacet.interface.getFunction("freezeAccount").selector,
-        tokenFacet.interface.getFunction("unfreezeAccount").selector
+        tokenFacet.interface.getFunction("unfreezeAccount").selector,
+        tokenFacet.interface.getFunction("isFrozen").selector
       ];
       
       // Check that all expected selectors are present
