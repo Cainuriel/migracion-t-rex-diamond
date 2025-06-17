@@ -133,23 +133,6 @@ TREX_COMMAND="info" npx hardhat run scripts/interact.js --network alastria
 TREX_COMMAND="balance" TREX_ARGS="0x742d35Cc..." npx hardhat run scripts/interact.js --network alastria
 ```
 
-## 🌐 Redes Configuradas
-
-### Alastria
-- **URL**: http://108.142.237.13:8545
-- **Gas Price**: 0 (red sin gas)
-- **Estado**: ✅ Validado - Despliegue y operaciones exitosas
-
-### BSC Testnet
-- **URL**: https://data-seed-prebsc-1-s1.bnbchain.org:8545
-- **Gas Price**: 400 Gwei
-- **Estado**: ⚠️ No validado
-
-### Taycan (Local)
-- **URL**: http://5.250.188.118:8545
-- **Estado**: ❌ No disponible
-
-## 📋 Configuración Requerida
 
 ### Variables de Entorno (.env)
 ```bash
@@ -158,8 +141,6 @@ INVESTOR1_PRIV_KEY=<clave_privada_opcional>
 INVESTOR2_PRIV_KEY=<clave_privada_opcional>
 ```
 
-### Configuración de Red (hardhat.config.ts)
-Las redes están preconfiguradas. Asegúrate de que tu wallet tenga fondos suficientes para el despliegue en redes que requieren gas.
 
 ## 🎯 Flujo de Uso Recomendado
 
@@ -249,10 +230,9 @@ Verifica que el despliegue sea correcto ejecutando múltiples pruebas:
 
 **Uso:**
 ```bash
-# Verificar despliegue en red local
-npm run verify:localhost
 
-# Verificar despliegue en bscTestnet
+
+# Ejemplo: Verificar despliegue en bscTestnet
 npm run verify:bscTestnet
 ```
 
@@ -336,45 +316,17 @@ npm run compile
 npm run test
 ```
 
-### 2. Despliegue en Red Local
+### 2. Despliegue en Red custom
 ```bash
 
-# Desplegar en localhost
+# Desplegar en localhost - En este repo era una custom network
 npm run deploy:localhost
 
 # Verificar despliegue
 npm run verify:localhost
 ```
 
-## 🌐 Compatibilidad de Red
 
-Todos los scripts son **universales** y funcionan en cualquier red donde el diamond esté desplegado:
-
-### ✅ Redes Soportadas
-- **Alastria Network** - Auto-detecta la dirección desplegada
-- **BSC Testnet** - Usa deployment file
-- **Polygon Amoy** - Usa deployment file  
-- **Taycan Network** - Usa deployment file
-- **Hardhat Local** - Usa deployment file
-- **Cualquier red EVM** - Con deployment file o configuración manual
-
-### 📄 Auto-detección de Deployment
-
-Los scripts buscan automáticamente el archivo de deployment:
-```
-deployments/
-├── alastria-deployment.json
-├── bscTestnet-deployment.json
-├── amoy-deployment.json
-├── taycan-deployment.json
-└── hardhat-deployment.json
-```
-
-Si no existe deployment file, para Alastria usa la dirección conocida: `0x7a8E55515de0Ad9e3293E58382BD730aD987d6DA`
-
-## 🔧 Nueva Arquitectura Soportada
-
-Los scripts están completamente actualizados para la nueva arquitectura modular:
 
 ### ✅ Facets Externos Soportados
 - **TokenFacet** - Operaciones de tokens ERC-3643
@@ -392,23 +344,8 @@ Los scripts están completamente actualizados para la nueva arquitectura modular
 - **ClaimTopicsStorage** - Estado de claim topics aislado
 - **TrustedIssuersStorage** - Estado de trusted issuers aislado
 
-## 📊 Características de Verificación
 
-### `verify.js` - Reportes Completos
-```
-🔧 BASIC CONTRACT VERIFICATION
-🎭 FACET VERIFICATION
-🔍 EIP-2535 INTROSPECTION (Optional)
-🧪 FUNCTIONAL TESTING
-📦 STORAGE VERIFICATION
-📊 VERIFICATION SUMMARY
-```
 
-**Métricas de éxito:**
-- 🟢 **≥90%**: Excelente - Sistema completamente operativo
-- 🟡 **70-89%**: Bueno - Sistema mayormente funcional  
-- 🟠 **50-69%**: Necesita atención - Algunos problemas
-- 🔴 **<50%**: Crítico - Problemas significativos
 
 ## 🚀 Ejemplos Prácticos
 
@@ -466,12 +403,12 @@ npx hardhat run scripts/interact.js --network alastria
 - ✅ **Variables de Entorno**: Solución para limitaciones de Hardhat
 
 ### 🎯 Listo para Producción
-Todos los scripts están optimizados y listos para uso en entornos de producción con la nueva arquitectura modular del T-REX Diamond.
+Todos los scripts están optimizados y listos para uso en entornos de producción con la nueva arquitectura modular de ISBE.
 
 ---
 
 **📝 Actualizado**: Nueva arquitectura modular - Junio 2025  
 **🔧 Compatibilidad**: Universal - Cualquier red EVM  
-**🎯 Estado**: Producción Ready
+**🎯 Estado**: Listo para ampliar el protocolo t-rex
 
 
