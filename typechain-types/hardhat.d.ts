@@ -73,6 +73,10 @@ declare module "hardhat/types/runtime" {
       name: "IDiamondCut",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IDiamondCut__factory>;
+    getContractFactory(
+      name: "IEIP2535Introspection",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IEIP2535Introspection__factory>;
 
     getContractAt(
       name: "IClaimIssuer",
@@ -149,6 +153,11 @@ declare module "hardhat/types/runtime" {
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.IDiamondCut>;
+    getContractAt(
+      name: "IEIP2535Introspection",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IEIP2535Introspection>;
 
     deployContract(
       name: "IClaimIssuer",
@@ -210,6 +219,10 @@ declare module "hardhat/types/runtime" {
       name: "IDiamondCut",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.IDiamondCut>;
+    deployContract(
+      name: "IEIP2535Introspection",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IEIP2535Introspection>;
 
     deployContract(
       name: "IClaimIssuer",
@@ -286,6 +299,11 @@ declare module "hardhat/types/runtime" {
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.IDiamondCut>;
+    deployContract(
+      name: "IEIP2535Introspection",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IEIP2535Introspection>;
 
     // default types
     getContractFactory(

@@ -38,3 +38,5 @@ export type { InitDiamond } from "./contracts/InitDiamond";
 export { InitDiamond__factory } from "./factories/contracts/InitDiamond__factory";
 export type { IDiamondCut } from "./contracts/interfaces/IDiamondCut";
 export { IDiamondCut__factory } from "./factories/contracts/interfaces/IDiamondCut__factory";
+export type { IEIP2535Introspection } from "./contracts/interfaces/IEIP2535Introspection";
+export { IEIP2535Introspection__factory } from "./factories/contracts/interfaces/IEIP2535Introspection__factory";

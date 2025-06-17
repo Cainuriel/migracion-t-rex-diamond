@@ -28,6 +28,7 @@ export interface ComplianceFacetInterface extends Interface {
     nameOrSignature:
       | "canTransfer"
       | "complianceRules"
+      | "selectorsIntrospection"
       | "setMaxBalance"
       | "setMaxInvestors"
       | "setMinBalance"
@@ -49,6 +50,10 @@ export interface ComplianceFacetInterface extends Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "selectorsIntrospection",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "setMaxBalance",
     values: [BigNumberish]
   ): string;
@@ -67,6 +72,10 @@ export interface ComplianceFacetInterface extends Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "complianceRules",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "selectorsIntrospection",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -180,6 +189,8 @@ export interface ComplianceFacet extends BaseContract {
     "view"
   >;
 
+  selectorsIntrospection: TypedContractMethod<[], [string[]], "view">;
+
   setMaxBalance: TypedContractMethod<[max: BigNumberish], [void], "nonpayable">;
 
   setMaxInvestors: TypedContractMethod<
@@ -214,6 +225,9 @@ export interface ComplianceFacet extends BaseContract {
     ],
     "view"
   >;
+  getFunction(
+    nameOrSignature: "selectorsIntrospection"
+  ): TypedContractMethod<[], [string[]], "view">;
   getFunction(
     nameOrSignature: "setMaxBalance"
   ): TypedContractMethod<[max: BigNumberish], [void], "nonpayable">;

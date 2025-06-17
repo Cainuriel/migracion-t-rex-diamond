@@ -24,7 +24,11 @@ import type {
 
 export interface ClaimTopicsFacetInterface extends Interface {
   getFunction(
-    nameOrSignature: "addClaimTopic" | "getClaimTopics" | "removeClaimTopic"
+    nameOrSignature:
+      | "addClaimTopic"
+      | "getClaimTopics"
+      | "removeClaimTopic"
+      | "selectorsIntrospection"
   ): FunctionFragment;
 
   getEvent(
@@ -43,6 +47,10 @@ export interface ClaimTopicsFacetInterface extends Interface {
     functionFragment: "removeClaimTopic",
     values: [BigNumberish]
   ): string;
+  encodeFunctionData(
+    functionFragment: "selectorsIntrospection",
+    values?: undefined
+  ): string;
 
   decodeFunctionResult(
     functionFragment: "addClaimTopic",
@@ -54,6 +62,10 @@ export interface ClaimTopicsFacetInterface extends Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "removeClaimTopic",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "selectorsIntrospection",
     data: BytesLike
   ): Result;
 }
@@ -139,6 +151,8 @@ export interface ClaimTopicsFacet extends BaseContract {
     "nonpayable"
   >;
 
+  selectorsIntrospection: TypedContractMethod<[], [string[]], "view">;
+
   getFunction<T extends ContractMethod = ContractMethod>(
     key: string | FunctionFragment
   ): T;
@@ -152,6 +166,9 @@ export interface ClaimTopicsFacet extends BaseContract {
   getFunction(
     nameOrSignature: "removeClaimTopic"
   ): TypedContractMethod<[topic: BigNumberish], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "selectorsIntrospection"
+  ): TypedContractMethod<[], [string[]], "view">;
 
   getEvent(
     key: "ClaimTopicAdded"

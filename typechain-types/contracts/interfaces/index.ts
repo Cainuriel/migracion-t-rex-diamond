@@ -2,3 +2,4 @@
 /* tslint:disable */
 /* eslint-disable */
 export type { IDiamondCut } from "./IDiamondCut";
+export type { IEIP2535Introspection } from "./IEIP2535Introspection";

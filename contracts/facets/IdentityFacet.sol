@@ -4,8 +4,9 @@ pragma solidity 0.8.17;
 import { LibAppStorage, AppStorage } from "../libraries/LibAppStorage.sol";
 import { IIdentity } from "@onchain-id/solidity/contracts/interface/IIdentity.sol";
 import { IClaimIssuer } from "@onchain-id/solidity/contracts/interface/IClaimIssuer.sol";
+import { IEIP2535Introspection } from "../interfaces/IEIP2535Introspection.sol";
 
-contract IdentityFacet {
+contract IdentityFacet is IEIP2535Introspection {
     event IdentityRegistered(address indexed investor, address identity, uint16 country);
     event IdentityUpdated(address indexed investor, address newIdentity);
     event IdentityRemoved(address indexed investor);
@@ -93,5 +94,25 @@ contract IdentityFacet {
     ///      Developers should use this function to retrieve the identity address associated with a given investor.
     function getIdentity(address investor) external view returns (address) {
         return LibAppStorage.diamondStorage().investorIdentities[investor];
+    }
+
+    /// @notice Returns the function selectors supported by this facet
+    /// @dev Implementation of IEIP2535Introspection
+    /// @return selectors_ Array of function selectors exposed by this facet
+    function selectorsIntrospection()
+        external
+        pure
+        override
+        returns (bytes4[] memory selectors_)
+    {
+        uint256 selectorsLength = 7;
+        selectors_ = new bytes4[](selectorsLength);
+        selectors_[--selectorsLength] = this.registerIdentity.selector;
+        selectors_[--selectorsLength] = this.updateIdentity.selector;
+        selectors_[--selectorsLength] = this.updateCountry.selector;
+        selectors_[--selectorsLength] = this.deleteIdentity.selector;
+        selectors_[--selectorsLength] = this.isVerified.selector;
+        selectors_[--selectorsLength] = this.getInvestorCountry.selector;
+        selectors_[--selectorsLength] = this.getIdentity.selector;
     }
 }

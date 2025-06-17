@@ -2,9 +2,10 @@
 pragma solidity 0.8.17;
 
 import { LibAppStorage, AppStorage } from "../libraries/LibAppStorage.sol";
+import { IEIP2535Introspection } from "../interfaces/IEIP2535Introspection.sol";
 
 /// @title TokenFacet - ERC20 and ERC-3643 logic
-contract TokenFacet {
+contract TokenFacet is IEIP2535Introspection {
     event Transfer(address indexed from, address indexed to, uint256 value);
     event Approval(address indexed owner, address indexed spender, uint256 value);
     event AccountFrozen(address indexed user, bool frozen);
@@ -95,5 +96,31 @@ contract TokenFacet {
         s.balances[from] -= amount;
         s.balances[to] += amount;
         emit Transfer(from, to, amount);
+    }
+
+    /// @notice Returns the function selectors supported by this facet
+    /// @dev Implementation of IEIP2535Introspection
+    /// @return selectors_ Array of function selectors exposed by this facet
+    function selectorsIntrospection()
+        external
+        pure
+        override
+        returns (bytes4[] memory selectors_)
+    {        uint256 selectorsLength = 14;
+        selectors_ = new bytes4[](selectorsLength);
+        selectors_[--selectorsLength] = this.name.selector;
+        selectors_[--selectorsLength] = this.symbol.selector;
+        selectors_[--selectorsLength] = this.decimals.selector;
+        selectors_[--selectorsLength] = this.totalSupply.selector;
+        selectors_[--selectorsLength] = this.balanceOf.selector;
+        selectors_[--selectorsLength] = this.transfer.selector;
+        selectors_[--selectorsLength] = this.approve.selector;
+        selectors_[--selectorsLength] = this.transferFrom.selector;
+        selectors_[--selectorsLength] = this.allowance.selector;
+        selectors_[--selectorsLength] = this.mint.selector;
+        selectors_[--selectorsLength] = this.burn.selector;
+        selectors_[--selectorsLength] = this.forceTransfer.selector;
+        selectors_[--selectorsLength] = this.freezeAccount.selector;
+        selectors_[--selectorsLength] = this.unfreezeAccount.selector;
     }
 }

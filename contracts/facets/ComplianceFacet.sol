@@ -2,8 +2,9 @@
 pragma solidity 0.8.17;
 
 import { LibAppStorage, AppStorage } from "../libraries/LibAppStorage.sol";
+import { IEIP2535Introspection } from "../interfaces/IEIP2535Introspection.sol";
 
-contract ComplianceFacet {
+contract ComplianceFacet is IEIP2535Introspection {
     event MaxBalanceSet(uint256 max);
     event MinBalanceSet(uint256 min);
     event MaxInvestorsSet(uint256 max);    modifier onlyOwner() {
@@ -50,5 +51,23 @@ contract ComplianceFacet {
             s.complianceMinBalance,
             s.complianceMaxInvestors
         );
+    }
+
+    /// @notice Returns the function selectors supported by this facet
+    /// @dev Implementation of IEIP2535Introspection
+    /// @return selectors_ Array of function selectors exposed by this facet
+    function selectorsIntrospection()
+        external
+        pure
+        override
+        returns (bytes4[] memory selectors_)
+    {
+        uint256 selectorsLength = 5;
+        selectors_ = new bytes4[](selectorsLength);
+        selectors_[--selectorsLength] = this.setMaxBalance.selector;
+        selectors_[--selectorsLength] = this.setMinBalance.selector;
+        selectors_[--selectorsLength] = this.setMaxInvestors.selector;
+        selectors_[--selectorsLength] = this.canTransfer.selector;
+        selectors_[--selectorsLength] = this.complianceRules.selector;
     }
 }

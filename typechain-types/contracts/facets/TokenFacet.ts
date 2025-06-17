@@ -35,6 +35,7 @@ export interface TokenFacetInterface extends Interface {
       | "freezeAccount"
       | "mint"
       | "name"
+      | "selectorsIntrospection"
       | "symbol"
       | "totalSupply"
       | "transfer"
@@ -76,6 +77,10 @@ export interface TokenFacetInterface extends Interface {
     values: [AddressLike, BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "selectorsIntrospection",
+    values?: undefined
+  ): string;
   encodeFunctionData(functionFragment: "symbol", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "totalSupply",
@@ -109,6 +114,10 @@ export interface TokenFacetInterface extends Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "selectorsIntrospection",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "symbol", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "totalSupply",
@@ -255,6 +264,8 @@ export interface TokenFacet extends BaseContract {
 
   name: TypedContractMethod<[], [string], "view">;
 
+  selectorsIntrospection: TypedContractMethod<[], [string[]], "view">;
+
   symbol: TypedContractMethod<[], [string], "view">;
 
   totalSupply: TypedContractMethod<[], [bigint], "view">;
@@ -328,6 +339,9 @@ export interface TokenFacet extends BaseContract {
   getFunction(
     nameOrSignature: "name"
   ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "selectorsIntrospection"
+  ): TypedContractMethod<[], [string[]], "view">;
   getFunction(
     nameOrSignature: "symbol"
   ): TypedContractMethod<[], [string], "view">;

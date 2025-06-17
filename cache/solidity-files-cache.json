@@ -303,8 +303,8 @@
       "artifacts": []
     },
     "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\facets\\TrustedIssuersFacet.sol": {
-      "lastModificationDate": 1749746559669,
-      "contentHash": "d30aef89935f815a6382bea2c600a466",
+      "lastModificationDate": 1750175853446,
+      "contentHash": "06b6dd9d1381c20f100ff5f4af17f555",
       "sourceName": "contracts/facets/TrustedIssuersFacet.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -331,7 +331,8 @@
         }
       },
       "imports": [
-        "../libraries/LibAppStorage.sol"
+        "../libraries/LibAppStorage.sol",
+        "../interfaces/IEIP2535Introspection.sol"
       ],
       "versionPragmas": [
         "0.8.17"
@@ -341,8 +342,8 @@
       ]
     },
     "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\facets\\TokenFacet.sol": {
-      "lastModificationDate": 1750170162445,
-      "contentHash": "de1b265594a70a09ff39463550b2696e",
+      "lastModificationDate": 1750175418420,
+      "contentHash": "396a970b923dd299a02ec21b990a6eee",
       "sourceName": "contracts/facets/TokenFacet.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -369,7 +370,8 @@
         }
       },
       "imports": [
-        "../libraries/LibAppStorage.sol"
+        "../libraries/LibAppStorage.sol",
+        "../interfaces/IEIP2535Introspection.sol"
       ],
       "versionPragmas": [
         "0.8.17"
@@ -379,8 +381,8 @@
       ]
     },
     "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\facets\\RolesFacet.sol": {
-      "lastModificationDate": 1749746559668,
-      "contentHash": "47be1de06e50756cad404441e17be73f",
+      "lastModificationDate": 1750175459201,
+      "contentHash": "68576267f00be193ffe639b292ce97e1",
       "sourceName": "contracts/facets/RolesFacet.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -408,7 +410,8 @@
       },
       "imports": [
         "../libraries/LibAppStorage.sol",
-        "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol"
+        "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol",
+        "../interfaces/IEIP2535Introspection.sol"
       ],
       "versionPragmas": [
         "0.8.17"
@@ -418,8 +421,8 @@
       ]
     },
     "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\facets\\IdentityFacet.sol": {
-      "lastModificationDate": 1750170162445,
-      "contentHash": "208270d203c7700996dd4daef98c34b5",
+      "lastModificationDate": 1750175506712,
+      "contentHash": "ece268f74a5a557ce915706da99ec2db",
       "sourceName": "contracts/facets/IdentityFacet.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -448,7 +451,8 @@
       "imports": [
         "../libraries/LibAppStorage.sol",
         "@onchain-id/solidity/contracts/interface/IIdentity.sol",
-        "@onchain-id/solidity/contracts/interface/IClaimIssuer.sol"
+        "@onchain-id/solidity/contracts/interface/IClaimIssuer.sol",
+        "../interfaces/IEIP2535Introspection.sol"
       ],
       "versionPragmas": [
         "0.8.17"
@@ -607,8 +611,8 @@
       ]
     },
     "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\facets\\ComplianceFacet.sol": {
-      "lastModificationDate": 1750170893587,
-      "contentHash": "6949613dbe4ff6490eca120dbdba9085",
+      "lastModificationDate": 1750175535893,
+      "contentHash": "80cd792ac54e2c7c89c8df681fd2d8c6",
       "sourceName": "contracts/facets/ComplianceFacet.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -635,7 +639,8 @@
         }
       },
       "imports": [
-        "../libraries/LibAppStorage.sol"
+        "../libraries/LibAppStorage.sol",
+        "../interfaces/IEIP2535Introspection.sol"
       ],
       "versionPragmas": [
         "0.8.17"
@@ -645,8 +650,8 @@
       ]
     },
     "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\facets\\ClaimTopicsFacet.sol": {
-      "lastModificationDate": 1749746559669,
-      "contentHash": "7b52759aef7449205450b737c31bb114",
+      "lastModificationDate": 1750175564677,
+      "contentHash": "8b922fb5585cf4d753bd14568d6bcbbf",
       "sourceName": "contracts/facets/ClaimTopicsFacet.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -673,7 +678,8 @@
         }
       },
       "imports": [
-        "../libraries/LibAppStorage.sol"
+        "../libraries/LibAppStorage.sol",
+        "../interfaces/IEIP2535Introspection.sol"
       ],
       "versionPragmas": [
         "0.8.17"
@@ -719,6 +725,258 @@
       ],
       "artifacts": [
         "DiamondCutFacet"
+      ]
+    },
+    "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\interfaces\\IEIP2535Introspection.sol": {
+      "lastModificationDate": 1750174535938,
+      "contentHash": "42b6950c6837e2b12274a1400d421b15",
+      "sourceName": "contracts/interfaces/IEIP2535Introspection.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.17"
+      ],
+      "artifacts": [
+        "IEIP2535Introspection"
+      ]
+    },
+    "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\storage\\ClaimTopicsStorage.sol": {
+      "lastModificationDate": 1750176181594,
+      "contentHash": "a6445c39877f6169efc877040cd23ffa",
+      "sourceName": "contracts/storage/ClaimTopicsStorage.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "0.8.17"
+      ],
+      "artifacts": [
+        "LibClaimTopicsStorage"
+      ]
+    },
+    "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\storage\\ComplianceStorage.sol": {
+      "lastModificationDate": 1750176174103,
+      "contentHash": "e9a9475759cc85859612bfeec20ae313",
+      "sourceName": "contracts/storage/ComplianceStorage.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "0.8.17"
+      ],
+      "artifacts": [
+        "LibComplianceStorage"
+      ]
+    },
+    "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\storage\\IdentityStorage.sol": {
+      "lastModificationDate": 1750176161987,
+      "contentHash": "efcefc391d3ab25852bfa41c5ae0667a",
+      "sourceName": "contracts/storage/IdentityStorage.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "0.8.17"
+      ],
+      "artifacts": [
+        "LibIdentityStorage"
+      ]
+    },
+    "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\storage\\RolesStorage.sol": {
+      "lastModificationDate": 1750176153494,
+      "contentHash": "2ecc9914b25d1b22bd0115fb36e4a4b4",
+      "sourceName": "contracts/storage/RolesStorage.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "0.8.17"
+      ],
+      "artifacts": [
+        "LibRolesStorage"
+      ]
+    },
+    "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\storage\\TokenStorage.sol": {
+      "lastModificationDate": 1750176135956,
+      "contentHash": "1e3506f056433886db720007a80f9ecc",
+      "sourceName": "contracts/storage/TokenStorage.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "0.8.17"
+      ],
+      "artifacts": [
+        "LibTokenStorage"
+      ]
+    },
+    "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\storage\\TrustedIssuersStorage.sol": {
+      "lastModificationDate": 1750176190185,
+      "contentHash": "7b1d2a65481b9225cc828f3c6b22354a",
+      "sourceName": "contracts/storage/TrustedIssuersStorage.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "0.8.17"
+      ],
+      "artifacts": [
+        "LibTrustedIssuersStorage"
       ]
     }
   }

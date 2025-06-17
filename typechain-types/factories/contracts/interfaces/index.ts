@@ -2,3 +2,4 @@
 /* tslint:disable */
 /* eslint-disable */
 export { IDiamondCut__factory } from "./IDiamondCut__factory";
+export { IEIP2535Introspection__factory } from "./IEIP2535Introspection__factory";
