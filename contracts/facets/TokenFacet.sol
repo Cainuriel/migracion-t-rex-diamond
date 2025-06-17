@@ -1,102 +1,141 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.17;
 
-import { LibAppStorage, AppStorage } from "../libraries/LibAppStorage.sol";
+import { TokenInternalFacet } from "./internal/TokenInternalFacet.sol";
 import { IEIP2535Introspection } from "../interfaces/IEIP2535Introspection.sol";
+import { LibRolesStorage } from "../storage/RolesStorage.sol";
 
-/// @title TokenFacet - ERC20 and ERC-3643 logic
-contract TokenFacet is IEIP2535Introspection {
-    event Transfer(address indexed from, address indexed to, uint256 value);
-    event Approval(address indexed owner, address indexed spender, uint256 value);
-    event AccountFrozen(address indexed user, bool frozen);
+/// @title TokenFacet - External interface for Token operations
+/// @dev Exposes only public/external functions, inherits business logic from TokenInternalFacet
+/// @dev Implements IEIP2535Introspection for selector introspection
+contract TokenFacet is TokenInternalFacet, IEIP2535Introspection {
 
     modifier onlyAgentOrOwner() {
-        AppStorage storage s = LibAppStorage.diamondStorage();
-        require(msg.sender == s.owner || s.agents[msg.sender], "TokenFacet: Not authorized");
+        require(
+            msg.sender == LibRolesStorage.rolesStorage().owner || 
+            LibRolesStorage.rolesStorage().agents[msg.sender], 
+            "TokenFacet: Not authorized"
+        );
         _;
     }
 
+    // ================== ERC20 EXTERNAL FUNCTIONS ==================
+
+    /// @notice Get token name
+    /// @return Token name
     function name() external view returns (string memory) {
-        return LibAppStorage.diamondStorage().name;
+        return _name();
     }
 
+    /// @notice Get token symbol
+    /// @return Token symbol
     function symbol() external view returns (string memory) {
-        return LibAppStorage.diamondStorage().symbol;
+        return _symbol();
     }
 
+    /// @notice Get token decimals
+    /// @return Token decimals (always 18)
     function decimals() external pure returns (uint8) {
-        return 18;
+        return _decimals();
     }
 
+    /// @notice Get total token supply
+    /// @return Total supply amount
     function totalSupply() external view returns (uint256) {
-        return LibAppStorage.diamondStorage().totalSupply;
+        return _totalSupply();
     }
 
-    function balanceOf(address account) public view returns (uint256) {
-        return LibAppStorage.diamondStorage().balances[account];
+    /// @notice Get balance of an account
+    /// @param account Account to check
+    /// @return Balance amount
+    function balanceOf(address account) external view returns (uint256) {
+        return _balanceOf(account);
     }
 
+    /// @notice Transfer tokens to another account
+    /// @param to Destination address
+    /// @param amount Amount to transfer
+    /// @return Success flag
     function transfer(address to, uint256 amount) external returns (bool) {
         _transfer(msg.sender, to, amount);
         return true;
     }
 
+    /// @notice Approve another account to spend tokens
+    /// @param spender Spender address
+    /// @param amount Amount to approve
+    /// @return Success flag
     function approve(address spender, uint256 amount) external returns (bool) {
-        AppStorage storage s = LibAppStorage.diamondStorage();
-        s.allowances[msg.sender][spender] = amount;
-        emit Approval(msg.sender, spender, amount);
+        _approve(msg.sender, spender, amount);
         return true;
     }
 
+    /// @notice Transfer tokens from one account to another (with allowance)
+    /// @param from Source address
+    /// @param to Destination address
+    /// @param amount Amount to transfer
+    /// @return Success flag
     function transferFrom(address from, address to, uint256 amount) external returns (bool) {
-        AppStorage storage s = LibAppStorage.diamondStorage();
-        uint256 allowed = s.allowances[from][msg.sender];
-        require(allowed >= amount, "TokenFacet: allowance exceeded");
-        s.allowances[from][msg.sender] -= amount;
+        uint256 currentAllowance = _allowance(from, msg.sender);
+        require(currentAllowance >= amount, "TokenFacet: allowance exceeded");
+        
+        _approve(from, msg.sender, currentAllowance - amount);
         _transfer(from, to, amount);
         return true;
     }
 
+    /// @notice Get allowance between owner and spender
+    /// @param owner_ Token owner
+    /// @param spender Spender address
+    /// @return Allowance amount
     function allowance(address owner_, address spender) external view returns (uint256) {
-        return LibAppStorage.diamondStorage().allowances[owner_][spender];
+        return _allowance(owner_, spender);
     }
 
+    // ================== ADMINISTRATIVE FUNCTIONS ==================
+
+    /// @notice Mint new tokens (only agent or owner)
+    /// @param to Recipient address
+    /// @param amount Amount to mint
     function mint(address to, uint256 amount) external onlyAgentOrOwner {
-        AppStorage storage s = LibAppStorage.diamondStorage();
-        s.totalSupply += amount;
-        s.balances[to] += amount;
-        emit Transfer(address(0), to, amount);
+        _mint(to, amount);
     }
 
+    /// @notice Burn tokens (only agent or owner)
+    /// @param from Address to burn from
+    /// @param amount Amount to burn
     function burn(address from, uint256 amount) external onlyAgentOrOwner {
-        AppStorage storage s = LibAppStorage.diamondStorage();
-        require(s.balances[from] >= amount, "TokenFacet: burn amount exceeds balance");
-        s.balances[from] -= amount;
-        s.totalSupply -= amount;
-        emit Transfer(from, address(0), amount);
+        _burn(from, amount);
     }
 
+    /// @notice Force transfer (bypass normal restrictions) - only agent or owner
+    /// @param from Source address
+    /// @param to Destination address
+    /// @param amount Amount to transfer
     function forceTransfer(address from, address to, uint256 amount) external onlyAgentOrOwner {
         _transfer(from, to, amount);
-    }    function freezeAccount(address user) external onlyAgentOrOwner {
-        LibAppStorage.diamondStorage().investorFrozenStatus[user] = true;
-        emit AccountFrozen(user, true);
     }
 
+    /// @notice Freeze an account (only agent or owner)
+    /// @param user Account to freeze
+    function freezeAccount(address user) external onlyAgentOrOwner {
+        _setAccountFrozen(user, true);
+    }
+
+    /// @notice Unfreeze an account (only agent or owner)
+    /// @param user Account to unfreeze
     function unfreezeAccount(address user) external onlyAgentOrOwner {
-        LibAppStorage.diamondStorage().investorFrozenStatus[user] = false;
-        emit AccountFrozen(user, false);
+        _setAccountFrozen(user, false);
     }
 
-    function _transfer(address from, address to, uint256 amount) internal {
-        AppStorage storage s = LibAppStorage.diamondStorage();
-        require(!s.investorFrozenStatus[from], "TokenFacet: sender frozen");
-        require(!s.investorFrozenStatus[to], "TokenFacet: receiver frozen");
-        require(s.balances[from] >= amount, "TokenFacet: insufficient balance");
-        s.balances[from] -= amount;
-        s.balances[to] += amount;
-        emit Transfer(from, to, amount);
+    /// @notice Check if an account is frozen
+    /// @param account Account to check
+    /// @return True if frozen
+    function isFrozen(address account) external view returns (bool) {
+        return _isFrozen(account);
     }
+
+    // ================== IEIP2535INTROSPECTION ==================
 
     /// @notice Returns the function selectors supported by this facet
     /// @dev Implementation of IEIP2535Introspection
@@ -106,7 +145,8 @@ contract TokenFacet is IEIP2535Introspection {
         pure
         override
         returns (bytes4[] memory selectors_)
-    {        uint256 selectorsLength = 14;
+    {
+        uint256 selectorsLength = 15;
         selectors_ = new bytes4[](selectorsLength);
         selectors_[--selectorsLength] = this.name.selector;
         selectors_[--selectorsLength] = this.symbol.selector;
@@ -122,5 +162,6 @@ contract TokenFacet is IEIP2535Introspection {
         selectors_[--selectorsLength] = this.forceTransfer.selector;
         selectors_[--selectorsLength] = this.freezeAccount.selector;
         selectors_[--selectorsLength] = this.unfreezeAccount.selector;
+        selectors_[--selectorsLength] = this.isFrozen.selector;
     }
 }

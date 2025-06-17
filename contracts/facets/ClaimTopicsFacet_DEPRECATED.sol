@@ -1,40 +1,42 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.17;
 
-import { ClaimTopicsInternalFacet } from "./internal/ClaimTopicsInternalFacet.sol";
+import { LibAppStorage, AppStorage } from "../libraries/LibAppStorage.sol";
 import { IEIP2535Introspection } from "../interfaces/IEIP2535Introspection.sol";
 
-/// @title ClaimTopicsFacetExternal - External interface for ClaimTopics operations
-/// @dev Exposes only public/external functions, inherits business logic from ClaimTopicsInternalFacet
-/// @dev Implements IEIP2535Introspection for selector introspection
-contract ClaimTopicsFacetExternal is ClaimTopicsInternalFacet, IEIP2535Introspection {
+contract ClaimTopicsFacet is IEIP2535Introspection {
+    event ClaimTopicAdded(uint256 indexed topic);
+    event ClaimTopicRemoved(uint256 indexed topic);
 
     modifier onlyOwner() {
-        _onlyOwner(msg.sender);
+        require(msg.sender == LibAppStorage.diamondStorage().owner, "Not owner");
         _;
     }
 
-    // ================== EXTERNAL CLAIM TOPICS FUNCTIONS ==================
-
-    /// @notice Add a new claim topic requirement
-    /// @param topic Topic identifier to add
     function addClaimTopic(uint256 topic) external onlyOwner {
-        _addClaimTopic(topic);
+        AppStorage storage s = LibAppStorage.diamondStorage();
+        for (uint i = 0; i < s.claimTopics.length; i++) {
+            require(s.claimTopics[i] != topic, "Already added");
+        }
+        s.claimTopics.push(topic);
+        emit ClaimTopicAdded(topic);
     }
 
-    /// @notice Remove a claim topic requirement
-    /// @param topic Topic identifier to remove
     function removeClaimTopic(uint256 topic) external onlyOwner {
-        _removeClaimTopic(topic);
+        AppStorage storage s = LibAppStorage.diamondStorage();
+        for (uint i = 0; i < s.claimTopics.length; i++) {
+            if (s.claimTopics[i] == topic) {
+                s.claimTopics[i] = s.claimTopics[s.claimTopics.length - 1];
+                s.claimTopics.pop();
+                emit ClaimTopicRemoved(topic);
+                break;
+            }
+        }
     }
 
-    /// @notice Get all required claim topics
-    /// @return Array of claim topic identifiers
     function getClaimTopics() external view returns (uint256[] memory) {
-        return _getClaimTopics();
+        return LibAppStorage.diamondStorage().claimTopics;
     }
-
-    // ================== IEIP2535INTROSPECTION ==================
 
     /// @notice Returns the function selectors supported by this facet
     /// @dev Implementation of IEIP2535Introspection
