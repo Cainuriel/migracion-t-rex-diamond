@@ -291,9 +291,9 @@ async function viewComplianceRules(compliance) {
   const rules = await compliance.complianceRules();
   
   console.log("   📊 COMPLIANCE RULES:");
-  console.log("   ├─ Max Balance per Investor:", ethers.formatEther(rules.maxBalance), "tokens");
-  console.log("   ├─ Min Investment Amount:", ethers.formatEther(rules.minBalance), "tokens");
-  console.log("   └─ Max Number of Investors:", rules.maxInvestors.toString());
+  console.log("   ├─ Max Balance per Investor:", ethers.formatEther(rules[0]), "tokens");
+  console.log("   ├─ Min Investment Amount:", ethers.formatEther(rules[1]), "tokens");
+  console.log("   └─ Max Number of Investors:", rules[2].toString());
 }
 
 async function viewTokenInfo(token) {
