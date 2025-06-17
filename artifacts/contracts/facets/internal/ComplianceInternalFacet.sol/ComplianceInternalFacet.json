@@ -1,0 +1,50 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "ComplianceInternalFacet",
+  "sourceName": "contracts/facets/internal/ComplianceInternalFacet.sol",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "max",
+          "type": "uint256"
+        }
+      ],
+      "name": "MaxBalanceSet",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "max",
+          "type": "uint256"
+        }
+      ],
+      "name": "MaxInvestorsSet",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "min",
+          "type": "uint256"
+        }
+      ],
+      "name": "MinBalanceSet",
+      "type": "event"
+    }
+  ],
+  "bytecode": "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea2646970667358221220c138e3a96f45330460d78b5a11e3803a1d2129d9626b010fca8cfde51a58960564736f6c63430008110033",
+  "deployedBytecode": "0x6080604052600080fdfea2646970667358221220c138e3a96f45330460d78b5a11e3803a1d2129d9626b010fca8cfde51a58960564736f6c63430008110033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

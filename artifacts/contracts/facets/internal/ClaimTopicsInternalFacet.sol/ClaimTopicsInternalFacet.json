@@ -1,0 +1,37 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "ClaimTopicsInternalFacet",
+  "sourceName": "contracts/facets/internal/ClaimTopicsInternalFacet.sol",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "topic",
+          "type": "uint256"
+        }
+      ],
+      "name": "ClaimTopicAdded",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "topic",
+          "type": "uint256"
+        }
+      ],
+      "name": "ClaimTopicRemoved",
+      "type": "event"
+    }
+  ],
+  "bytecode": "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea264697066735822122065456c6186f1df35f042e1dc884d7f49d6c486d4faf591340753b471b6a0a30564736f6c63430008110033",
+  "deployedBytecode": "0x6080604052600080fdfea264697066735822122065456c6186f1df35f042e1dc884d7f49d6c486d4faf591340753b471b6a0a30564736f6c63430008110033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

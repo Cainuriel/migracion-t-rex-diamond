@@ -1,0 +1,43 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "TrustedIssuersInternalFacet",
+  "sourceName": "contracts/facets/internal/TrustedIssuersInternalFacet.sol",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "issuer",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256[]",
+          "name": "claimTopics",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "TrustedIssuerAdded",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "issuer",
+          "type": "address"
+        }
+      ],
+      "name": "TrustedIssuerRemoved",
+      "type": "event"
+    }
+  ],
+  "bytecode": "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea2646970667358221220f28738a9450f178f0e0cbf90125157dcc4c56dc5b772c7a32bccde6a4fe669ac64736f6c63430008110033",
+  "deployedBytecode": "0x6080604052600080fdfea2646970667358221220f28738a9450f178f0e0cbf90125157dcc4c56dc5b772c7a32bccde6a4fe669ac64736f6c63430008110033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

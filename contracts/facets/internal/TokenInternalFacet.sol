@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.17;
 
-import { LibTokenStorage, TokenStorage } from "../storage/TokenStorage.sol";
-import { LibRolesStorage, RolesStorage } from "../storage/RolesStorage.sol";
+import { LibTokenStorage, TokenStorage } from "../../storage/TokenStorage.sol";
+import { LibRolesStorage, RolesStorage } from "../../storage/RolesStorage.sol";
 
 /// @title TokenInternalFacet - Internal business logic for Token domain
 /// @dev Contains all the business logic for token operations
@@ -11,12 +11,6 @@ contract TokenInternalFacet {
     event Transfer(address indexed from, address indexed to, uint256 value);
     event Approval(address indexed owner, address indexed spender, uint256 value);
     event AccountFrozen(address indexed user, bool frozen);
-
-    modifier onlyAgentOrOwner() {
-        RolesStorage storage rs = LibRolesStorage.rolesStorage();
-        require(msg.sender == rs.owner || rs.agents[msg.sender], "TokenInternal: Not authorized");
-        _;
-    }
 
     // ================== INTERNAL TOKEN OPERATIONS ==================
 

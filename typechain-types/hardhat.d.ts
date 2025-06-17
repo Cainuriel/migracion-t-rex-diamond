@@ -42,9 +42,17 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ClaimTopicsFacet__factory>;
     getContractFactory(
+      name: "ClaimTopicsFacetExternal",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ClaimTopicsFacetExternal__factory>;
+    getContractFactory(
       name: "ComplianceFacet",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ComplianceFacet__factory>;
+    getContractFactory(
+      name: "ComplianceFacetExternal",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ComplianceFacetExternal__factory>;
     getContractFactory(
       name: "DiamondCutFacet",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -54,17 +62,57 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IdentityFacet__factory>;
     getContractFactory(
+      name: "IdentityFacetExternal",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IdentityFacetExternal__factory>;
+    getContractFactory(
+      name: "ClaimTopicsInternalFacet",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ClaimTopicsInternalFacet__factory>;
+    getContractFactory(
+      name: "ComplianceInternalFacet",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ComplianceInternalFacet__factory>;
+    getContractFactory(
+      name: "IdentityInternalFacet",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IdentityInternalFacet__factory>;
+    getContractFactory(
+      name: "RolesInternalFacet",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.RolesInternalFacet__factory>;
+    getContractFactory(
+      name: "TokenInternalFacet",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TokenInternalFacet__factory>;
+    getContractFactory(
+      name: "TrustedIssuersInternalFacet",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TrustedIssuersInternalFacet__factory>;
+    getContractFactory(
       name: "RolesFacet",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.RolesFacet__factory>;
+    getContractFactory(
+      name: "RolesFacetExternal",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.RolesFacetExternal__factory>;
     getContractFactory(
       name: "TokenFacet",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TokenFacet__factory>;
     getContractFactory(
+      name: "TokenFacetExternal",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TokenFacetExternal__factory>;
+    getContractFactory(
       name: "TrustedIssuersFacet",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TrustedIssuersFacet__factory>;
+    getContractFactory(
+      name: "TrustedIssuersFacetExternal",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TrustedIssuersFacetExternal__factory>;
     getContractFactory(
       name: "InitDiamond",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -114,10 +162,20 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.ClaimTopicsFacet>;
     getContractAt(
+      name: "ClaimTopicsFacetExternal",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ClaimTopicsFacetExternal>;
+    getContractAt(
       name: "ComplianceFacet",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.ComplianceFacet>;
+    getContractAt(
+      name: "ComplianceFacetExternal",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ComplianceFacetExternal>;
     getContractAt(
       name: "DiamondCutFacet",
       address: string | ethers.Addressable,
@@ -129,20 +187,70 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.IdentityFacet>;
     getContractAt(
+      name: "IdentityFacetExternal",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IdentityFacetExternal>;
+    getContractAt(
+      name: "ClaimTopicsInternalFacet",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ClaimTopicsInternalFacet>;
+    getContractAt(
+      name: "ComplianceInternalFacet",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ComplianceInternalFacet>;
+    getContractAt(
+      name: "IdentityInternalFacet",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IdentityInternalFacet>;
+    getContractAt(
+      name: "RolesInternalFacet",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.RolesInternalFacet>;
+    getContractAt(
+      name: "TokenInternalFacet",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TokenInternalFacet>;
+    getContractAt(
+      name: "TrustedIssuersInternalFacet",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TrustedIssuersInternalFacet>;
+    getContractAt(
       name: "RolesFacet",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.RolesFacet>;
+    getContractAt(
+      name: "RolesFacetExternal",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.RolesFacetExternal>;
     getContractAt(
       name: "TokenFacet",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.TokenFacet>;
     getContractAt(
+      name: "TokenFacetExternal",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TokenFacetExternal>;
+    getContractAt(
       name: "TrustedIssuersFacet",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.TrustedIssuersFacet>;
+    getContractAt(
+      name: "TrustedIssuersFacetExternal",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TrustedIssuersFacetExternal>;
     getContractAt(
       name: "InitDiamond",
       address: string | ethers.Addressable,
@@ -188,9 +296,17 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.ClaimTopicsFacet>;
     deployContract(
+      name: "ClaimTopicsFacetExternal",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ClaimTopicsFacetExternal>;
+    deployContract(
       name: "ComplianceFacet",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.ComplianceFacet>;
+    deployContract(
+      name: "ComplianceFacetExternal",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ComplianceFacetExternal>;
     deployContract(
       name: "DiamondCutFacet",
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -200,17 +316,57 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.IdentityFacet>;
     deployContract(
+      name: "IdentityFacetExternal",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IdentityFacetExternal>;
+    deployContract(
+      name: "ClaimTopicsInternalFacet",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ClaimTopicsInternalFacet>;
+    deployContract(
+      name: "ComplianceInternalFacet",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ComplianceInternalFacet>;
+    deployContract(
+      name: "IdentityInternalFacet",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IdentityInternalFacet>;
+    deployContract(
+      name: "RolesInternalFacet",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.RolesInternalFacet>;
+    deployContract(
+      name: "TokenInternalFacet",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.TokenInternalFacet>;
+    deployContract(
+      name: "TrustedIssuersInternalFacet",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.TrustedIssuersInternalFacet>;
+    deployContract(
       name: "RolesFacet",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.RolesFacet>;
+    deployContract(
+      name: "RolesFacetExternal",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.RolesFacetExternal>;
     deployContract(
       name: "TokenFacet",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.TokenFacet>;
     deployContract(
+      name: "TokenFacetExternal",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.TokenFacetExternal>;
+    deployContract(
       name: "TrustedIssuersFacet",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.TrustedIssuersFacet>;
+    deployContract(
+      name: "TrustedIssuersFacetExternal",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.TrustedIssuersFacetExternal>;
     deployContract(
       name: "InitDiamond",
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -260,10 +416,20 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.ClaimTopicsFacet>;
     deployContract(
+      name: "ClaimTopicsFacetExternal",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ClaimTopicsFacetExternal>;
+    deployContract(
       name: "ComplianceFacet",
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.ComplianceFacet>;
+    deployContract(
+      name: "ComplianceFacetExternal",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ComplianceFacetExternal>;
     deployContract(
       name: "DiamondCutFacet",
       args: any[],
@@ -275,20 +441,70 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.IdentityFacet>;
     deployContract(
+      name: "IdentityFacetExternal",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IdentityFacetExternal>;
+    deployContract(
+      name: "ClaimTopicsInternalFacet",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ClaimTopicsInternalFacet>;
+    deployContract(
+      name: "ComplianceInternalFacet",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ComplianceInternalFacet>;
+    deployContract(
+      name: "IdentityInternalFacet",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IdentityInternalFacet>;
+    deployContract(
+      name: "RolesInternalFacet",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.RolesInternalFacet>;
+    deployContract(
+      name: "TokenInternalFacet",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.TokenInternalFacet>;
+    deployContract(
+      name: "TrustedIssuersInternalFacet",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.TrustedIssuersInternalFacet>;
+    deployContract(
       name: "RolesFacet",
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.RolesFacet>;
+    deployContract(
+      name: "RolesFacetExternal",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.RolesFacetExternal>;
     deployContract(
       name: "TokenFacet",
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.TokenFacet>;
     deployContract(
+      name: "TokenFacetExternal",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.TokenFacetExternal>;
+    deployContract(
       name: "TrustedIssuersFacet",
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.TrustedIssuersFacet>;
+    deployContract(
+      name: "TrustedIssuersFacetExternal",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.TrustedIssuersFacetExternal>;
     deployContract(
       name: "InitDiamond",
       args: any[],

@@ -1,0 +1,49 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "RolesInternalFacet",
+  "sourceName": "contracts/facets/internal/RolesInternalFacet.sol",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "agent",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bool",
+          "name": "status",
+          "type": "bool"
+        }
+      ],
+      "name": "AgentSet",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    }
+  ],
+  "bytecode": "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea26469706673582212205d6d9b4c73342affd17eca0c3c7d5645404d439dd93991ec533ac23b36fe667764736f6c63430008110033",
+  "deployedBytecode": "0x6080604052600080fdfea26469706673582212205d6d9b4c73342affd17eca0c3c7d5645404d439dd93991ec533ac23b36fe667764736f6c63430008110033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}
