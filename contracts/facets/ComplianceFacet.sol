@@ -27,12 +27,10 @@ contract ComplianceFacet {
     function setMaxInvestors(uint256 max) external onlyOwner {
         LibAppStorage.diamondStorage().compliance.maxInvestors = max;
         emit MaxInvestorsSet(max);
-    }
-
-    function canTransfer(address from, address to, uint256 amount) external view returns (bool) {
+    }    function canTransfer(address from, address to, uint256 amount) external view returns (bool) {
         AppStorage storage s = LibAppStorage.diamondStorage();
-        if (s.investors[from].isFrozen || s.investors[to].isFrozen) return false;
-        if (s.investors[to].identity == address(0)) return false;
+        if (s.investorFrozenStatus[from] || s.investorFrozenStatus[to]) return false;
+        if (s.investorIdentities[to] == address(0)) return false;
 
         uint256 newBalance = s.balances[to] + amount;
         if (s.compliance.maxBalance > 0 && newBalance > s.compliance.maxBalance) return false;

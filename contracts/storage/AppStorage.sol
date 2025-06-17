@@ -1,12 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.17;
 
-struct Investor {
-    address identity;
-    uint16 country;
-    bool isFrozen;
-}
-
 struct Compliance {
     uint256 maxBalance;
     uint256 minBalance;
@@ -14,16 +8,27 @@ struct Compliance {
 }
 
 struct AppStorage {
-    mapping(address => Investor) investors;
+    // === INVESTOR DATA (Aplanado para extensibilidad) ===
+    mapping(address => address) investorIdentities;
+    mapping(address => uint16) investorCountries;
+    mapping(address => bool) investorFrozenStatus;
+    
+    // === TOKEN CORE ===
     mapping(address => uint256) balances;
     mapping(address => mapping(address => uint256)) allowances;
     uint256 totalSupply;
     string name;
     string symbol;
     uint8 decimals;
-    Compliance compliance;
+    
+    // === ACCESS CONTROL ===
     address owner;
     mapping(address => bool) agents;
+    
+    // === COMPLIANCE (Agrupado - cambia poco) ===
+    Compliance compliance;
+    
+    // === T-REX SPECIFIC ===
     address[] complianceModules;
     uint256[] claimTopics;
     mapping(uint256 => address[]) trustedIssuers;

@@ -269,8 +269,8 @@
       ]
     },
     "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\storage\\AppStorage.sol": {
-      "lastModificationDate": 1749747991398,
-      "contentHash": "15be5c4b4850a19311d1b67a4b8fdf14",
+      "lastModificationDate": 1750169480393,
+      "contentHash": "7176d46c46f148ce77de22637ecc8071",
       "sourceName": "contracts/storage/AppStorage.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -300,38 +300,6 @@
       "versionPragmas": [
         "0.8.17"
       ],
-      "artifacts": []
-    },
-    "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\faces\\IdentityFacet.sol": {
-      "lastModificationDate": 1749796385042,
-      "contentHash": "d41d8cd98f00b204e9800998ecf8427e",
-      "sourceName": "contracts/faces/IdentityFacet.sol",
-      "solcConfig": {
-        "version": "0.8.17",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [],
       "artifacts": []
     },
     "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\node_modules\\@onchain-id\\solidity\\contracts\\interface\\IIdentity.sol": {
@@ -483,73 +451,9 @@
         "IERC735"
       ]
     },
-    "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\faces\\ComplianceFacet.sol": {
-      "lastModificationDate": 1749796385101,
-      "contentHash": "d41d8cd98f00b204e9800998ecf8427e",
-      "sourceName": "contracts/faces/ComplianceFacet.sol",
-      "solcConfig": {
-        "version": "0.8.17",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [],
-      "artifacts": []
-    },
-    "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\faces\\DiamondCutFacet.sol": {
-      "lastModificationDate": 1749796385166,
-      "contentHash": "d41d8cd98f00b204e9800998ecf8427e",
-      "sourceName": "contracts/faces/DiamondCutFacet.sol",
-      "solcConfig": {
-        "version": "0.8.17",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [],
-      "artifacts": []
-    },
     "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\facets\\IdentityFacet.sol": {
-      "lastModificationDate": 1749748239296,
-      "contentHash": "a5dc8c0568394eeef0953591539d3df9",
+      "lastModificationDate": 1750169579347,
+      "contentHash": "208270d203c7700996dd4daef98c34b5",
       "sourceName": "contracts/facets/IdentityFacet.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -577,7 +481,6 @@
       },
       "imports": [
         "../libraries/LibAppStorage.sol",
-        "../storage/AppStorage.sol",
         "@onchain-id/solidity/contracts/interface/IIdentity.sol",
         "@onchain-id/solidity/contracts/interface/IClaimIssuer.sol"
       ],
@@ -589,8 +492,8 @@
       ]
     },
     "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\facets\\ComplianceFacet.sol": {
-      "lastModificationDate": 1749747926133,
-      "contentHash": "6d9e385531a0c010060514844faa7f7b",
+      "lastModificationDate": 1750169615571,
+      "contentHash": "25b7f24cb89e73abceaa5dc0c930a513",
       "sourceName": "contracts/facets/ComplianceFacet.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -666,8 +569,8 @@
       ]
     },
     "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\facets\\TokenFacet.sol": {
-      "lastModificationDate": 1749746559668,
-      "contentHash": "995be513f0626beab541411744f02443",
+      "lastModificationDate": 1750169600872,
+      "contentHash": "de1b265594a70a09ff39463550b2696e",
       "sourceName": "contracts/facets/TokenFacet.sol",
       "solcConfig": {
         "version": "0.8.17",

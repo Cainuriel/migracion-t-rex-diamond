@@ -77,22 +77,20 @@ contract TokenFacet {
 
     function forceTransfer(address from, address to, uint256 amount) external onlyAgentOrOwner {
         _transfer(from, to, amount);
-    }
-
-    function freezeAccount(address user) external onlyAgentOrOwner {
-        LibAppStorage.diamondStorage().investors[user].isFrozen = true;
+    }    function freezeAccount(address user) external onlyAgentOrOwner {
+        LibAppStorage.diamondStorage().investorFrozenStatus[user] = true;
         emit AccountFrozen(user, true);
     }
 
     function unfreezeAccount(address user) external onlyAgentOrOwner {
-        LibAppStorage.diamondStorage().investors[user].isFrozen = false;
+        LibAppStorage.diamondStorage().investorFrozenStatus[user] = false;
         emit AccountFrozen(user, false);
     }
 
     function _transfer(address from, address to, uint256 amount) internal {
         AppStorage storage s = LibAppStorage.diamondStorage();
-        require(!s.investors[from].isFrozen, "TokenFacet: sender frozen");
-        require(!s.investors[to].isFrozen, "TokenFacet: receiver frozen");
+        require(!s.investorFrozenStatus[from], "TokenFacet: sender frozen");
+        require(!s.investorFrozenStatus[to], "TokenFacet: receiver frozen");
         require(s.balances[from] >= amount, "TokenFacet: insufficient balance");
         s.balances[from] -= amount;
         s.balances[to] += amount;
