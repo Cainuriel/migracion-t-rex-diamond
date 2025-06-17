@@ -49,7 +49,7 @@ const config: HardhatUserConfig = {
         process.env.INVESTOR1_PRIV_KEY,
         process.env.INVESTOR2_PRIV_KEY
       ].filter((key): key is string => !!key),
-      gasPrice: 0, // Alastria es una red sin gas
+      gasPrice: 0, 
       timeout: 300000,
     }
   },

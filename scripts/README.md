@@ -1,13 +1,15 @@
-# T-REX Diamond Scripts
+# T-REX Diamond Scripts - New Architecture
 
-Este directorio contiene los scripts principales para desplegar, verificar e interactuar con el sistema T-REX Diamond refactorizado.
+Este directorio contiene los scripts principales para desplegar, verificar e interactuar con el sistema T-REX Diamond refactorizado con la nueva arquitectura modular.
 
 ## 📁 Scripts Disponibles
 
 ### 🚀 `deploy.js` - Script de Despliegue Principal
-Despliega todo el sistema T-REX Diamond con la nueva estructura de storage aplanada:
+Despliega todo el sistema T-REX Diamond con la nueva arquitectura modular:
 - Diamond contract principal
-- Todos los facets (Token, Compliance, Identity, Roles, ClaimTopics, TrustedIssuers)
+- Todos los facets externos (Token, Compliance, Identity, Roles, ClaimTopics, TrustedIssuers)
+- Todos los facets internos (business logic)
+- Storage libraries independientes por dominio
 - Configuración inicial del sistema
 - Reglas de cumplimiento básicas
 
@@ -23,24 +25,42 @@ npx hardhat run scripts/deploy.js --network bscTestnet
 npx hardhat run scripts/deploy.js --network localhost
 ```
 
-### 🔍 `verify.js` - Script de Verificación
-Verifica que el despliegue se haya completado correctamente:
+### 🔍 `verify.js` - Script de Verificación Universal
+Verifica que el despliegue se haya completado correctamente en cualquier red:
 - Valida que todos los facets estén correctamente registrados
-- Verifica la configuración inicial
-- Comprueba las reglas de compliance
+- Verifica la configuración inicial del sistema
+- Comprueba el funcionamiento de la nueva arquitectura modular
 - Valida el estado de agentes y permisos
+- Prueba las funciones de storage separado
+- Genera reporte de estado completo
+
+**Características:**
+- ✅ Funciona en cualquier red donde esté desplegado el diamond
+- ✅ Auto-detecta el archivo de deployment o usa direcciones conocidas
+- ✅ Reporte completo con métricas de éxito
+- ✅ Compatible con Alastria, BSC, Polygon, etc.
 
 **Uso:**
 ```bash
-# Verificar despliegue en Alastria
+# Verificar despliegue en Alastria (auto-detecta)
 npx hardhat run scripts/verify.js --network alastria
 
 # Verificar despliegue en BSC testnet
 npx hardhat run scripts/verify.js --network bscTestnet
+
+# Verificar cualquier red con deployment file
+npx hardhat run scripts/verify.js --network <network-name>
 ```
 
-### 🎮 `interact.js` - Script de Interacción
-Script interactivo para realizar operaciones administrativas y operacionales:
+### 🎮 `interact.js` - Script de Interacción Universal
+Script interactivo para realizar operaciones administrativas y operacionales en cualquier red:
+
+**Funcionalidades nuevas:**
+- ✅ Compatible con nueva arquitectura modular
+- ✅ Funciona en cualquier red
+- ✅ Auto-detecta deployment files o usa direcciones conocidas
+- ✅ Soporte para variables de entorno
+- ✅ Manejo robusto de errores
 
 **Comandos disponibles:**
 - `setup-issuer <issuerAddr> <topicId>` - Agregar issuer confiable
@@ -48,6 +68,12 @@ Script interactivo para realizar operaciones administrativas y operacionales:
 - `mint <recipientAddr> <amount>` - Mintear tokens
 - `set-agent <agentAddr> <true/false>` - Configurar estado de agente
 - `check-agent <agentAddr>` - Verificar estado de agente
+- `freeze <investorAddr>` - Congelar cuenta de inversor
+- `unfreeze <investorAddr>` - Descongelar cuenta de inversor
+- `balance <address>` - Consultar balance de tokens
+- `total-supply` - Consultar supply total
+- `transfer <toAddr> <amount>` - Transferir tokens
+- `info` - Mostrar información completa del sistema
 - `freeze <investorAddr>` - Congelar cuenta de inversor
 - `unfreeze <investorAddr>` - Descongelar cuenta de inversor
 - `compliance-rules` - Ver reglas de compliance
@@ -68,6 +94,43 @@ npx hardhat run scripts/interact.js --network alastria -- compliance-rules
 $env:TREX_COMMAND='mint'
 $env:TREX_ARGS='0x1234567890123456789012345678901234567890 50000'
 npx hardhat run scripts/interact.js --network alastria
+```
+
+**Uso con argumentos de línea de comandos (problemático en Hardhat):**
+```bash
+# No recomendado - Hardhat puede interpretar mal los argumentos
+npx hardhat run scripts/interact.js --network alastria info
+```
+
+**Uso recomendado con variables de entorno:**
+```bash
+# Mostrar información del sistema
+$env:TREX_COMMAND="info"
+npx hardhat run scripts/interact.js --network alastria
+
+# Consultar balance
+$env:TREX_COMMAND="balance"
+$env:TREX_ARGS="0x742d35Cc6606C8B4B8B8F4B2B8e2e2e2e2e2e2e2"
+npx hardhat run scripts/interact.js --network alastria
+
+# Transferir tokens
+$env:TREX_COMMAND="transfer"
+$env:TREX_ARGS="0x742d35Cc6606C8B4B8B8F4B2B8e2e2e2e2e2e2e2 100"
+npx hardhat run scripts/interact.js --network alastria
+
+# Mintear tokens (solo agentes)
+$env:TREX_COMMAND="mint"
+$env:TREX_ARGS="0x742d35Cc6606C8B4B8B8F4B2B8e2e2e2e2e2e2e2 1000"
+npx hardhat run scripts/interact.js --network alastria
+```
+
+**Comandos Linux/Mac:**
+```bash
+# Mostrar información del sistema
+TREX_COMMAND="info" npx hardhat run scripts/interact.js --network alastria
+
+# Consultar balance
+TREX_COMMAND="balance" TREX_ARGS="0x742d35Cc..." npx hardhat run scripts/interact.js --network alastria
 ```
 
 ## 🌐 Redes Configuradas
@@ -282,5 +345,133 @@ npm run deploy:localhost
 # Verificar despliegue
 npm run verify:localhost
 ```
+
+## 🌐 Compatibilidad de Red
+
+Todos los scripts son **universales** y funcionan en cualquier red donde el diamond esté desplegado:
+
+### ✅ Redes Soportadas
+- **Alastria Network** - Auto-detecta la dirección desplegada
+- **BSC Testnet** - Usa deployment file
+- **Polygon Amoy** - Usa deployment file  
+- **Taycan Network** - Usa deployment file
+- **Hardhat Local** - Usa deployment file
+- **Cualquier red EVM** - Con deployment file o configuración manual
+
+### 📄 Auto-detección de Deployment
+
+Los scripts buscan automáticamente el archivo de deployment:
+```
+deployments/
+├── alastria-deployment.json
+├── bscTestnet-deployment.json
+├── amoy-deployment.json
+├── taycan-deployment.json
+└── hardhat-deployment.json
+```
+
+Si no existe deployment file, para Alastria usa la dirección conocida: `0x7a8E55515de0Ad9e3293E58382BD730aD987d6DA`
+
+## 🔧 Nueva Arquitectura Soportada
+
+Los scripts están completamente actualizados para la nueva arquitectura modular:
+
+### ✅ Facets Externos Soportados
+- **TokenFacet** - Operaciones de tokens ERC-3643
+- **RolesFacet** - Gestión de roles y permisos
+- **IdentityFacet** - Registro de identidades
+- **ComplianceFacet** - Reglas de cumplimiento
+- **ClaimTopicsFacet** - Gestión de claim topics
+- **TrustedIssuersFacet** - Gestión de issuers confiables
+
+### ✅ Storage Modular
+- **TokenStorage** - Estado de tokens aislado
+- **RolesStorage** - Estado de roles aislado
+- **IdentityStorage** - Estado de identidades aislado
+- **ComplianceStorage** - Estado de compliance aislado
+- **ClaimTopicsStorage** - Estado de claim topics aislado
+- **TrustedIssuersStorage** - Estado de trusted issuers aislado
+
+## 📊 Características de Verificación
+
+### `verify.js` - Reportes Completos
+```
+🔧 BASIC CONTRACT VERIFICATION
+🎭 FACET VERIFICATION
+🔍 EIP-2535 INTROSPECTION (Optional)
+🧪 FUNCTIONAL TESTING
+📦 STORAGE VERIFICATION
+📊 VERIFICATION SUMMARY
+```
+
+**Métricas de éxito:**
+- 🟢 **≥90%**: Excelente - Sistema completamente operativo
+- 🟡 **70-89%**: Bueno - Sistema mayormente funcional  
+- 🟠 **50-69%**: Necesita atención - Algunos problemas
+- 🔴 **<50%**: Crítico - Problemas significativos
+
+## 🚀 Ejemplos Prácticos
+
+### Deployment y Verificación Completa
+```bash
+# 1. Desplegar en Alastria
+npx hardhat run scripts/deploy.js --network alastria
+
+# 2. Verificar deployment
+npx hardhat run scripts/verify.js --network alastria
+
+# 3. Mostrar información del sistema
+$env:TREX_COMMAND="info"
+npx hardhat run scripts/interact.js --network alastria
+```
+
+### Operaciones de Administración
+```bash
+# Configurar agente
+$env:TREX_COMMAND="set-agent"
+$env:TREX_ARGS="0x742d35Cc6606C8B4B8B8F4B2B8e2e2e2e2e2e2e2 true"
+npx hardhat run scripts/interact.js --network alastria
+
+# Mintear tokens iniciales
+$env:TREX_COMMAND="mint"
+$env:TREX_ARGS="0x742d35Cc6606C8B4B8B8F4B2B8e2e2e2e2e2e2e2 10000"
+npx hardhat run scripts/interact.js --network alastria
+```
+
+### Operaciones de Usuario
+```bash
+# Consultar balance
+$env:TREX_COMMAND="balance"
+$env:TREX_ARGS="0x742d35Cc6606C8B4B8B8F4B2B8e2e2e2e2e2e2e2"
+npx hardhat run scripts/interact.js --network alastria
+
+# Transferir tokens
+$env:TREX_COMMAND="transfer"
+$env:TREX_ARGS="0x123... 500"
+npx hardhat run scripts/interact.js --network alastria
+```
+
+## ✨ Mejoras en la Nueva Versión
+
+### 🔄 Migración Completa
+- ✅ **Storage Modular**: Cada dominio tiene su propio storage aislado
+- ✅ **Facets Separados**: External/Internal facet pattern implementado
+- ✅ **EIP-2535 Compliance**: Diamond standard completamente implementado
+- ✅ **Compatibilidad Universal**: Scripts funcionan en cualquier red
+
+### 🛠️ Funcionalidades Mejoradas
+- ✅ **Auto-detección**: Encuentra automáticamente el diamond desplegado
+- ✅ **Manejo de Errores**: Recuperación robusta de fallos
+- ✅ **Reportes Detallados**: Información completa de estado
+- ✅ **Variables de Entorno**: Solución para limitaciones de Hardhat
+
+### 🎯 Listo para Producción
+Todos los scripts están optimizados y listos para uso en entornos de producción con la nueva arquitectura modular del T-REX Diamond.
+
+---
+
+**📝 Actualizado**: Nueva arquitectura modular - Junio 2025  
+**🔧 Compatibilidad**: Universal - Cualquier red EVM  
+**🎯 Estado**: Producción Ready
 
 

@@ -257,11 +257,14 @@ async function main() {
   console.log("\n7️⃣  Executing Diamond Cut...");
   
   const diamondCut = await ethers.getContractAt("IDiamondCut", diamondAddress);
-  
-  const tx = await diamondCut.diamondCut(
+    const tx = await diamondCut.diamondCut(
     cuts,
     initDiamondAddress,
-    initDiamond.interface.encodeFunctionData("init")
+    initDiamond.interface.encodeFunctionData("init", [
+      config.initialOwner,
+      config.tokenName,
+      config.tokenSymbol
+    ])
   );
   
   console.log("   📦 Transaction hash:", tx.hash);
