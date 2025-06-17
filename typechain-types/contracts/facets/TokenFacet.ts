@@ -33,6 +33,7 @@ export interface TokenFacetInterface extends Interface {
       | "decimals"
       | "forceTransfer"
       | "freezeAccount"
+      | "isFrozen"
       | "mint"
       | "name"
       | "selectorsIntrospection"
@@ -70,6 +71,10 @@ export interface TokenFacetInterface extends Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "freezeAccount",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isFrozen",
     values: [AddressLike]
   ): string;
   encodeFunctionData(
@@ -112,6 +117,7 @@ export interface TokenFacetInterface extends Interface {
     functionFragment: "freezeAccount",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "isFrozen", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
   decodeFunctionResult(
@@ -256,6 +262,8 @@ export interface TokenFacet extends BaseContract {
 
   freezeAccount: TypedContractMethod<[user: AddressLike], [void], "nonpayable">;
 
+  isFrozen: TypedContractMethod<[account: AddressLike], [boolean], "view">;
+
   mint: TypedContractMethod<
     [to: AddressLike, amount: BigNumberish],
     [void],
@@ -329,6 +337,9 @@ export interface TokenFacet extends BaseContract {
   getFunction(
     nameOrSignature: "freezeAccount"
   ): TypedContractMethod<[user: AddressLike], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "isFrozen"
+  ): TypedContractMethod<[account: AddressLike], [boolean], "view">;
   getFunction(
     nameOrSignature: "mint"
   ): TypedContractMethod<

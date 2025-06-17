@@ -6,7 +6,7 @@ import { Initializable } from "@openzeppelin/contracts-upgradeable/proxy/utils/I
 import { IEIP2535Introspection } from "../interfaces/IEIP2535Introspection.sol";
 
 /// @title RolesFacet - Owner and Agent role management
-contract RolesFacet is Initializable, IEIP2535Introspection {
+contract RolesFacet_DEPRECATED  is Initializable, IEIP2535Introspection {
     event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
     event AgentSet(address indexed agent, bool status);
 

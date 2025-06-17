@@ -6,7 +6,7 @@ import { IIdentity } from "@onchain-id/solidity/contracts/interface/IIdentity.so
 import { IClaimIssuer } from "@onchain-id/solidity/contracts/interface/IClaimIssuer.sol";
 import { IEIP2535Introspection } from "../interfaces/IEIP2535Introspection.sol";
 
-contract IdentityFacet is IEIP2535Introspection {
+contract IdentityFacet_DEPRECATED  is IEIP2535Introspection {
     event IdentityRegistered(address indexed investor, address identity, uint16 country);
     event IdentityUpdated(address indexed investor, address newIdentity);
     event IdentityRemoved(address indexed investor);

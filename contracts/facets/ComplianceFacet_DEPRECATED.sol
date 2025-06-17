@@ -4,7 +4,7 @@ pragma solidity 0.8.17;
 import { LibAppStorage, AppStorage } from "../libraries/LibAppStorage.sol";
 import { IEIP2535Introspection } from "../interfaces/IEIP2535Introspection.sol";
 
-contract ComplianceFacet is IEIP2535Introspection {
+contract ComplianceFacet_DEPRECATED  is IEIP2535Introspection {
     event MaxBalanceSet(uint256 max);
     event MinBalanceSet(uint256 min);
     event MaxInvestorsSet(uint256 max);    modifier onlyOwner() {

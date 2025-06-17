@@ -4,8 +4,8 @@ pragma solidity 0.8.17;
 import { LibAppStorage, AppStorage } from "../libraries/LibAppStorage.sol";
 import { IEIP2535Introspection } from "../interfaces/IEIP2535Introspection.sol";
 
-/// @title TokenFacet - ERC20 and ERC-3643 logic
-contract TokenFacet is IEIP2535Introspection {
+/// @title TokenFacet_DEPRECATED - ERC20 and ERC-3643 logic (DEPRECATED)
+contract TokenFacet_DEPRECATED is IEIP2535Introspection {
     event Transfer(address indexed from, address indexed to, uint256 value);
     event Approval(address indexed owner, address indexed spender, uint256 value);
     event AccountFrozen(address indexed user, bool frozen);

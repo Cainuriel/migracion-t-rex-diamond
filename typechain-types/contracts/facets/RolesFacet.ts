@@ -159,25 +159,25 @@ export interface RolesFacet extends BaseContract {
   ): Promise<this>;
 
   initializeRoles: TypedContractMethod<
-    [_owner: AddressLike],
+    [initialOwner: AddressLike],
     [void],
     "nonpayable"
   >;
 
-  isAgent: TypedContractMethod<[_addr: AddressLike], [boolean], "view">;
+  isAgent: TypedContractMethod<[addr: AddressLike], [boolean], "view">;
 
   owner: TypedContractMethod<[], [string], "view">;
 
   selectorsIntrospection: TypedContractMethod<[], [string[]], "view">;
 
   setAgent: TypedContractMethod<
-    [_agent: AddressLike, _status: boolean],
+    [agent: AddressLike, status: boolean],
     [void],
     "nonpayable"
   >;
 
   transferOwnership: TypedContractMethod<
-    [_newOwner: AddressLike],
+    [newOwner: AddressLike],
     [void],
     "nonpayable"
   >;
@@ -188,10 +188,10 @@ export interface RolesFacet extends BaseContract {
 
   getFunction(
     nameOrSignature: "initializeRoles"
-  ): TypedContractMethod<[_owner: AddressLike], [void], "nonpayable">;
+  ): TypedContractMethod<[initialOwner: AddressLike], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "isAgent"
-  ): TypedContractMethod<[_addr: AddressLike], [boolean], "view">;
+  ): TypedContractMethod<[addr: AddressLike], [boolean], "view">;
   getFunction(
     nameOrSignature: "owner"
   ): TypedContractMethod<[], [string], "view">;
@@ -201,13 +201,13 @@ export interface RolesFacet extends BaseContract {
   getFunction(
     nameOrSignature: "setAgent"
   ): TypedContractMethod<
-    [_agent: AddressLike, _status: boolean],
+    [agent: AddressLike, status: boolean],
     [void],
     "nonpayable"
   >;
   getFunction(
     nameOrSignature: "transferOwnership"
-  ): TypedContractMethod<[_newOwner: AddressLike], [void], "nonpayable">;
+  ): TypedContractMethod<[newOwner: AddressLike], [void], "nonpayable">;
 
   getEvent(
     key: "AgentSet"

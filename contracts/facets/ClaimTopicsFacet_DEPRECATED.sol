@@ -4,7 +4,7 @@ pragma solidity 0.8.17;
 import { LibAppStorage, AppStorage } from "../libraries/LibAppStorage.sol";
 import { IEIP2535Introspection } from "../interfaces/IEIP2535Introspection.sol";
 
-contract ClaimTopicsFacet is IEIP2535Introspection {
+contract ClaimTopicsFacet_DEPRECATED  is IEIP2535Introspection {
     event ClaimTopicAdded(uint256 indexed topic);
     event ClaimTopicRemoved(uint256 indexed topic);
 
