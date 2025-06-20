@@ -15,8 +15,8 @@ Despliega todo el sistema ERC-3643  Diamond con la nueva arquitectura modular:
 
 **Uso:**
 ```bash
-# Despliegue en red Alastria
-npx hardhat run scripts/deploy.js --network alastria
+# Despliegue en red <CUSTOM_NETWORK>
+npx hardhat run scripts/deploy.js --network <CUSTOM_NETWORK>
 
 # Despliegue en BSC testnet
 npx hardhat run scripts/deploy.js --network bscTestnet
@@ -38,12 +38,12 @@ Verifica que el despliegue se haya completado correctamente en cualquier red:
 - ✅ Funciona en cualquier red donde esté desplegado el diamond
 - ✅ Auto-detecta el archivo de deployment o usa direcciones conocidas
 - ✅ Reporte completo con métricas de éxito
-- ✅ Compatible con Alastria, BSC, Polygon, etc.
+- ✅ Compatible con <CUSTOM_NETWORK>, BSC, Polygon, etc.
 
 **Uso:**
 ```bash
-# Verificar despliegue en Alastria (auto-detecta)
-npx hardhat run scripts/verify.js --network alastria
+# Verificar despliegue en <CUSTOM_NETWORK> (auto-detecta)
+npx hardhat run scripts/verify.js --network <CUSTOM_NETWORK>
 
 # Verificar despliegue en BSC testnet
 npx hardhat run scripts/verify.js --network bscTestnet
@@ -85,52 +85,52 @@ Script interactivo para realizar operaciones administrativas y operacionales en 
 ```bash
 # Método 1: Usando variables de entorno
 $env:TREX_COMMAND='compliance-rules'
-npx hardhat run scripts/interact.js --network alastria
+npx hardhat run scripts/interact.js --network <CUSTOM_NETWORK>
 
 # Método 2: Usando argumentos directos
-npx hardhat run scripts/interact.js --network alastria -- compliance-rules
+npx hardhat run scripts/interact.js --network <CUSTOM_NETWORK> -- compliance-rules
 
 # Ejemplo: Mintear tokens
 $env:TREX_COMMAND='mint'
 $env:TREX_ARGS='0x1234567890123456789012345678901234567890 50000'
-npx hardhat run scripts/interact.js --network alastria
+npx hardhat run scripts/interact.js --network <CUSTOM_NETWORK>
 ```
 
 **Uso con argumentos de línea de comandos (problemático en Hardhat):**
 ```bash
 # No recomendado - Hardhat puede interpretar mal los argumentos
-npx hardhat run scripts/interact.js --network alastria info
+npx hardhat run scripts/interact.js --network <CUSTOM_NETWORK> info
 ```
 
 **Uso recomendado con variables de entorno:**
 ```bash
 # Mostrar información del sistema
 $env:TREX_COMMAND="info"
-npx hardhat run scripts/interact.js --network alastria
+npx hardhat run scripts/interact.js --network <CUSTOM_NETWORK>
 
 # Consultar balance
 $env:TREX_COMMAND="balance"
 $env:TREX_ARGS="0x742d35Cc6606C8B4B8B8F4B2B8e2e2e2e2e2e2e2"
-npx hardhat run scripts/interact.js --network alastria
+npx hardhat run scripts/interact.js --network <CUSTOM_NETWORK>
 
 # Transferir tokens
 $env:TREX_COMMAND="transfer"
 $env:TREX_ARGS="0x742d35Cc6606C8B4B8B8F4B2B8e2e2e2e2e2e2e2 100"
-npx hardhat run scripts/interact.js --network alastria
+npx hardhat run scripts/interact.js --network <CUSTOM_NETWORK>
 
 # Mintear tokens (solo agentes)
 $env:TREX_COMMAND="mint"
 $env:TREX_ARGS="0x742d35Cc6606C8B4B8B8F4B2B8e2e2e2e2e2e2e2 1000"
-npx hardhat run scripts/interact.js --network alastria
+npx hardhat run scripts/interact.js --network <CUSTOM_NETWORK>
 ```
 
 **Comandos Linux/Mac:**
 ```bash
 # Mostrar información del sistema
-TREX_COMMAND="info" npx hardhat run scripts/interact.js --network alastria
+TREX_COMMAND="info" npx hardhat run scripts/interact.js --network <CUSTOM_NETWORK>
 
 # Consultar balance
-TREX_COMMAND="balance" TREX_ARGS="0x742d35Cc..." npx hardhat run scripts/interact.js --network alastria
+TREX_COMMAND="balance" TREX_ARGS="0x742d35Cc..." npx hardhat run scripts/interact.js --network <CUSTOM_NETWORK>
 ```
 
 
@@ -146,29 +146,29 @@ INVESTOR2_PRIV_KEY=<clave_privada_opcional>
 
 1. **Desplegar el sistema:**
    ```bash
-   npx hardhat run scripts/deploy.js --network alastria
+   npx hardhat run scripts/deploy.js --network <CUSTOM_NETWORK>
    ```
 
 2. **Verificar el despliegue:**
    ```bash
-   npx hardhat run scripts/verify.js --network alastria
+   npx hardhat run scripts/verify.js --network <CUSTOM_NETWORK>
    ```
 
 3. **Interactuar con el sistema:**
    ```bash
    # Ver reglas de compliance
    $env:TREX_COMMAND='compliance-rules'
-   npx hardhat run scripts/interact.js --network alastria
+   npx hardhat run scripts/interact.js --network <CUSTOM_NETWORK>
    
    # Registrar un inversor
    $env:TREX_COMMAND='register-investor'
    $env:TREX_ARGS='0x... 0x...'
-   npx hardhat run scripts/interact.js --network alastria
+   npx hardhat run scripts/interact.js --network <CUSTOM_NETWORK>
    
    # Mintear tokens
    $env:TREX_COMMAND='mint'
    $env:TREX_ARGS='0x... 1000'
-   npx hardhat run scripts/interact.js --network alastria
+   npx hardhat run scripts/interact.js --network <CUSTOM_NETWORK>
    ```
 
 ## 🔧 Estructura de Storage Refactorizada
@@ -208,14 +208,14 @@ Después del despliegue se generan automáticamente:
 
 1. **Agentes vs Owner**: El owner puede configurar el sistema, pero necesita ser registrado como agent para realizar operaciones de tokens.
 
-2. **Redes Persistentes**: Para usar `interact.js`, despliega en una red persistente (como Alastria) ya que Hardhat local se reinicia entre ejecuciones.
+2. **Redes Persistentes**: Para usar `interact.js`, despliega en una red persistente (como <CUSTOM_NETWORK>) ya que Hardhat local se reinicia entre ejecuciones.
 
-3. **Validación**: El sistema ha sido completamente validado en la red Alastria con todas las operaciones funcionando correctamente.
+3. **Validación**: El sistema ha sido completamente validado en la red <CUSTOM_NETWORK> con todas las operaciones funcionando correctamente.
 
 ## 🎉 Estado del Proyecto
 
 ✅ **Refactorización Completada**: Storage aplanado implementado y validado  
-✅ **Despliegue Exitoso**: Validado en red Alastria  
+✅ **Despliegue Exitoso**: Validado en red <CUSTOM_NETWORK>  
 ✅ **Funcionalidad Completa**: Todos los comandos de interacción funcionando  
 ✅ **Tests Pasando**: 5/5 pruebas exitosas
 
@@ -351,15 +351,15 @@ npm run verify:localhost
 
 ### Deployment y Verificación Completa
 ```bash
-# 1. Desplegar en Alastria
-npx hardhat run scripts/deploy.js --network alastria
+# 1. Desplegar en <CUSTOM_NETWORK>
+npx hardhat run scripts/deploy.js --network <CUSTOM_NETWORK>
 
 # 2. Verificar deployment
-npx hardhat run scripts/verify.js --network alastria
+npx hardhat run scripts/verify.js --network <CUSTOM_NETWORK>
 
 # 3. Mostrar información del sistema
 $env:TREX_COMMAND="info"
-npx hardhat run scripts/interact.js --network alastria
+npx hardhat run scripts/interact.js --network <CUSTOM_NETWORK>
 ```
 
 ### Operaciones de Administración
@@ -367,12 +367,12 @@ npx hardhat run scripts/interact.js --network alastria
 # Configurar agente
 $env:TREX_COMMAND="set-agent"
 $env:TREX_ARGS="0x742d35Cc6606C8B4B8B8F4B2B8e2e2e2e2e2e2e2 true"
-npx hardhat run scripts/interact.js --network alastria
+npx hardhat run scripts/interact.js --network <CUSTOM_NETWORK>
 
 # Mintear tokens iniciales
 $env:TREX_COMMAND="mint"
 $env:TREX_ARGS="0x742d35Cc6606C8B4B8B8F4B2B8e2e2e2e2e2e2e2 10000"
-npx hardhat run scripts/interact.js --network alastria
+npx hardhat run scripts/interact.js --network <CUSTOM_NETWORK>
 ```
 
 ### Operaciones de Usuario
@@ -380,12 +380,12 @@ npx hardhat run scripts/interact.js --network alastria
 # Consultar balance
 $env:TREX_COMMAND="balance"
 $env:TREX_ARGS="0x742d35Cc6606C8B4B8B8F4B2B8e2e2e2e2e2e2e2"
-npx hardhat run scripts/interact.js --network alastria
+npx hardhat run scripts/interact.js --network <CUSTOM_NETWORK>
 
 # Transferir tokens
 $env:TREX_COMMAND="transfer"
 $env:TREX_ARGS="0x123... 500"
-npx hardhat run scripts/interact.js --network alastria
+npx hardhat run scripts/interact.js --network <CUSTOM_NETWORK>
 ```
 
 ## ✨ Mejoras en la Nueva Versión

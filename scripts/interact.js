@@ -36,7 +36,7 @@ async function main() {
     console.log("   transfer <toAddr> <amount>                 - Transfer tokens");
     console.log("   info                                       - Show system information");
     console.log("");
-    console.log("💡 Example: npx hardhat run scripts/interact.js --network alastria info");
+    console.log("💡 Example: npx hardhat run scripts/interact.js ");
     return;
   }
 
@@ -56,12 +56,12 @@ async function main() {
     console.log("📄 Using deployment file:", deploymentFile);
   } else {
     // For Alastria or manual interaction, use the known address
-    if (networkName === 'alastria') {
-      diamondAddress = "0x8E96e3F80aF9c715C90d35BFFFAA32d330C69528";
-      console.log("📍 Using Alastria address:", diamondAddress);
-    } else {
-      throw new Error(`❌ No deployment file found for ${networkName}. Please deploy first.`);
-    }
+    // if (networkName === 'alastria') {
+    //   diamondAddress = "0x8E96e3F80aF9c715C90d35BFFFAA32d330C69528";
+    //   console.log("📍 Using Alastria address:", diamondAddress);
+    // } else {
+    //   throw new Error(`❌ No deployment file found for ${networkName}. Please deploy first.`);
+    // }
   }
 
   console.log("🏛️  Diamond Address:", diamondAddress);

@@ -26,12 +26,12 @@ async function main() {
     console.log("📄 Using deployment file:", deploymentFile);
   } else {
     // For Alastria or manual verification, use the known address
-    if (networkName === 'alastria') {
-      diamondAddress = "0x8E96e3F80aF9c715C90d35BFFFAA32d330C69528";
-      console.log("📍 Using Alastria address:", diamondAddress);
-    } else {
-      throw new Error(`❌ No deployment file found for ${networkName}. Please deploy first.`);
-    }
+    // if (networkName === 'alastria') {
+    //   diamondAddress = "0x8E96e3F80aF9c715C90d35BFFFAA32d330C69528";
+    //   console.log("📍 Using Alastria address:", diamondAddress);
+    // } else {
+    //   throw new Error(`❌ No deployment file found for ${networkName}. Please deploy first.`);
+    // }
   }
 
   console.log("🏛️  Diamond Address:", diamondAddress);

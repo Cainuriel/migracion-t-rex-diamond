@@ -9,7 +9,7 @@
 ## 📋 Información del Contrato Principal
 
 - **Diamond Address**: `0x7a8E55515de0Ad9e3293E58382BD730aD987d6DA`
-- **Network**: Alastria (http://108.142.237.13:8545)
+- **Network**: Alastria 
 - **Deployer**: `0x542dD28258357Cc0a4d3EdC4F6eDA03d93106744`
 - **Diamond Cut Tx**: `0x252a0ff10f6039b81332e0764588fc89a3a27dba09534756b555d6331ab4e770`
 
@@ -83,7 +83,6 @@
 1. **✅ Extensibilidad Mejorada**: Nuevos campos pueden agregarse independientemente
 2. **✅ Mantenibilidad Mejorada**: Acceso directo a campos más legible
 3. **✅ Funcionalidad Preservada**: Todas las operaciones funcionan correctamente
-4. **✅ Compatibilidad de Red**: Funciona perfectamente en red real (Alastria)
 
 ## 🎯 Conclusión
 
