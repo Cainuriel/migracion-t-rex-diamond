@@ -1,6 +1,7 @@
 # ERC-3643  Diamond  - Con nueva arquitectura ISBE
 
-Este directorio contiene los scripts principales para desplegar, verificar e interactuar con el sistema ERC-3643  Diamond refactorizado con la nueva arquitectura de ISBE.
+Este directorio contiene los scripts principales para desplegar, verificar e interactuar con el sistema ERC-3643 Diamond refactorizado con la nueva arquitectura de ISBE.
+> ⚠️ **ATENCIÓN:** Tiene que configurar su custom network en el archivo de configuración de hardhat y adaptar el proyecto a ella. En caso contrario, utilice las testnet disponibles.
 
 ## 📁 Scripts Disponibles
 
