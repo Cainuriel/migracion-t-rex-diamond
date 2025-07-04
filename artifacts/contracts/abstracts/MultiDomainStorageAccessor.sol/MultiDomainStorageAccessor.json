@@ -1,0 +1,60 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "MultiDomainStorageAccessor",
+  "sourceName": "contracts/abstracts/MultiDomainStorageAccessor.sol",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "getStorageNamespace",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getStorageStatus",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "token",
+          "type": "bool"
+        },
+        {
+          "internalType": "bool",
+          "name": "roles",
+          "type": "bool"
+        },
+        {
+          "internalType": "bool",
+          "name": "compliance",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getStorageVersion",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

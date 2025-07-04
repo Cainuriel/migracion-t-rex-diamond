@@ -2,6 +2,529 @@
   "version": "3.4",
   "log": [
     {
+      "contracts/abstracts/BaseStorageAccessor.sol:BaseStorageAccessor": {
+        "src": "contracts\\abstracts\\BaseStorageAccessor.sol:7",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "getStorageVersion()",
+          "getStorageNamespace()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/abstracts/ComplianceStorageAccessor.sol:ComplianceStorageAccessor": {
+        "src": "contracts\\abstracts\\ComplianceStorageAccessor.sol:10",
+        "inherit": [
+          "contracts/interfaces/storage/IComplianceStorage.sol:IComplianceStorage",
+          "contracts/abstracts/BaseStorageAccessor.sol:BaseStorageAccessor"
+        ],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/abstracts/MultiDomainStorageAccessor.sol:MultiDomainStorageAccessor": {
+        "src": "contracts\\abstracts\\MultiDomainStorageAccessor.sol:11",
+        "inherit": [
+          "contracts/abstracts/ComplianceStorageAccessor.sol:ComplianceStorageAccessor",
+          "contracts/interfaces/storage/IComplianceStorage.sol:IComplianceStorage",
+          "contracts/abstracts/RolesStorageAccessor.sol:RolesStorageAccessor",
+          "contracts/interfaces/storage/IRolesStorage.sol:IRolesStorage",
+          "contracts/abstracts/TokenStorageAccessor.sol:TokenStorageAccessor",
+          "contracts/interfaces/storage/ITokenStorage.sol:ITokenStorage",
+          "contracts/abstracts/BaseStorageAccessor.sol:BaseStorageAccessor"
+        ],
+        "libraries": [],
+        "methods": [
+          "getStorageStatus()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/abstracts/RolesStorageAccessor.sol:RolesStorageAccessor": {
+        "src": "contracts\\abstracts\\RolesStorageAccessor.sol:10",
+        "inherit": [
+          "contracts/interfaces/storage/IRolesStorage.sol:IRolesStorage",
+          "contracts/abstracts/BaseStorageAccessor.sol:BaseStorageAccessor"
+        ],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/abstracts/TokenStorageAccessor.sol:TokenStorageAccessor": {
+        "src": "contracts\\abstracts\\TokenStorageAccessor.sol:10",
+        "inherit": [
+          "contracts/interfaces/storage/ITokenStorage.sol:ITokenStorage",
+          "contracts/abstracts/BaseStorageAccessor.sol:BaseStorageAccessor"
+        ],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/examples/OptimizedTokenFacet.sol:OptimizedTokenFacet": {
+        "src": "contracts\\examples\\OptimizedTokenFacet.sol:10",
+        "version": {
+          "withMetadata": "b274d620171cba76303e4aac1fcf75425a05ab6b21341415f21fed43bbff4b61",
+          "withoutMetadata": "437fced406d963ec4149808484d11b5bae0c7fa465a4ace1f41562e411061bfa",
+          "linkedWithoutMetadata": "437fced406d963ec4149808484d11b5bae0c7fa465a4ace1f41562e411061bfa"
+        },
+        "inherit": [
+          "contracts/interfaces/IEIP2535Introspection.sol:IEIP2535Introspection",
+          "contracts/abstracts/MultiDomainStorageAccessor.sol:MultiDomainStorageAccessor",
+          "contracts/abstracts/ComplianceStorageAccessor.sol:ComplianceStorageAccessor",
+          "contracts/interfaces/storage/IComplianceStorage.sol:IComplianceStorage",
+          "contracts/abstracts/RolesStorageAccessor.sol:RolesStorageAccessor",
+          "contracts/interfaces/storage/IRolesStorage.sol:IRolesStorage",
+          "contracts/abstracts/TokenStorageAccessor.sol:TokenStorageAccessor",
+          "contracts/interfaces/storage/ITokenStorage.sol:ITokenStorage",
+          "contracts/abstracts/BaseStorageAccessor.sol:BaseStorageAccessor"
+        ],
+        "libraries": [],
+        "methods": [
+          "name()",
+          "symbol()",
+          "decimals()",
+          "totalSupply()",
+          "balanceOf(address)",
+          "allowance(address,address)",
+          "transfer(address,uint256)",
+          "transferFrom(address,address,uint256)",
+          "approve(address,uint256)",
+          "mint(address,uint256)",
+          "freezeAccount(address)",
+          "unfreezeAccount(address)",
+          "selectorsIntrospection()",
+          "getSelectors()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/interfaces/IEIP2535Introspection.sol:IEIP2535Introspection": {
+        "src": "contracts\\interfaces\\IEIP2535Introspection.sol:9",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "selectorsIntrospection()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/interfaces/storage/IComplianceStorage.sol:IComplianceStorage": {
+        "src": "contracts\\interfaces\\storage\\IComplianceStorage.sol:6",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/interfaces/storage/IRolesStorage.sol:IRolesStorage": {
+        "src": "contracts\\interfaces\\storage\\IRolesStorage.sol:6",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/interfaces/storage/ITokenStorage.sol:ITokenStorage": {
+        "src": "contracts\\interfaces\\storage\\ITokenStorage.sol:6",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      }
+    },
+    {
+      "contracts/abstracts/BaseStorageAccessor.sol:BaseStorageAccessor": {
+        "src": "contracts\\abstracts\\BaseStorageAccessor.sol:7",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "getStorageVersion()",
+          "getStorageNamespace()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/abstracts/ComplianceStorageAccessor.sol:ComplianceStorageAccessor": {
+        "src": "contracts\\abstracts\\ComplianceStorageAccessor.sol:10",
+        "inherit": [
+          "contracts/interfaces/storage/IComplianceStorage.sol:IComplianceStorage",
+          "contracts/abstracts/BaseStorageAccessor.sol:BaseStorageAccessor"
+        ],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/abstracts/MultiDomainStorageAccessor.sol:MultiDomainStorageAccessor": {
+        "src": "contracts\\abstracts\\MultiDomainStorageAccessor.sol:11",
+        "inherit": [
+          "contracts/abstracts/ComplianceStorageAccessor.sol:ComplianceStorageAccessor",
+          "contracts/interfaces/storage/IComplianceStorage.sol:IComplianceStorage",
+          "contracts/abstracts/RolesStorageAccessor.sol:RolesStorageAccessor",
+          "contracts/interfaces/storage/IRolesStorage.sol:IRolesStorage",
+          "contracts/abstracts/TokenStorageAccessor.sol:TokenStorageAccessor",
+          "contracts/interfaces/storage/ITokenStorage.sol:ITokenStorage",
+          "contracts/abstracts/BaseStorageAccessor.sol:BaseStorageAccessor"
+        ],
+        "libraries": [],
+        "methods": [
+          "getStorageStatus()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/abstracts/RolesStorageAccessor.sol:RolesStorageAccessor": {
+        "src": "contracts\\abstracts\\RolesStorageAccessor.sol:10",
+        "inherit": [
+          "contracts/interfaces/storage/IRolesStorage.sol:IRolesStorage",
+          "contracts/abstracts/BaseStorageAccessor.sol:BaseStorageAccessor"
+        ],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/abstracts/TokenStorageAccessor.sol:TokenStorageAccessor": {
+        "src": "contracts\\abstracts\\TokenStorageAccessor.sol:10",
+        "inherit": [
+          "contracts/interfaces/storage/ITokenStorage.sol:ITokenStorage",
+          "contracts/abstracts/BaseStorageAccessor.sol:BaseStorageAccessor"
+        ],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/interfaces/storage/IComplianceStorage.sol:IComplianceStorage": {
+        "src": "contracts\\interfaces\\storage\\IComplianceStorage.sol:6",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/interfaces/storage/IRolesStorage.sol:IRolesStorage": {
+        "src": "contracts\\interfaces\\storage\\IRolesStorage.sol:6",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/interfaces/storage/ITokenStorage.sol:ITokenStorage": {
+        "src": "contracts\\interfaces\\storage\\ITokenStorage.sol:6",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      }
+    },
+    {
+      "contracts/abstracts/BaseStorageAccessor.sol:BaseStorageAccessor": {
+        "src": "contracts\\abstracts\\BaseStorageAccessor.sol:7",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "getStorageVersion()",
+          "getStorageNamespace()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/abstracts/RolesStorageAccessor.sol:RolesStorageAccessor": {
+        "src": "contracts\\abstracts\\RolesStorageAccessor.sol:10",
+        "inherit": [
+          "contracts/interfaces/storage/IRolesStorage.sol:IRolesStorage",
+          "contracts/abstracts/BaseStorageAccessor.sol:BaseStorageAccessor"
+        ],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/abstracts/TokenStorageAccessor.sol:TokenStorageAccessor": {
+        "src": "contracts\\abstracts\\TokenStorageAccessor.sol:10",
+        "inherit": [
+          "contracts/interfaces/storage/ITokenStorage.sol:ITokenStorage",
+          "contracts/abstracts/BaseStorageAccessor.sol:BaseStorageAccessor"
+        ],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/interfaces/storage/IClaimTopicsStorage.sol:IClaimTopicsStorage": {
+        "src": "contracts\\interfaces\\storage\\IClaimTopicsStorage.sol:6",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/interfaces/storage/IComplianceStorage.sol:IComplianceStorage": {
+        "src": "contracts\\interfaces\\storage\\IComplianceStorage.sol:6",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/interfaces/storage/IIdentityStorage.sol:IIdentityStorage": {
+        "src": "contracts\\interfaces\\storage\\IIdentityStorage.sol:6",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/interfaces/storage/IRolesStorage.sol:IRolesStorage": {
+        "src": "contracts\\interfaces\\storage\\IRolesStorage.sol:6",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/interfaces/storage/ITokenStorage.sol:ITokenStorage": {
+        "src": "contracts\\interfaces\\storage\\ITokenStorage.sol:6",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/interfaces/storage/ITrustedIssuersStorage.sol:ITrustedIssuersStorage": {
+        "src": "contracts\\interfaces\\storage\\ITrustedIssuersStorage.sol:6",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      }
+    },
+    {
       "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:Initializable": {
         "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:58",
         "inherit": [],
