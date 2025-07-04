@@ -1,10 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.17;
 
-import { LibIdentityStorage, IdentityStorage } from "../../storage/IdentityStorage.sol";
-import { LibClaimTopicsStorage } from "../../storage/ClaimTopicsStorage.sol";
-import { LibTrustedIssuersStorage } from "../../storage/TrustedIssuersStorage.sol";
-import { LibRolesStorage } from "../../storage/RolesStorage.sol";
 import { IIdentity } from "../../onchain-id/interface/IIdentity.sol";
 import { IClaimIssuer } from "../../onchain-id/interface/IClaimIssuer.sol";
 import { IIdentityEvents } from "../../interfaces/events/IIdentityEvents.sol";
@@ -14,7 +10,96 @@ import { IIdentityEvents } from "../../interfaces/events/IIdentityEvents.sol";
 /// @dev This facet is not directly exposed in the diamond interface
 contract IdentityInternalFacet is IIdentityEvents {
 
-    // ================== INTERNAL IDENTITY OPERATIONS ==================    /// @notice Internal function to register an investor identity
+    // ================== STORAGE STRUCTURES ==================
+
+    /// @title IdentityStorage - Unstructured storage for Identity domain
+    /// @dev Uses Diamond Storage pattern with unique storage slot
+    struct IdentityStorage {
+        // === IDENTITY DATA ===
+        mapping(address => address) investorIdentities;
+        mapping(address => uint16) investorCountries;
+        mapping(address => bool) verificationStatus;
+    }
+
+    /// @title ClaimTopicsStorage - Unstructured storage for ClaimTopics domain
+    /// @dev Uses Diamond Storage pattern with unique storage slot
+    struct ClaimTopicsStorage {
+        // === CLAIM TOPICS ===
+        uint256[] claimTopics;
+        mapping(uint256 => bool) requiredClaimTopics;
+    }
+
+    /// @title TrustedIssuersStorage - Unstructured storage for TrustedIssuers domain
+    /// @dev Uses Diamond Storage pattern with unique storage slot
+    struct TrustedIssuersStorage {
+        // === TRUSTED ISSUERS ===
+        mapping(uint256 => address[]) trustedIssuers; // claimTopic => issuer addresses
+        mapping(address => mapping(uint256 => bool)) issuerStatus; // issuer => claimTopic => trusted
+        mapping(uint256 => uint256) issuerCount; // claimTopic => count of trusted issuers
+    }
+
+    /// @title RolesStorage - Unstructured storage for Roles domain
+    /// @dev Uses Diamond Storage pattern with unique storage slot
+    struct RolesStorage {
+        // === ACCESS CONTROL ===
+        address owner;
+        mapping(address => bool) agents;
+        bool initialized;
+    }
+
+    // ================== STORAGE ACCESS ==================
+
+    /// @dev Storage slot for Identity domain
+    bytes32 private constant IDENTITY_STORAGE_POSITION = keccak256("t-rex.diamond.identity.storage");
+    
+    /// @dev Storage slot for ClaimTopics domain
+    bytes32 private constant CLAIM_TOPICS_STORAGE_POSITION = keccak256("t-rex.diamond.claim-topics.storage");
+    
+    /// @dev Storage slot for TrustedIssuers domain
+    bytes32 private constant TRUSTED_ISSUERS_STORAGE_POSITION = keccak256("t-rex.diamond.trusted-issuers.storage");
+    
+    /// @dev Storage slot for Roles domain
+    bytes32 private constant ROLES_STORAGE_POSITION = keccak256("t-rex.diamond.roles.storage");
+
+    /// @notice Get Identity storage reference
+    /// @return ids Identity storage struct
+    function _getIdentityStorage() private pure returns (IdentityStorage storage ids) {
+        bytes32 position = IDENTITY_STORAGE_POSITION;
+        assembly {
+            ids.slot := position
+        }
+    }
+
+    /// @notice Get ClaimTopics storage reference
+    /// @return cts ClaimTopics storage struct
+    function _getClaimTopicsStorage() private pure returns (ClaimTopicsStorage storage cts) {
+        bytes32 position = CLAIM_TOPICS_STORAGE_POSITION;
+        assembly {
+            cts.slot := position
+        }
+    }
+
+    /// @notice Get TrustedIssuers storage reference
+    /// @return tis TrustedIssuers storage struct
+    function _getTrustedIssuersStorage() private pure returns (TrustedIssuersStorage storage tis) {
+        bytes32 position = TRUSTED_ISSUERS_STORAGE_POSITION;
+        assembly {
+            tis.slot := position
+        }
+    }
+
+    /// @notice Get Roles storage reference
+    /// @return rs Roles storage struct
+    function _getRolesStorage() private pure returns (RolesStorage storage rs) {
+        bytes32 position = ROLES_STORAGE_POSITION;
+        assembly {
+            rs.slot := position
+        }
+    }
+
+    // ================== INTERNAL IDENTITY OPERATIONS ==================
+
+    /// @notice Internal function to register an investor identity
     /// @param investor Investor address
     /// @param identity Identity contract address
     /// @param country Country code
@@ -22,7 +107,7 @@ contract IdentityInternalFacet is IIdentityEvents {
         require(investor != address(0), "IdentityInternal: investor is zero address");
         require(identity != address(0), "IdentityInternal: identity is zero address");
         
-        IdentityStorage storage ids = LibIdentityStorage.identityStorage();
+        IdentityStorage storage ids = _getIdentityStorage();
         require(ids.investorIdentities[investor] == address(0), "IdentityInternal: Already registered");
         
         ids.investorIdentities[investor] = identity;
@@ -37,7 +122,7 @@ contract IdentityInternalFacet is IIdentityEvents {
     function _updateIdentity(address investor, address newIdentity) internal {
         require(newIdentity != address(0), "IdentityInternal: identity is zero address");
         
-        IdentityStorage storage ids = LibIdentityStorage.identityStorage();
+        IdentityStorage storage ids = _getIdentityStorage();
         require(ids.investorIdentities[investor] != address(0), "IdentityInternal: Not registered");
         
         ids.investorIdentities[investor] = newIdentity;
@@ -46,125 +131,135 @@ contract IdentityInternalFacet is IIdentityEvents {
 
     /// @notice Internal function to update investor country
     /// @param investor Investor address
-    /// @param newCountry New country code
-    function _updateCountry(address investor, uint16 newCountry) internal {
-        IdentityStorage storage ids = LibIdentityStorage.identityStorage();
-        ids.investorCountries[investor] = newCountry;
-        emit CountryUpdated(investor, newCountry);
-    }    /// @notice Internal function to delete investor identity
+    /// @param country New country code
+    function _updateCountry(address investor, uint16 country) internal {
+        IdentityStorage storage ids = _getIdentityStorage();
+        require(ids.investorIdentities[investor] != address(0), "IdentityInternal: Not registered");
+        
+        ids.investorCountries[investor] = country;
+        emit CountryUpdated(investor, country);
+    }
+
+    /// @notice Internal function to remove investor identity
     /// @param investor Investor address
-    function _deleteIdentity(address investor) internal {
-        IdentityStorage storage ids = LibIdentityStorage.identityStorage();
+    function _removeIdentity(address investor) internal {
+        IdentityStorage storage ids = _getIdentityStorage();
+        require(ids.investorIdentities[investor] != address(0), "IdentityInternal: Not registered");
         
         delete ids.investorIdentities[investor];
         delete ids.investorCountries[investor];
+        delete ids.verificationStatus[investor];
         
         emit IdentityRemoved(investor);
     }
 
-    // ================== INTERNAL VIEW FUNCTIONS ==================    /// @notice Get investor identity address
+    // ================== INTERNAL VIEW FUNCTIONS ==================
+
+    /// @notice Get investor identity contract address
     /// @param investor Investor address
     /// @return Identity contract address
     function _getIdentity(address investor) internal view returns (address) {
-        return LibIdentityStorage.identityStorage().investorIdentities[investor];
+        return _getIdentityStorage().investorIdentities[investor];
     }
 
     /// @notice Get investor country
     /// @param investor Investor address
     /// @return Country code
-    function _getInvestorCountry(address investor) internal view returns (uint16) {
-        return LibIdentityStorage.identityStorage().investorCountries[investor];
+    function _getCountry(address investor) internal view returns (uint16) {
+        return _getIdentityStorage().investorCountries[investor];
     }
 
-    /// @notice Internal function to check if user is verified
-    /// @param user User address to verify
-    /// @return True if user has valid claims for all required topics
-    function _isVerified(address user) internal view returns (bool) {
-        IdentityStorage storage ids = LibIdentityStorage.identityStorage();
-        address identityAddress = ids.investorIdentities[user];
+    /// @notice Check if investor is registered
+    /// @param investor Investor address
+    /// @return True if registered
+    function _isRegistered(address investor) internal view returns (bool) {
+        return _getIdentityStorage().investorIdentities[investor] != address(0);
+    }
+
+    /// @notice Verify if investor has valid claims for required topics
+    /// @param investor Investor address
+    /// @return True if investor has all required claims
+    function _isVerified(address investor) internal view returns (bool) {
+        IdentityStorage storage ids = _getIdentityStorage();
+        ClaimTopicsStorage storage cts = _getClaimTopicsStorage();
+        TrustedIssuersStorage storage tis = _getTrustedIssuersStorage();
         
-        if (identityAddress == address(0)) return false;
+        address identity = ids.investorIdentities[investor];
+        if (identity == address(0)) {
+            return false;
+        }
 
-        IIdentity identity = IIdentity(identityAddress);
-        uint256[] memory claimTopics = LibClaimTopicsStorage.claimTopicsStorage().claimTopics;
-
-        for (uint i = 0; i < claimTopics.length; i++) {
-            if (!_hasValidClaimForTopic(identity, claimTopics[i])) {
-                return false;
+        // Check all required claim topics
+        for (uint256 i = 0; i < cts.claimTopics.length; i++) {
+            uint256 topic = cts.claimTopics[i];
+            
+            if (cts.requiredClaimTopics[topic]) {
+                if (!_hasValidClaim(identity, topic, tis)) {
+                    return false;
+                }
             }
         }
+
         return true;
     }
 
-    /// @notice Internal helper to check if identity has valid claim for a topic
-    /// @param identity Identity contract
-    /// @param topic Claim topic to verify
-    /// @return True if valid claim exists
-    function _hasValidClaimForTopic(IIdentity identity, uint256 topic) private view returns (bool) {
-        address[] memory issuers = LibTrustedIssuersStorage.trustedIssuersStorage().trustedIssuers[topic];
-        
-        for (uint j = 0; j < issuers.length; j++) {
-            if (_checkIssuerClaims(identity, topic, issuers[j])) {
-                return true;
-            }
-        }
-        return false;
-    }
+    // ================== PRIVATE HELPER FUNCTIONS ==================
 
-    /// @notice Internal helper to check claims from specific issuer
-    /// @param identity Identity contract
+    /// @notice Check if identity has valid claim for specific topic
+    /// @param identity Identity contract address
     /// @param topic Claim topic
-    /// @param issuer Trusted issuer address
-    /// @return True if valid claim found
-    function _checkIssuerClaims(IIdentity identity, uint256 topic, address issuer) private view returns (bool) {
-        try identity.getClaimIdsByTopic(topic) returns (bytes32[] memory claimIds) {
-            for (uint k = 0; k < claimIds.length; k++) {
-                if (_validateClaim(identity, claimIds[k], topic, issuer)) {
-                    return true;
+    /// @param tis TrustedIssuers storage reference
+    /// @return True if has valid claim
+    function _hasValidClaim(
+        address identity, 
+        uint256 topic, 
+        TrustedIssuersStorage storage tis
+    ) private view returns (bool) {
+        // Get trusted issuers for this topic
+        address[] memory trustedIssuers = tis.trustedIssuers[topic];
+        
+        if (trustedIssuers.length == 0) {
+            return false;
+        }
+
+        // Check if identity has claim from any trusted issuer
+        try IIdentity(identity).getClaimIdsByTopic(topic) returns (bytes32[] memory claimIds) {
+            for (uint256 i = 0; i < claimIds.length; i++) {
+                try IIdentity(identity).getClaim(claimIds[i]) returns (
+                    uint256, // topic
+                    uint256, // scheme  
+                    address issuer,
+                    bytes memory, // signature
+                    bytes memory, // data
+                    string memory // uri
+                ) {
+                    // Check if issuer is trusted for this topic
+                    if (tis.issuerStatus[issuer][topic]) {
+                        return true;
+                    }
+                } catch {
+                    continue;
                 }
             }
-        } catch {}
-        return false;
-    }
+        } catch {
+            return false;
+        }
 
-    /// @notice Internal helper to validate a specific claim
-    /// @param identity Identity contract
-    /// @param claimId Claim ID to validate
-    /// @param topic Expected topic
-    /// @param expectedIssuer Expected issuer address
-    /// @return True if claim is valid
-    function _validateClaim(
-        IIdentity identity, 
-        bytes32 claimId, 
-        uint256 topic, 
-        address expectedIssuer
-    ) private view returns (bool) {
-        try identity.getClaim(claimId) returns (
-            uint256 /* claimTopic */,
-            uint256 /* scheme */,
-            address issuer,
-            bytes memory signature,
-            bytes memory data,
-            string memory /* uri */
-        ) {
-            if (issuer == expectedIssuer) {
-                try IClaimIssuer(issuer).isClaimValid(identity, topic, signature, data) returns (bool valid) {
-                    return valid;
-                } catch {}
-            }
-        } catch {}
         return false;
     }
 
     // ================== INTERNAL AUTHORIZATION ==================
 
-    /// @notice Internal check for owner or agent authorization
+    /// @notice Internal check for owner authorization
+    /// @param caller Address calling the function
+    function _onlyOwner(address caller) internal view {
+        require(caller == _getRolesStorage().owner, "IdentityInternal: Not owner");
+    }
+
+    /// @notice Internal check for agent or owner authorization
     /// @param caller Address calling the function
     function _onlyAgentOrOwner(address caller) internal view {
-        require(
-            caller == LibRolesStorage.rolesStorage().owner || 
-            LibRolesStorage.rolesStorage().agents[caller],
-            "IdentityInternal: Not authorized"
-        );
+        RolesStorage storage rs = _getRolesStorage();
+        require(caller == rs.owner || rs.agents[caller], "IdentityInternal: Not authorized");
     }
 }

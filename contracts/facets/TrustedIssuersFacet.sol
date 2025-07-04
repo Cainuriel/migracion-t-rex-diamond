@@ -27,14 +27,14 @@ contract TrustedIssuersFacet is TrustedIssuersInternalFacet, IEIP2535Introspecti
     /// @param issuer Issuer address to remove
     /// @param topic Topic identifier
     function removeTrustedIssuer(address issuer, uint256 topic) external onlyOwner {
-        _removeTrustedIssuer(issuer, topic);
+        _removeTrustedIssuerForTopic(issuer, topic);
     }
 
     /// @notice Get all trusted issuers for a specific topic
     /// @param topic Topic identifier
     /// @return Array of trusted issuer addresses
     function getTrustedIssuers(uint256 topic) external view returns (address[] memory) {
-        return _getTrustedIssuers(topic);
+        return _getTrustedIssuersForTopic(topic);
     }
 
     // ================== IEIP2535INTROSPECTION ==================

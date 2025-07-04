@@ -14,22 +14,6 @@ import * as Contracts from ".";
 declare module "hardhat/types/runtime" {
   interface HardhatEthersHelpers extends HardhatEthersHelpersBase {
     getContractFactory(
-      name: "IClaimIssuer",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.IClaimIssuer__factory>;
-    getContractFactory(
-      name: "IERC734",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.IERC734__factory>;
-    getContractFactory(
-      name: "IERC735",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.IERC735__factory>;
-    getContractFactory(
-      name: "IIdentity",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.IIdentity__factory>;
-    getContractFactory(
       name: "Initializable",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Initializable__factory>;
@@ -215,26 +199,6 @@ declare module "hardhat/types/runtime" {
     ): Promise<Contracts.Version__factory>;
 
     getContractAt(
-      name: "IClaimIssuer",
-      address: string | ethers.Addressable,
-      signer?: ethers.Signer
-    ): Promise<Contracts.IClaimIssuer>;
-    getContractAt(
-      name: "IERC734",
-      address: string | ethers.Addressable,
-      signer?: ethers.Signer
-    ): Promise<Contracts.IERC734>;
-    getContractAt(
-      name: "IERC735",
-      address: string | ethers.Addressable,
-      signer?: ethers.Signer
-    ): Promise<Contracts.IERC735>;
-    getContractAt(
-      name: "IIdentity",
-      address: string | ethers.Addressable,
-      signer?: ethers.Signer
-    ): Promise<Contracts.IIdentity>;
-    getContractAt(
       name: "Initializable",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
@@ -466,22 +430,6 @@ declare module "hardhat/types/runtime" {
     ): Promise<Contracts.Version>;
 
     deployContract(
-      name: "IClaimIssuer",
-      signerOrOptions?: ethers.Signer | DeployContractOptions
-    ): Promise<Contracts.IClaimIssuer>;
-    deployContract(
-      name: "IERC734",
-      signerOrOptions?: ethers.Signer | DeployContractOptions
-    ): Promise<Contracts.IERC734>;
-    deployContract(
-      name: "IERC735",
-      signerOrOptions?: ethers.Signer | DeployContractOptions
-    ): Promise<Contracts.IERC735>;
-    deployContract(
-      name: "IIdentity",
-      signerOrOptions?: ethers.Signer | DeployContractOptions
-    ): Promise<Contracts.IIdentity>;
-    deployContract(
       name: "Initializable",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.Initializable>;
@@ -666,26 +614,6 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.Version>;
 
-    deployContract(
-      name: "IClaimIssuer",
-      args: any[],
-      signerOrOptions?: ethers.Signer | DeployContractOptions
-    ): Promise<Contracts.IClaimIssuer>;
-    deployContract(
-      name: "IERC734",
-      args: any[],
-      signerOrOptions?: ethers.Signer | DeployContractOptions
-    ): Promise<Contracts.IERC734>;
-    deployContract(
-      name: "IERC735",
-      args: any[],
-      signerOrOptions?: ethers.Signer | DeployContractOptions
-    ): Promise<Contracts.IERC735>;
-    deployContract(
-      name: "IIdentity",
-      args: any[],
-      signerOrOptions?: ethers.Signer | DeployContractOptions
-    ): Promise<Contracts.IIdentity>;
     deployContract(
       name: "Initializable",
       args: any[],

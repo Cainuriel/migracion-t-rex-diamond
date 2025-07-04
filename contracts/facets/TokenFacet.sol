@@ -3,7 +3,6 @@ pragma solidity 0.8.17;
 
 import { TokenInternalFacet } from "./internal/TokenInternalFacet.sol";
 import { IEIP2535Introspection } from "../interfaces/IEIP2535Introspection.sol";
-import { LibRolesStorage } from "../storage/RolesStorage.sol";
 
 /// @title TokenFacet - External interface for Token operations
 /// @dev Exposes only public/external functions, inherits business logic from TokenInternalFacet
@@ -11,11 +10,7 @@ import { LibRolesStorage } from "../storage/RolesStorage.sol";
 contract TokenFacet is TokenInternalFacet, IEIP2535Introspection {
 
     modifier onlyAgentOrOwner() {
-        require(
-            msg.sender == LibRolesStorage.rolesStorage().owner || 
-            LibRolesStorage.rolesStorage().agents[msg.sender], 
-            "TokenFacet: Not authorized"
-        );
+        _onlyAgentOrOwner(msg.sender);
         _;
     }
 

@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.17;
 
-import { LibRolesStorage, RolesStorage } from "../../storage/RolesStorage.sol";
 import { IRolesEvents } from "../../interfaces/events/IRolesEvents.sol";
 
 /// @title RolesInternalFacet - Internal business logic for Roles domain
@@ -9,13 +8,38 @@ import { IRolesEvents } from "../../interfaces/events/IRolesEvents.sol";
 /// @dev This facet is not directly exposed in the diamond interface
 contract RolesInternalFacet is IRolesEvents {
 
+    // ================== STORAGE STRUCTURES ==================
+
+    /// @title RolesStorage - Unstructured storage for Roles domain
+    /// @dev Uses Diamond Storage pattern with unique storage slot
+    struct RolesStorage {
+        // === ACCESS CONTROL ===
+        address owner;
+        mapping(address => bool) agents;
+        bool initialized;
+    }
+
+    // ================== STORAGE ACCESS ==================
+
+    /// @dev Storage slot for Roles domain
+    bytes32 private constant ROLES_STORAGE_POSITION = keccak256("t-rex.diamond.roles.storage");
+
+    /// @notice Get Roles storage reference
+    /// @return rs Roles storage struct
+    function _getRolesStorage() private pure returns (RolesStorage storage rs) {
+        bytes32 position = ROLES_STORAGE_POSITION;
+        assembly {
+            rs.slot := position
+        }
+    }
+
     // ================== INTERNAL ROLES OPERATIONS ==================
 
     /// @notice Internal function to initialize roles
     /// @param initialOwner Initial owner address
     function _setInitialOwner(address initialOwner) internal {
         require(initialOwner != address(0), "RolesInternal: owner is the zero address");
-        RolesStorage storage rs = LibRolesStorage.rolesStorage();
+        RolesStorage storage rs = _getRolesStorage();
         
         // Ensure not already initialized
         require(rs.owner == address(0), "RolesInternal: already initialized");
@@ -28,7 +52,7 @@ contract RolesInternalFacet is IRolesEvents {
     /// @param newOwner New owner address
     function _transferOwnership(address newOwner) internal {
         require(newOwner != address(0), "RolesInternal: new owner is the zero address");
-        RolesStorage storage rs = LibRolesStorage.rolesStorage();
+        RolesStorage storage rs = _getRolesStorage();
         
         address previousOwner = rs.owner;
         rs.owner = newOwner;
@@ -41,7 +65,7 @@ contract RolesInternalFacet is IRolesEvents {
     /// @param status True to grant agent role, false to revoke
     function _setAgent(address agent, bool status) internal {
         require(agent != address(0), "RolesInternal: agent is the zero address");
-        RolesStorage storage rs = LibRolesStorage.rolesStorage();
+        RolesStorage storage rs = _getRolesStorage();
         
         rs.agents[agent] = status;
         emit AgentSet(agent, status);
@@ -52,21 +76,21 @@ contract RolesInternalFacet is IRolesEvents {
     /// @notice Get current owner
     /// @return Owner address
     function _owner() internal view returns (address) {
-        return LibRolesStorage.rolesStorage().owner;
+        return _getRolesStorage().owner;
     }
 
     /// @notice Check if address is an agent
     /// @param addr Address to check
     /// @return True if address is an agent
     function _isAgent(address addr) internal view returns (bool) {
-        return LibRolesStorage.rolesStorage().agents[addr];
+        return _getRolesStorage().agents[addr];
     }
 
     /// @notice Check if address is owner or agent
     /// @param addr Address to check
     /// @return True if address is owner or agent
     function _isAuthorized(address addr) internal view returns (bool) {
-        RolesStorage storage rs = LibRolesStorage.rolesStorage();
+        RolesStorage storage rs = _getRolesStorage();
         return addr == rs.owner || rs.agents[addr];
     }
 
