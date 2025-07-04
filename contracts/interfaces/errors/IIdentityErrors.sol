@@ -23,4 +23,8 @@ interface IIdentityErrors {
     /// @notice Thrown when the country code is invalid
     /// @param country The invalid country code
     error InvalidCountry(uint16 country);
+
+    /// @notice Thrown when a non-authorized address tries to perform a restricted operation
+    /// @param caller The unauthorized caller address
+    error Unauthorized(address caller);
 }

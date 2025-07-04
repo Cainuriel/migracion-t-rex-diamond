@@ -48,6 +48,17 @@
       "type": "error"
     },
     {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "caller",
+          "type": "address"
+        }
+      ],
+      "name": "Unauthorized",
+      "type": "error"
+    },
+    {
       "inputs": [],
       "name": "ZeroAddress",
       "type": "error"
@@ -129,8 +140,8 @@
       "type": "event"
     }
   ],
-  "bytecode": "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea2646970667358221220d87ba58eaa4dc9516ee2258f210c6134e12bd322c14de37b55270a027212015764736f6c63430008110033",
-  "deployedBytecode": "0x6080604052600080fdfea2646970667358221220d87ba58eaa4dc9516ee2258f210c6134e12bd322c14de37b55270a027212015764736f6c63430008110033",
+  "bytecode": "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea264697066735822122040337842511b16d7caef618e95ee6584ba8c09ec1db940b6ec7f68b119eee6c364736f6c63430008110033",
+  "deployedBytecode": "0x6080604052600080fdfea264697066735822122040337842511b16d7caef618e95ee6584ba8c09ec1db940b6ec7f68b119eee6c364736f6c63430008110033",
   "linkReferences": {},
   "deployedLinkReferences": {}
 }

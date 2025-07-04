@@ -135,7 +135,7 @@ contract IdentityInternalFacet is IIdentityEvents, IIdentityErrors {
     /// @param country New country code
     function _updateCountry(address investor, uint16 country) internal {
         IdentityStorage storage ids = _getIdentityStorage();
-        require(ids.investorIdentities[investor] != address(0), "IdentityInternal: Not registered");
+        if (ids.investorIdentities[investor] == address(0)) revert NotRegistered(investor);
         
         ids.investorCountries[investor] = country;
         emit CountryUpdated(investor, country);
@@ -145,7 +145,7 @@ contract IdentityInternalFacet is IIdentityEvents, IIdentityErrors {
     /// @param investor Investor address
     function _removeIdentity(address investor) internal {
         IdentityStorage storage ids = _getIdentityStorage();
-        require(ids.investorIdentities[investor] != address(0), "IdentityInternal: Not registered");
+        if (ids.investorIdentities[investor] == address(0)) revert NotRegistered(investor);
         
         delete ids.investorIdentities[investor];
         delete ids.investorCountries[investor];
@@ -254,13 +254,13 @@ contract IdentityInternalFacet is IIdentityEvents, IIdentityErrors {
     /// @notice Internal check for owner authorization
     /// @param caller Address calling the function
     function _onlyOwner(address caller) internal view {
-        require(caller == _getRolesStorage().owner, "IdentityInternal: Not owner");
+        if (caller != _getRolesStorage().owner) revert Unauthorized(caller);
     }
 
     /// @notice Internal check for agent or owner authorization
     /// @param caller Address calling the function
     function _onlyAgentOrOwner(address caller) internal view {
         RolesStorage storage rs = _getRolesStorage();
-        require(caller == rs.owner || rs.agents[caller], "IdentityInternal: Not authorized");
+        if (caller != rs.owner && !rs.agents[caller]) revert Unauthorized(caller);
     }
 }

@@ -54,6 +54,17 @@ const _abi = [
     type: "error",
   },
   {
+    inputs: [
+      {
+        internalType: "address",
+        name: "caller",
+        type: "address",
+      },
+    ],
+    name: "Unauthorized",
+    type: "error",
+  },
+  {
     inputs: [],
     name: "ZeroAddress",
     type: "error",

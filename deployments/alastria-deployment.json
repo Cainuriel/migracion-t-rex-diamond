@@ -1,17 +1,17 @@
 {
   "network": "alastria",
   "deployer": "0x542dD28258357Cc0a4d3EdC4F6eDA03d93106744",
-  "timestamp": "2025-07-04T14:08:22.171Z",
+  "timestamp": "2025-07-04T14:52:46.258Z",
   "contracts": {
-    "Diamond": "0x5DE0983421b79c54587F128341b282c5ce49B2D8",
-    "DiamondCutFacet": "0xda6E3466575478672b8cd22bd1ed4EB1DA082484",
-    "TokenFacet": "0x9E4E642274625c15fCB82E6449e98CB702997Df6",
-    "RolesFacet": "0x777586AEe6a2E5849756c55da870b05cEa8d2f43",
-    "IdentityFacet": "0x8bE814039A62cF8348621c32B25401F116cb2B6D",
-    "ComplianceFacet": "0x42964f999407fa764689D2df21544f6365e520F1",
-    "ClaimTopicsFacet": "0x26B645484720C4E00d121DFf86CD696E3A74EB36",
-    "TrustedIssuersFacet": "0x071e0667c9bd43c8DCC6F1155C41ABeEa7739073",
-    "InitDiamond": "0x8F566EFF5d61206eaa5bee68b7aEC69dCA39e192"
+    "Diamond": "0x16e62dDe281b3E4AbCA3fA343F542FaaA835772f",
+    "DiamondCutFacet": "0xCB75067f700BA276720638119D4baDb1941a5f7d",
+    "TokenFacet": "0x53aE509912e4e2bf98260379e1a3f92a30d5C40D",
+    "RolesFacet": "0x1a6ce5fCCB8D095ba00Be9D001Db4b9207757344",
+    "IdentityFacet": "0x9B7891951e6e223938E15e5609a21dbE4847F87F",
+    "ComplianceFacet": "0x0967201B88E8D36874497705A9892F9D550fd8AE",
+    "ClaimTopicsFacet": "0x1E8dd357b5fFdc6956977ECb8Bed72e82f8f64e4",
+    "TrustedIssuersFacet": "0x1E0f3FD032E1b8beEB7C3bE2F043279CB7127b92",
+    "InitDiamond": "0x22591d0d7Fa841AF2B9470C2256a3d8AeAEa7afd"
   },
   "configuration": {
     "tokenName": "T-REX Security Token",

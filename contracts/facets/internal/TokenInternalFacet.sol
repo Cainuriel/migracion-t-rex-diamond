@@ -69,10 +69,14 @@ contract TokenInternalFacet is ITokenEvents, ITokenErrors {
     /// @param to Destination address  
     /// @param amount Amount to transfer
     function _transfer(address from, address to, uint256 amount) internal {
+        if (from == address(0)) revert ZeroAddress();
+        if (to == address(0)) revert ZeroAddress();
+        if (amount == 0) revert ZeroAmount();
+        
         TokenStorage storage ts = _getTokenStorage();
-        require(!ts.frozenAccounts[from], "TokenInternal: sender frozen");
-        require(!ts.frozenAccounts[to], "TokenInternal: receiver frozen");
-        require(ts.balances[from] >= amount, "TokenInternal: insufficient balance");
+        if (ts.frozenAccounts[from]) revert FrozenAccount(from);
+        if (ts.frozenAccounts[to]) revert FrozenAccount(to);
+        if (ts.balances[from] < amount) revert InsufficientBalance(ts.balances[from], amount);
         
         ts.balances[from] -= amount;
         ts.balances[to] += amount;
@@ -87,6 +91,9 @@ contract TokenInternalFacet is ITokenEvents, ITokenErrors {
     /// @param to Recipient address
     /// @param amount Amount to mint
     function _mint(address to, uint256 amount) internal {
+        if (to == address(0)) revert ZeroAddress();
+        if (amount == 0) revert ZeroAmount();
+        
         TokenStorage storage ts = _getTokenStorage();
         ts.totalSupply += amount;
         ts.balances[to] += amount;
@@ -101,8 +108,11 @@ contract TokenInternalFacet is ITokenEvents, ITokenErrors {
     /// @param from Address to burn from
     /// @param amount Amount to burn
     function _burn(address from, uint256 amount) internal {
+        if (from == address(0)) revert ZeroAddress();
+        if (amount == 0) revert ZeroAmount();
+        
         TokenStorage storage ts = _getTokenStorage();
-        require(ts.balances[from] >= amount, "TokenInternal: burn amount exceeds balance");
+        if (ts.balances[from] < amount) revert InsufficientBalance(ts.balances[from], amount);
         
         ts.balances[from] -= amount;
         ts.totalSupply -= amount;
@@ -127,6 +137,9 @@ contract TokenInternalFacet is ITokenEvents, ITokenErrors {
     /// @param spender Spender address
     /// @param amount Allowance amount
     function _approve(address owner_, address spender, uint256 amount) internal {
+        if (owner_ == address(0)) revert ZeroAddress();
+        if (spender == address(0)) revert ZeroAddress();
+        
         TokenStorage storage ts = _getTokenStorage();
         ts.allowances[owner_][spender] = amount;
         emit Approval(owner_, spender, amount);

@@ -1,5 +1,53 @@
 [
   {
+    "type": "error",
+    "name": "FrozenAccount",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "account"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "InsufficientAllowance",
+    "inputs": [
+      {
+        "type": "uint256",
+        "name": "available"
+      },
+      {
+        "type": "uint256",
+        "name": "requested"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "InsufficientBalance",
+    "inputs": [
+      {
+        "type": "uint256",
+        "name": "available"
+      },
+      {
+        "type": "uint256",
+        "name": "requested"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "ZeroAddress",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "ZeroAmount",
+    "inputs": []
+  },
+  {
     "type": "event",
     "anonymous": false,
     "name": "AccountFrozen",
@@ -343,6 +391,51 @@
     "outputs": []
   },
   {
+    "type": "error",
+    "name": "AgentAlreadySet",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "agent"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "AgentNotSet",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "agent"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "SameOwner",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "currentOwner"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "Unauthorized",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "caller"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "ZeroAddress",
+    "inputs": []
+  },
+  {
     "type": "event",
     "anonymous": false,
     "name": "AgentSet",
@@ -477,6 +570,61 @@
       }
     ],
     "outputs": []
+  },
+  {
+    "type": "error",
+    "name": "AlreadyRegistered",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "investor"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "InvalidCountry",
+    "inputs": [
+      {
+        "type": "uint16",
+        "name": "country"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "InvalidIdentity",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "identity"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "NotRegistered",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "investor"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "Unauthorized",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "caller"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "ZeroAddress",
+    "inputs": []
   },
   {
     "type": "event",
@@ -900,6 +1048,56 @@
         "name": "selectors_"
       }
     ]
+  },
+  {
+    "type": "error",
+    "name": "EmptyClaimTopics",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "InvalidIssuer",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "issuer"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "TrustedIssuerAlreadyExists",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "issuer"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "TrustedIssuerNotFound",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "issuer"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "Unauthorized",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "caller"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "ZeroAddress",
+    "inputs": []
   },
   {
     "type": "event",

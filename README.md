@@ -5,6 +5,21 @@
 [![ERC-3643](https://img.shields.io/badge/ERC--3643-T--REX-orange.svg)](https://github.com/TokenySolutions/T-REX)
 [![Tests](https://img.shields.io/badge/Tests-18%2F18-brightgreen.svg)]()
 [![Deployment](https://img.shields.io/badge/Deployment-Success-brightgreen.svg)]()
+[![Network](https://img.shields.io/badge/Alastria-Deployed-blue.svg)]()
+[![Errors](https://img.shields.io/badge/Custom%20Errors-Validated-green.svg)]()
+
+## 🎉 **ESTADO ACTUAL - COMPLETAMENTE OPERATIVO**
+
+**✅ SISTEMA REFACTORIZADO Y VALIDADO EN PRODUCCIÓN**
+
+- **🌐 Red:** Alastria Network  
+- **📍 Contrato:** `0x16e62dDe281b3E4AbCA3fA343F542FaaA835772f`  
+- **✅ Estado:** Completamente operativo con errores personalizados validados  
+- **🔧 Arquitectura:** Diamond con storage encapsulado y interfaces modulares  
+- **🧪 Tests:** 18/18 passing  
+- **📚 Documentación:** Completa y actualizada  
+
+---
 
 Este proyecto implementa una versión **completamente refactorizada** del estándar **ERC-3643 (T-REX)** utilizando el patrón **Diamond (EIP-2535)** con una arquitectura modular avanzada que elimina las limitaciones de storage y mejora significativamente la extensibilidad del sistema.
 
@@ -954,4 +969,8 @@ Todos los scripts están optimizados y listos para uso en entornos de producció
 
 - [EIP-2535 Diamond Standard](https://eips.ethereum.org/EIPS/eip-2535)
 - [ERC-3643 Standard](https://github.com/TokenySolutions/T-REX)
+
+---
+
+
 
