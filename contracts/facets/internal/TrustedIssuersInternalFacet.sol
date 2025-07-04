@@ -1,14 +1,58 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.17;
 
-import { LibTrustedIssuersStorage, TrustedIssuersStorage } from "../../storage/TrustedIssuersStorage.sol";
-import { LibRolesStorage } from "../../storage/RolesStorage.sol";
 import { ITrustedIssuersEvents } from "../../interfaces/events/ITrustedIssuersEvents.sol";
 
 /// @title TrustedIssuersInternalFacet - Internal business logic for TrustedIssuers domain
 /// @dev Contains all the business logic for trusted issuers management
 /// @dev This facet is not directly exposed in the diamond interface
 contract TrustedIssuersInternalFacet is ITrustedIssuersEvents {
+
+    // ================== STORAGE STRUCTURES ==================
+
+    /// @title TrustedIssuersStorage - Unstructured storage for TrustedIssuers domain
+    /// @dev Uses Diamond Storage pattern with unique storage slot
+    struct TrustedIssuersStorage {
+        // === TRUSTED ISSUERS ===
+        mapping(uint256 => address[]) trustedIssuers; // claimTopic => issuer addresses
+        mapping(address => mapping(uint256 => bool)) issuerStatus; // issuer => claimTopic => trusted
+        mapping(uint256 => uint256) issuerCount; // claimTopic => count of trusted issuers
+    }
+
+    /// @title RolesStorage - Unstructured storage for Roles domain
+    /// @dev Uses Diamond Storage pattern with unique storage slot
+    struct RolesStorage {
+        // === ACCESS CONTROL ===
+        address owner;
+        mapping(address => bool) agents;
+        bool initialized;
+    }
+
+    // ================== STORAGE ACCESS ==================
+
+    /// @dev Storage slot for TrustedIssuers domain
+    bytes32 private constant TRUSTED_ISSUERS_STORAGE_POSITION = keccak256("t-rex.diamond.trusted-issuers.storage");
+    
+    /// @dev Storage slot for Roles domain
+    bytes32 private constant ROLES_STORAGE_POSITION = keccak256("t-rex.diamond.roles.storage");
+
+    /// @notice Get TrustedIssuers storage reference
+    /// @return tis TrustedIssuers storage struct
+    function _getTrustedIssuersStorage() private pure returns (TrustedIssuersStorage storage tis) {
+        bytes32 position = TRUSTED_ISSUERS_STORAGE_POSITION;
+        assembly {
+            tis.slot := position
+        }
+    }
+
+    /// @notice Get Roles storage reference
+    /// @return rs Roles storage struct
+    function _getRolesStorage() private pure returns (RolesStorage storage rs) {
+        bytes32 position = ROLES_STORAGE_POSITION;
+        assembly {
+            rs.slot := position
+        }
+    }
 
     // ================== INTERNAL TRUSTED ISSUERS OPERATIONS ==================
 
@@ -19,7 +63,7 @@ contract TrustedIssuersInternalFacet is ITrustedIssuersEvents {
         require(issuer != address(0), "TrustedIssuersInternal: issuer is zero address");
         require(topics.length > 0, "TrustedIssuersInternal: no topics provided");
         
-        TrustedIssuersStorage storage tis = LibTrustedIssuersStorage.trustedIssuersStorage();
+        TrustedIssuersStorage storage tis = _getTrustedIssuersStorage();
         
         for (uint256 i = 0; i < topics.length; i++) {
             uint256 topic = topics[i];
@@ -35,74 +79,122 @@ contract TrustedIssuersInternalFacet is ITrustedIssuersEvents {
                 }
             }
             
-            // Add issuer if not already present
             if (!exists) {
-                issuers.push(issuer);
+                tis.trustedIssuers[topic].push(issuer);
+                tis.issuerStatus[issuer][topic] = true;
+                tis.issuerCount[topic]++;
             }
         }
         
         emit TrustedIssuerAdded(issuer, topics);
     }
 
-    /// @notice Internal function to remove trusted issuer from a specific topic
+    /// @notice Internal function to remove trusted issuer
     /// @param issuer Issuer address to remove
-    /// @param topic Topic identifier
-    function _removeTrustedIssuer(address issuer, uint256 topic) internal {
-        TrustedIssuersStorage storage tis = LibTrustedIssuersStorage.trustedIssuersStorage();
-        address[] storage issuers = tis.trustedIssuers[topic];
+    function _removeTrustedIssuer(address issuer) internal {
+        require(issuer != address(0), "TrustedIssuersInternal: issuer is zero address");
         
-        for (uint256 i = 0; i < issuers.length; i++) {
-            if (issuers[i] == issuer) {
-                // Move last element to current position and remove last
-                issuers[i] = issuers[issuers.length - 1];
-                issuers.pop();
-                emit TrustedIssuerRemoved(issuer);
-                return;
+        TrustedIssuersStorage storage tis = _getTrustedIssuersStorage();
+        
+        // Find all topics where this issuer is trusted and remove them
+        uint256[] memory topicsToRemove = _getIssuerTopics(issuer);
+        
+        for (uint256 i = 0; i < topicsToRemove.length; i++) {
+            uint256 topic = topicsToRemove[i];
+            address[] storage issuers = tis.trustedIssuers[topic];
+            
+            // Find and remove issuer from array
+            for (uint256 j = 0; j < issuers.length; j++) {
+                if (issuers[j] == issuer) {
+                    issuers[j] = issuers[issuers.length - 1];
+                    issuers.pop();
+                    tis.issuerStatus[issuer][topic] = false;
+                    tis.issuerCount[topic]--;
+                    break;
+                }
             }
         }
         
-        // If we reach here, issuer was not found for this topic - this is not an error
-    }    /// @notice Internal function to remove trusted issuer from all topics
-    /// @param issuer Issuer address to remove completely
-    function _removeTrustedIssuerFromAllTopics(address issuer) internal {
-        // Note: This is a simplified approach. In a production system, you might want to 
-        // keep track of which topics an issuer is associated with for more efficient removal
-        // For now, this would require iterating through all possible topics or maintaining 
-        // a reverse mapping
+        emit TrustedIssuerRemoved(issuer);
+    }
+
+    /// @notice Internal function to remove trusted issuer for specific topic
+    /// @param issuer Issuer address
+    /// @param topic Topic identifier
+    function _removeTrustedIssuerForTopic(address issuer, uint256 topic) internal {
+        require(issuer != address(0), "TrustedIssuersInternal: issuer is zero address");
+        
+        TrustedIssuersStorage storage tis = _getTrustedIssuersStorage();
+        require(tis.issuerStatus[issuer][topic], "TrustedIssuersInternal: issuer not trusted for topic");
+        
+        address[] storage issuers = tis.trustedIssuers[topic];
+        
+        // Find and remove issuer from array
+        for (uint256 j = 0; j < issuers.length; j++) {
+            if (issuers[j] == issuer) {
+                issuers[j] = issuers[issuers.length - 1];
+                issuers.pop();
+                tis.issuerStatus[issuer][topic] = false;
+                tis.issuerCount[topic]--;
+                break;
+            }
+        }
         
         emit TrustedIssuerRemoved(issuer);
     }
 
     // ================== INTERNAL VIEW FUNCTIONS ==================
 
-    /// @notice Get all trusted issuers for a topic
+    /// @notice Get trusted issuers for a specific topic
     /// @param topic Topic identifier
     /// @return Array of trusted issuer addresses
-    function _getTrustedIssuers(uint256 topic) internal view returns (address[] memory) {
-        return LibTrustedIssuersStorage.trustedIssuersStorage().trustedIssuers[topic];
+    function _getTrustedIssuersForTopic(uint256 topic) internal view returns (address[] memory) {
+        return _getTrustedIssuersStorage().trustedIssuers[topic];
     }
 
-    /// @notice Check if an issuer is trusted for a specific topic
-    /// @param issuer Issuer address to check
+    /// @notice Check if issuer is trusted for specific topic
+    /// @param issuer Issuer address
     /// @param topic Topic identifier
     /// @return True if issuer is trusted for the topic
     function _isTrustedIssuer(address issuer, uint256 topic) internal view returns (bool) {
-        address[] memory issuers = LibTrustedIssuersStorage.trustedIssuersStorage().trustedIssuers[topic];
+        return _getTrustedIssuersStorage().issuerStatus[issuer][topic];
+    }
+
+    /// @notice Get count of trusted issuers for a topic
+    /// @param topic Topic identifier
+    /// @return Number of trusted issuers for the topic
+    function _getTrustedIssuerCount(uint256 topic) internal view returns (uint256) {
+        return _getTrustedIssuersStorage().issuerCount[topic];
+    }
+
+    // ================== PRIVATE HELPER FUNCTIONS ==================
+
+    /// @notice Get all topics where an issuer is trusted
+    /// @param issuer Issuer address
+    /// @return Array of topic identifiers
+    function _getIssuerTopics(address issuer) private view returns (uint256[] memory) {
+        TrustedIssuersStorage storage tis = _getTrustedIssuersStorage();
         
-        for (uint256 i = 0; i < issuers.length; i++) {
-            if (issuers[i] == issuer) {
-                return true;
+        // This is a simplified implementation
+        // In a real implementation, you might want to track this more efficiently
+        uint256[] memory tempTopics = new uint256[](100); // Assuming max 100 topics
+        uint256 count = 0;
+        
+        // Check topics 1-100 (common range for claim topics)
+        for (uint256 topic = 1; topic <= 100; topic++) {
+            if (tis.issuerStatus[issuer][topic]) {
+                tempTopics[count] = topic;
+                count++;
             }
         }
         
-        return false;
-    }
-
-    /// @notice Get number of trusted issuers for a topic
-    /// @param topic Topic identifier
-    /// @return Number of trusted issuers
-    function _getTrustedIssuersCount(uint256 topic) internal view returns (uint256) {
-        return LibTrustedIssuersStorage.trustedIssuersStorage().trustedIssuers[topic].length;
+        // Create array with exact size
+        uint256[] memory result = new uint256[](count);
+        for (uint256 i = 0; i < count; i++) {
+            result[i] = tempTopics[i];
+        }
+        
+        return result;
     }
 
     // ================== INTERNAL AUTHORIZATION ==================
@@ -110,6 +202,13 @@ contract TrustedIssuersInternalFacet is ITrustedIssuersEvents {
     /// @notice Internal check for owner authorization
     /// @param caller Address calling the function
     function _onlyOwner(address caller) internal view {
-        require(caller == LibRolesStorage.rolesStorage().owner, "TrustedIssuersInternal: Not owner");
+        require(caller == _getRolesStorage().owner, "TrustedIssuersInternal: Not owner");
+    }
+
+    /// @notice Internal check for agent or owner authorization
+    /// @param caller Address calling the function
+    function _onlyAgentOrOwner(address caller) internal view {
+        RolesStorage storage rs = _getRolesStorage();
+        require(caller == rs.owner || rs.agents[caller], "TrustedIssuersInternal: Not authorized");
     }
 }

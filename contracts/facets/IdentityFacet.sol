@@ -41,7 +41,7 @@ contract IdentityFacet is IdentityInternalFacet, IEIP2535Introspection {
     /// @notice Delete investor identity
     /// @param investor Investor address
     function deleteIdentity(address investor) external onlyAgentOrOwner {
-        _deleteIdentity(investor);
+        _removeIdentity(investor);
     }
 
     /// @notice Check if user has valid identity claims
@@ -55,7 +55,7 @@ contract IdentityFacet is IdentityInternalFacet, IEIP2535Introspection {
     /// @param investor Investor address
     /// @return Country code
     function getInvestorCountry(address investor) external view returns (uint16) {
-        return _getInvestorCountry(investor);
+        return _getCountry(investor);
     }
 
     /// @notice Get investor identity contract address
