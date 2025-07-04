@@ -22,9 +22,33 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Ownable__factory>;
     getContractFactory(
+      name: "BaseStorageAccessor",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.BaseStorageAccessor__factory>;
+    getContractFactory(
+      name: "ComplianceStorageAccessor",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ComplianceStorageAccessor__factory>;
+    getContractFactory(
+      name: "MultiDomainStorageAccessor",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.MultiDomainStorageAccessor__factory>;
+    getContractFactory(
+      name: "RolesStorageAccessor",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.RolesStorageAccessor__factory>;
+    getContractFactory(
+      name: "TokenStorageAccessor",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TokenStorageAccessor__factory>;
+    getContractFactory(
       name: "Diamond",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Diamond__factory>;
+    getContractFactory(
+      name: "OptimizedTokenFacet",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.OptimizedTokenFacet__factory>;
     getContractFactory(
       name: "ClaimTopicsFacet",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -209,10 +233,40 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.Ownable>;
     getContractAt(
+      name: "BaseStorageAccessor",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BaseStorageAccessor>;
+    getContractAt(
+      name: "ComplianceStorageAccessor",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ComplianceStorageAccessor>;
+    getContractAt(
+      name: "MultiDomainStorageAccessor",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.MultiDomainStorageAccessor>;
+    getContractAt(
+      name: "RolesStorageAccessor",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.RolesStorageAccessor>;
+    getContractAt(
+      name: "TokenStorageAccessor",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TokenStorageAccessor>;
+    getContractAt(
       name: "Diamond",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.Diamond>;
+    getContractAt(
+      name: "OptimizedTokenFacet",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.OptimizedTokenFacet>;
     getContractAt(
       name: "ClaimTopicsFacet",
       address: string | ethers.Addressable,
@@ -438,9 +492,33 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.Ownable>;
     deployContract(
+      name: "BaseStorageAccessor",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.BaseStorageAccessor>;
+    deployContract(
+      name: "ComplianceStorageAccessor",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ComplianceStorageAccessor>;
+    deployContract(
+      name: "MultiDomainStorageAccessor",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.MultiDomainStorageAccessor>;
+    deployContract(
+      name: "RolesStorageAccessor",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.RolesStorageAccessor>;
+    deployContract(
+      name: "TokenStorageAccessor",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.TokenStorageAccessor>;
+    deployContract(
       name: "Diamond",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.Diamond>;
+    deployContract(
+      name: "OptimizedTokenFacet",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.OptimizedTokenFacet>;
     deployContract(
       name: "ClaimTopicsFacet",
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -625,10 +703,40 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.Ownable>;
     deployContract(
+      name: "BaseStorageAccessor",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.BaseStorageAccessor>;
+    deployContract(
+      name: "ComplianceStorageAccessor",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ComplianceStorageAccessor>;
+    deployContract(
+      name: "MultiDomainStorageAccessor",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.MultiDomainStorageAccessor>;
+    deployContract(
+      name: "RolesStorageAccessor",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.RolesStorageAccessor>;
+    deployContract(
+      name: "TokenStorageAccessor",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.TokenStorageAccessor>;
+    deployContract(
       name: "Diamond",
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.Diamond>;
+    deployContract(
+      name: "OptimizedTokenFacet",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.OptimizedTokenFacet>;
     deployContract(
       name: "ClaimTopicsFacet",
       args: any[],
