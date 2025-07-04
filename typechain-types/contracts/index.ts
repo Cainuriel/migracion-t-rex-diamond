@@ -5,5 +5,7 @@ import type * as facets from "./facets";
 export type { facets };
 import type * as interfaces from "./interfaces";
 export type { interfaces };
+import type * as onchainId from "./onchain-id";
+export type { onchainId };
 export type { Diamond } from "./Diamond";
 export type { InitDiamond } from "./InitDiamond";

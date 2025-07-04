@@ -3,6 +3,9 @@
 Este directorio contiene los scripts principales para desplegar, verificar e interactuar con el sistema ERC-3643 Diamond refactorizado con la nueva arquitectura de ISBE.
 > ⚠️ **ATENCIÓN:** Tiene que configurar su custom network en el archivo de configuración de hardhat y adaptar el proyecto a ella. En caso contrario, utilice las testnet disponibles.
 
+## Control de version
+Hemos desaclopado la librería onChain-id para poder dejar la versión 0.17 atrás.
+
 ## 📁 Scripts Disponibles
 
 ### 🚀 `deploy.js` - Script de Despliegue Principal
@@ -408,9 +411,7 @@ Todos los scripts están optimizados y listos para uso en entornos de producció
 
 ---
 
-**📝 Actualizado**: Nueva arquitectura modular - Junio 2025  
-**🔧 Compatibilidad**: Universal - Cualquier red EVM  
-
+**📝 Actualizado**: Hemos desaclopado la librería onChain-id - Julio 2025  
 
 
 ### **COMPARACIÓN CON ERC-3643 ORIGINAL**
@@ -428,11 +429,6 @@ Todos los scripts están optimizados y listos para uso en entornos de producció
 
 ### **Por realizar**
 
-#### **Para Producción Inmediata:**
-1. **Añadir más tests de edge cases**
-2. **Implementar OwnershipFacet separado**
-3. **Mejorar validación de claims**
-4. **Añadir emergency pause**
 
 #### **Para Versión Completa:**
 1. **Implementar compliance modules**

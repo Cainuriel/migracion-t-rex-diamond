@@ -5,8 +5,8 @@ import { LibIdentityStorage, IdentityStorage } from "../../storage/IdentityStora
 import { LibClaimTopicsStorage } from "../../storage/ClaimTopicsStorage.sol";
 import { LibTrustedIssuersStorage } from "../../storage/TrustedIssuersStorage.sol";
 import { LibRolesStorage } from "../../storage/RolesStorage.sol";
-import { IIdentity } from "@onchain-id/solidity/contracts/interface/IIdentity.sol";
-import { IClaimIssuer } from "@onchain-id/solidity/contracts/interface/IClaimIssuer.sol";
+import { IIdentity } from "../../onchain-id/interface/IIdentity.sol";
+import { IClaimIssuer } from "../../onchain-id/interface/IClaimIssuer.sol";
 
 /// @title IdentityInternalFacet - Internal business logic for Identity domain
 /// @dev Contains all the business logic for investor identity management
