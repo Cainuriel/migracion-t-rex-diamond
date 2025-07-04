@@ -1,59 +1,73 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.17;
 
-import { LibAppStorage, AppStorage } from "../libraries/LibAppStorage.sol";
-import { Compliance } from "../storage/AppStorage.sol";
+import { ComplianceInternalFacet } from "./internal/ComplianceInternalFacet.sol";
+import { IEIP2535Introspection } from "../interfaces/IEIP2535Introspection.sol";
 
-contract ComplianceFacet {
-    event MaxBalanceSet(uint256 max);
-    event MinBalanceSet(uint256 min);
-    event MaxInvestorsSet(uint256 max);
+/// @title ComplianceFacet - External interface for Compliance operations
+/// @dev Exposes only public/external functions, inherits business logic from ComplianceInternalFacet
+/// @dev Implements IEIP2535Introspection for selector introspection
+contract ComplianceFacet is ComplianceInternalFacet, IEIP2535Introspection {
 
     modifier onlyOwner() {
-        require(msg.sender == LibAppStorage.diamondStorage().owner, "Not owner");
+        _onlyOwner(msg.sender);
         _;
     }
 
+    // ================== EXTERNAL COMPLIANCE FUNCTIONS ==================
+
+    /// @notice Set maximum balance limit per investor
+    /// @param max Maximum balance allowed
     function setMaxBalance(uint256 max) external onlyOwner {
-        LibAppStorage.diamondStorage().compliance.maxBalance = max;
-        emit MaxBalanceSet(max);
+        _setMaxBalance(max);
     }
 
+    /// @notice Set minimum balance limit per investor
+    /// @param min Minimum balance required
     function setMinBalance(uint256 min) external onlyOwner {
-        LibAppStorage.diamondStorage().compliance.minBalance = min;
-        emit MinBalanceSet(min);
+        _setMinBalance(min);
     }
 
+    /// @notice Set maximum number of investors allowed
+    /// @param max Maximum number of investors
     function setMaxInvestors(uint256 max) external onlyOwner {
-        LibAppStorage.diamondStorage().compliance.maxInvestors = max;
-        emit MaxInvestorsSet(max);
+        _setMaxInvestors(max);
     }
 
+    /// @notice Check if a transfer is compliant with all rules
+    /// @param from Sender address
+    /// @param to Recipient address
+    /// @param amount Transfer amount
+    /// @return True if transfer is compliant
     function canTransfer(address from, address to, uint256 amount) external view returns (bool) {
-        AppStorage storage s = LibAppStorage.diamondStorage();
-        if (s.investors[from].isFrozen || s.investors[to].isFrozen) return false;
-        if (s.investors[to].identity == address(0)) return false;
-
-        uint256 newBalance = s.balances[to] + amount;
-        if (s.compliance.maxBalance > 0 && newBalance > s.compliance.maxBalance) return false;
-        if (s.compliance.minBalance > 0 && newBalance < s.compliance.minBalance) return false;
-
-        if (s.compliance.maxInvestors > 0 && s.balances[to] == 0) {
-            uint256 count = 0;
-            for (uint i = 0; i < s.holders.length; i++) {
-                if (s.balances[s.holders[i]] > 0) count++;
-            }
-            if (count >= s.compliance.maxInvestors) return false;
-        }
-        return true;
+        return _canTransfer(from, to, amount);
     }
 
+    /// @notice Get current compliance rules
+    /// @return maxBalance Maximum balance limit
+    /// @return minBalance Minimum balance limit
+    /// @return maxInvestors Maximum investors limit
     function complianceRules() external view returns (uint256 maxBalance, uint256 minBalance, uint256 maxInvestors) {
-        AppStorage storage s = LibAppStorage.diamondStorage();
-        return (
-            s.compliance.maxBalance,
-            s.compliance.minBalance,
-            s.compliance.maxInvestors
-        );
+        return _getComplianceRules();
+    }
+
+    // ================== IEIP2535INTROSPECTION ==================
+
+    /// @notice Returns the function selectors supported by this facet
+    /// @dev Implementation of IEIP2535Introspection
+    /// @return selectors_ Array of function selectors exposed by this facet
+    function selectorsIntrospection()
+        external
+        pure
+        override
+        returns (bytes4[] memory selectors_)
+    {
+        uint256 selectorsLength = 5;
+        selectors_ = new bytes4[](selectorsLength);
+        selectors_[--selectorsLength] = this.setMaxBalance.selector;
+        selectors_[--selectorsLength] = this.setMinBalance.selector;
+        selectors_[--selectorsLength] = this.setMaxInvestors.selector;
+        selectors_[--selectorsLength] = this.canTransfer.selector;
+        selectors_[--selectorsLength] = this.complianceRules.selector;
     }
 }

@@ -29,6 +29,7 @@ export interface TrustedIssuersFacetInterface extends Interface {
       | "addTrustedIssuer"
       | "getTrustedIssuers"
       | "removeTrustedIssuer"
+      | "selectorsIntrospection"
   ): FunctionFragment;
 
   getEvent(
@@ -47,6 +48,10 @@ export interface TrustedIssuersFacetInterface extends Interface {
     functionFragment: "removeTrustedIssuer",
     values: [AddressLike, BigNumberish]
   ): string;
+  encodeFunctionData(
+    functionFragment: "selectorsIntrospection",
+    values?: undefined
+  ): string;
 
   decodeFunctionResult(
     functionFragment: "addTrustedIssuer",
@@ -58,6 +63,10 @@ export interface TrustedIssuersFacetInterface extends Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "removeTrustedIssuer",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "selectorsIntrospection",
     data: BytesLike
   ): Result;
 }
@@ -148,6 +157,8 @@ export interface TrustedIssuersFacet extends BaseContract {
     "nonpayable"
   >;
 
+  selectorsIntrospection: TypedContractMethod<[], [string[]], "view">;
+
   getFunction<T extends ContractMethod = ContractMethod>(
     key: string | FunctionFragment
   ): T;
@@ -169,6 +180,9 @@ export interface TrustedIssuersFacet extends BaseContract {
     [void],
     "nonpayable"
   >;
+  getFunction(
+    nameOrSignature: "selectorsIntrospection"
+  ): TypedContractMethod<[], [string[]], "view">;
 
   getEvent(
     key: "TrustedIssuerAdded"

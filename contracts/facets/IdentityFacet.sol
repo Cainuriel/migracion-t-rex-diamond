@@ -1,96 +1,89 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.17;
 
-import { LibAppStorage, AppStorage } from "../libraries/LibAppStorage.sol";
-import { Investor } from "../storage/AppStorage.sol";
-import { IIdentity } from "@onchain-id/solidity/contracts/interface/IIdentity.sol";
-import { IClaimIssuer } from "@onchain-id/solidity/contracts/interface/IClaimIssuer.sol";
+import { IdentityInternalFacet } from "./internal/IdentityInternalFacet.sol";
+import { IEIP2535Introspection } from "../interfaces/IEIP2535Introspection.sol";
 
-contract IdentityFacet {
-    event IdentityRegistered(address indexed investor, address identity, uint16 country);
-    event IdentityUpdated(address indexed investor, address newIdentity);
-    event IdentityRemoved(address indexed investor);
-    event CountryUpdated(address indexed investor, uint16 country);
+/// @title IdentityFacet - External interface for Identity operations
+/// @dev Exposes only public/external functions, inherits business logic from IdentityInternalFacet
+/// @dev Implements IEIP2535Introspection for selector introspection
+contract IdentityFacet is IdentityInternalFacet, IEIP2535Introspection {
 
     modifier onlyAgentOrOwner() {
-        AppStorage storage s = LibAppStorage.diamondStorage();
-        require(msg.sender == s.owner || s.agents[msg.sender], "Not authorized");
+        _onlyAgentOrOwner(msg.sender);
         _;
     }
 
+    // ================== EXTERNAL IDENTITY FUNCTIONS ==================
+
+    /// @notice Register a new investor identity
+    /// @param investor Investor address
+    /// @param identity Identity contract address
+    /// @param country Country code
     function registerIdentity(address investor, address identity, uint16 country) external onlyAgentOrOwner {
-        AppStorage storage s = LibAppStorage.diamondStorage();
-        require(s.investors[investor].identity == address(0), "Already registered");
-        s.investors[investor] = Investor(identity, country, false);
-        emit IdentityRegistered(investor, identity, country);
+        _registerIdentity(investor, identity, country);
     }
 
+    /// @notice Update investor identity contract
+    /// @param investor Investor address
+    /// @param newIdentity New identity contract address
     function updateIdentity(address investor, address newIdentity) external onlyAgentOrOwner {
-        AppStorage storage s = LibAppStorage.diamondStorage();
-        require(s.investors[investor].identity != address(0), "Not registered");
-        s.investors[investor].identity = newIdentity;
-        emit IdentityUpdated(investor, newIdentity);
+        _updateIdentity(investor, newIdentity);
     }
 
+    /// @notice Update investor country
+    /// @param investor Investor address
+    /// @param newCountry New country code
     function updateCountry(address investor, uint16 newCountry) external onlyAgentOrOwner {
-        AppStorage storage s = LibAppStorage.diamondStorage();
-        s.investors[investor].country = newCountry;
-        emit CountryUpdated(investor, newCountry);
+        _updateCountry(investor, newCountry);
     }
 
+    /// @notice Delete investor identity
+    /// @param investor Investor address
     function deleteIdentity(address investor) external onlyAgentOrOwner {
-        AppStorage storage s = LibAppStorage.diamondStorage();
-        delete s.investors[investor];
-        emit IdentityRemoved(investor);
-    }    function isVerified(address user) public view returns (bool) {
-        AppStorage storage s = LibAppStorage.diamondStorage();
-        Investor memory investor = s.investors[user];
-        if (investor.identity == address(0)) return false;
-
-        IIdentity identity = IIdentity(investor.identity);
-
-        for (uint i = 0; i < s.claimTopics.length; i++) {
-            uint256 topic = s.claimTopics[i];
-            address[] memory issuers = s.trustedIssuers[topic];
-            bool validClaim = false;
-
-            for (uint j = 0; j < issuers.length; j++) {
-                try identity.getClaimIdsByTopic(topic) returns (bytes32[] memory claimIds) {                    
-                    for (uint k = 0; k < claimIds.length; k++) {
-                        try identity.getClaim(claimIds[k]) returns (
-                            uint256 /* claimTopic */,
-                            uint256 /* scheme */,
-                            address issuer,
-                            bytes memory signature,
-                            bytes memory data,
-                            string memory /* uri */
-                        ) {
-                            if (issuer == issuers[j]) {
-                                try IClaimIssuer(issuer).isClaimValid(identity, topic, signature, data) returns (bool valid) {
-                                    if (valid) {
-                                        validClaim = true;
-                                        break;
-                                    }
-                                } catch {}
-                            }
-                        } catch {}
-                        if (validClaim) break;
-                    }
-                } catch {}
-                if (validClaim) break;
-            }
-            if (!validClaim) return false;
-        }
-        return true;
+        _deleteIdentity(investor);
     }
 
+    /// @notice Check if user has valid identity claims
+    /// @param user User address to verify
+    /// @return True if user is verified with valid claims
+    function isVerified(address user) external view returns (bool) {
+        return _isVerified(user);
+    }
+
+    /// @notice Get investor country code
+    /// @param investor Investor address
+    /// @return Country code
     function getInvestorCountry(address investor) external view returns (uint16) {
-        return LibAppStorage.diamondStorage().investors[investor].country;
+        return _getInvestorCountry(investor);
     }
 
-    /// @dev Renamed the function to `getIdentity` to avoid a naming conflict with the `identity` variable.
-    ///      Developers should use this function to retrieve the identity address associated with a given investor.
+    /// @notice Get investor identity contract address
+    /// @param investor Investor address
+    /// @return Identity contract address
     function getIdentity(address investor) external view returns (address) {
-        return LibAppStorage.diamondStorage().investors[investor].identity;
+        return _getIdentity(investor);
+    }
+
+    // ================== IEIP2535INTROSPECTION ==================
+
+    /// @notice Returns the function selectors supported by this facet
+    /// @dev Implementation of IEIP2535Introspection
+    /// @return selectors_ Array of function selectors exposed by this facet
+    function selectorsIntrospection()
+        external
+        pure
+        override
+        returns (bytes4[] memory selectors_)
+    {
+        uint256 selectorsLength = 7;
+        selectors_ = new bytes4[](selectorsLength);
+        selectors_[--selectorsLength] = this.registerIdentity.selector;
+        selectors_[--selectorsLength] = this.updateIdentity.selector;
+        selectors_[--selectorsLength] = this.updateCountry.selector;
+        selectors_[--selectorsLength] = this.deleteIdentity.selector;
+        selectors_[--selectorsLength] = this.isVerified.selector;
+        selectors_[--selectorsLength] = this.getInvestorCountry.selector;
+        selectors_[--selectorsLength] = this.getIdentity.selector;
     }
 }

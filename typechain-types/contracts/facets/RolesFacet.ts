@@ -29,6 +29,7 @@ export interface RolesFacetInterface extends Interface {
       | "initializeRoles"
       | "isAgent"
       | "owner"
+      | "selectorsIntrospection"
       | "setAgent"
       | "transferOwnership"
   ): FunctionFragment;
@@ -47,6 +48,10 @@ export interface RolesFacetInterface extends Interface {
   ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
+    functionFragment: "selectorsIntrospection",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "setAgent",
     values: [AddressLike, boolean]
   ): string;
@@ -61,6 +66,10 @@ export interface RolesFacetInterface extends Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "isAgent", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "selectorsIntrospection",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "setAgent", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "transferOwnership",
@@ -150,23 +159,25 @@ export interface RolesFacet extends BaseContract {
   ): Promise<this>;
 
   initializeRoles: TypedContractMethod<
-    [_owner: AddressLike],
+    [initialOwner: AddressLike],
     [void],
     "nonpayable"
   >;
 
-  isAgent: TypedContractMethod<[_addr: AddressLike], [boolean], "view">;
+  isAgent: TypedContractMethod<[addr: AddressLike], [boolean], "view">;
 
   owner: TypedContractMethod<[], [string], "view">;
 
+  selectorsIntrospection: TypedContractMethod<[], [string[]], "view">;
+
   setAgent: TypedContractMethod<
-    [_agent: AddressLike, _status: boolean],
+    [agent: AddressLike, status: boolean],
     [void],
     "nonpayable"
   >;
 
   transferOwnership: TypedContractMethod<
-    [_newOwner: AddressLike],
+    [newOwner: AddressLike],
     [void],
     "nonpayable"
   >;
@@ -177,23 +188,26 @@ export interface RolesFacet extends BaseContract {
 
   getFunction(
     nameOrSignature: "initializeRoles"
-  ): TypedContractMethod<[_owner: AddressLike], [void], "nonpayable">;
+  ): TypedContractMethod<[initialOwner: AddressLike], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "isAgent"
-  ): TypedContractMethod<[_addr: AddressLike], [boolean], "view">;
+  ): TypedContractMethod<[addr: AddressLike], [boolean], "view">;
   getFunction(
     nameOrSignature: "owner"
   ): TypedContractMethod<[], [string], "view">;
   getFunction(
+    nameOrSignature: "selectorsIntrospection"
+  ): TypedContractMethod<[], [string[]], "view">;
+  getFunction(
     nameOrSignature: "setAgent"
   ): TypedContractMethod<
-    [_agent: AddressLike, _status: boolean],
+    [agent: AddressLike, status: boolean],
     [void],
     "nonpayable"
   >;
   getFunction(
     nameOrSignature: "transferOwnership"
-  ): TypedContractMethod<[_newOwner: AddressLike], [void], "nonpayable">;
+  ): TypedContractMethod<[newOwner: AddressLike], [void], "nonpayable">;
 
   getEvent(
     key: "AgentSet"

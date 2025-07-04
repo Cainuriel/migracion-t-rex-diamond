@@ -31,6 +31,7 @@ export interface IdentityFacetInterface extends Interface {
       | "getInvestorCountry"
       | "isVerified"
       | "registerIdentity"
+      | "selectorsIntrospection"
       | "updateCountry"
       | "updateIdentity"
   ): FunctionFragment;
@@ -64,6 +65,10 @@ export interface IdentityFacetInterface extends Interface {
     values: [AddressLike, AddressLike, BigNumberish]
   ): string;
   encodeFunctionData(
+    functionFragment: "selectorsIntrospection",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "updateCountry",
     values: [AddressLike, BigNumberish]
   ): string;
@@ -87,6 +92,10 @@ export interface IdentityFacetInterface extends Interface {
   decodeFunctionResult(functionFragment: "isVerified", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "registerIdentity",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "selectorsIntrospection",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -224,6 +233,8 @@ export interface IdentityFacet extends BaseContract {
     "nonpayable"
   >;
 
+  selectorsIntrospection: TypedContractMethod<[], [string[]], "view">;
+
   updateCountry: TypedContractMethod<
     [investor: AddressLike, newCountry: BigNumberish],
     [void],
@@ -259,6 +270,9 @@ export interface IdentityFacet extends BaseContract {
     [void],
     "nonpayable"
   >;
+  getFunction(
+    nameOrSignature: "selectorsIntrospection"
+  ): TypedContractMethod<[], [string[]], "view">;
   getFunction(
     nameOrSignature: "updateCountry"
   ): TypedContractMethod<

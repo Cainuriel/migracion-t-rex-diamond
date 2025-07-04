@@ -1,0 +1,84 @@
+{
+  "network": "hardhat",
+  "diamondAddress": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+  "timestamp": "2025-06-17T14:31:48.235Z",
+  "totalChecks": 9,
+  "passedChecks": 0,
+  "failedChecks": 9,
+  "successRate": "0.0",
+  "checks": [
+    {
+      "description": "Diamond contract deployed",
+      "passed": false,
+      "value": null
+    },
+    {
+      "description": "Owner available for agent check",
+      "passed": false,
+      "value": "Owner not determined"
+    },
+    {
+      "description": "TokenFacet deployed",
+      "passed": false,
+      "value": "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0"
+    },
+    {
+      "description": "RolesFacet deployed",
+      "passed": false,
+      "value": "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9"
+    },
+    {
+      "description": "IdentityFacet deployed",
+      "passed": false,
+      "value": "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9"
+    },
+    {
+      "description": "ComplianceFacet deployed",
+      "passed": false,
+      "value": "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707"
+    },
+    {
+      "description": "ClaimTopicsFacet deployed",
+      "passed": false,
+      "value": "0x0165878A594ca255338adfa4d48449f69242Eb8F"
+    },
+    {
+      "description": "TrustedIssuersFacet deployed",
+      "passed": false,
+      "value": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853"
+    },
+    {
+      "description": "DiamondCutFacet deployed",
+      "passed": false,
+      "value": "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+    }
+  ],
+  "deploymentInfo": {
+    "network": "hardhat",
+    "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+    "timestamp": "2025-06-17T14:31:37.504Z",
+    "contracts": {
+      "Diamond": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+      "DiamondCutFacet": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+      "TokenFacet": "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0",
+      "RolesFacet": "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
+      "IdentityFacet": "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9",
+      "ComplianceFacet": "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707",
+      "ClaimTopicsFacet": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+      "TrustedIssuersFacet": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+      "InitDiamond": "0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6"
+    },
+    "configuration": {
+      "tokenName": "T-REX Security Token",
+      "tokenSymbol": "TREX",
+      "initialOwner": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+      "complianceRules": {
+        "maxBalance": "1000000000000000000000000",
+        "minBalance": "1000000000000000000000",
+        "maxInvestors": 100
+      },
+      "initialAgents": [],
+      "ownerAsAgent": true
+    }
+  }
+}

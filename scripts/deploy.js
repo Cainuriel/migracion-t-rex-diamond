@@ -257,11 +257,14 @@ async function main() {
   console.log("\n7️⃣  Executing Diamond Cut...");
   
   const diamondCut = await ethers.getContractAt("IDiamondCut", diamondAddress);
-  
-  const tx = await diamondCut.diamondCut(
+    const tx = await diamondCut.diamondCut(
     cuts,
     initDiamondAddress,
-    initDiamond.interface.encodeFunctionData("init")
+    initDiamond.interface.encodeFunctionData("init", [
+      config.initialOwner,
+      config.tokenName,
+      config.tokenSymbol
+    ])
   );
   
   console.log("   📦 Transaction hash:", tx.hash);
@@ -283,12 +286,34 @@ async function main() {
 
   // Verify initialization
   console.log("   🔍 Verifying system initialization...");
-  const currentOwner = await roles.owner();
-  const tokenName = await token.name();
-  const tokenSymbol = await token.symbol();
+  try {
+    const currentOwner = await roles.owner();
     console.log("   ✅ Owner:", currentOwner);
-  console.log("   ✅ Token Name:", tokenName);
-  console.log("   ✅ Token Symbol:", tokenSymbol);
+  } catch (error) {
+    console.log("   ❌ Error getting owner:", error.message);
+  }
+  
+  try {
+    const tokenName = await token.name();
+    console.log("   ✅ Token Name:", tokenName);
+  } catch (error) {
+    console.log("   ❌ Error getting token name:", error.message);
+  }
+  
+  try {
+    const tokenSymbol = await token.symbol();
+    console.log("   ✅ Token Symbol:", tokenSymbol);
+  } catch (error) {
+    console.log("   ❌ Error getting token symbol:", error.message);
+  }
+
+  // Test compliance rules
+  try {
+    const rules = await compliance.complianceRules();
+    console.log("   ✅ Compliance rules accessible:", rules.length ? "Yes" : "No");
+  } catch (error) {
+    console.log("   ❌ Error getting compliance rules:", error.message);
+  }
 
   // Register owner as agent if requested
   if (config.ownerAsAgent) {

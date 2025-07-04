@@ -33,8 +33,10 @@ export interface TokenFacetInterface extends Interface {
       | "decimals"
       | "forceTransfer"
       | "freezeAccount"
+      | "isFrozen"
       | "mint"
       | "name"
+      | "selectorsIntrospection"
       | "symbol"
       | "totalSupply"
       | "transfer"
@@ -72,10 +74,18 @@ export interface TokenFacetInterface extends Interface {
     values: [AddressLike]
   ): string;
   encodeFunctionData(
+    functionFragment: "isFrozen",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
     functionFragment: "mint",
     values: [AddressLike, BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "selectorsIntrospection",
+    values?: undefined
+  ): string;
   encodeFunctionData(functionFragment: "symbol", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "totalSupply",
@@ -107,8 +117,13 @@ export interface TokenFacetInterface extends Interface {
     functionFragment: "freezeAccount",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "isFrozen", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "selectorsIntrospection",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "symbol", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "totalSupply",
@@ -247,6 +262,8 @@ export interface TokenFacet extends BaseContract {
 
   freezeAccount: TypedContractMethod<[user: AddressLike], [void], "nonpayable">;
 
+  isFrozen: TypedContractMethod<[account: AddressLike], [boolean], "view">;
+
   mint: TypedContractMethod<
     [to: AddressLike, amount: BigNumberish],
     [void],
@@ -254,6 +271,8 @@ export interface TokenFacet extends BaseContract {
   >;
 
   name: TypedContractMethod<[], [string], "view">;
+
+  selectorsIntrospection: TypedContractMethod<[], [string[]], "view">;
 
   symbol: TypedContractMethod<[], [string], "view">;
 
@@ -319,6 +338,9 @@ export interface TokenFacet extends BaseContract {
     nameOrSignature: "freezeAccount"
   ): TypedContractMethod<[user: AddressLike], [void], "nonpayable">;
   getFunction(
+    nameOrSignature: "isFrozen"
+  ): TypedContractMethod<[account: AddressLike], [boolean], "view">;
+  getFunction(
     nameOrSignature: "mint"
   ): TypedContractMethod<
     [to: AddressLike, amount: BigNumberish],
@@ -328,6 +350,9 @@ export interface TokenFacet extends BaseContract {
   getFunction(
     nameOrSignature: "name"
   ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "selectorsIntrospection"
+  ): TypedContractMethod<[], [string[]], "view">;
   getFunction(
     nameOrSignature: "symbol"
   ): TypedContractMethod<[], [string], "view">;

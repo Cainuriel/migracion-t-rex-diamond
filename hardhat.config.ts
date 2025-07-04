@@ -24,8 +24,7 @@ const config: HardhatUserConfig = {
   paths: {
     sources: "./contracts",
     artifacts: "./artifacts",
-  },
-  networks: {
+  },  networks: {
     bscTestnet: {
       url: "https://data-seed-prebsc-1-s1.bnbchain.org:8545",
       accounts: process.env.ADMIN_WALLET_PRIV_KEY ? [process.env.ADMIN_WALLET_PRIV_KEY] : [],
@@ -37,7 +36,8 @@ const config: HardhatUserConfig = {
       accounts: process.env.ADMIN_WALLET_PRIV_KEY ? [process.env.ADMIN_WALLET_PRIV_KEY] : [],
       gasPrice: 400000000000,
       timeout: 300000, 
-    }
+    },
+
   },
 };
 

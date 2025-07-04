@@ -1,0 +1,24 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "IEIP2535Introspection",
+  "sourceName": "contracts/interfaces/IEIP2535Introspection.sol",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "selectorsIntrospection",
+      "outputs": [
+        {
+          "internalType": "bytes4[]",
+          "name": "selectors_",
+          "type": "bytes4[]"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

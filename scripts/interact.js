@@ -3,13 +3,14 @@ const fs = require('fs');
 const path = require('path');
 
 /**
- * Interaction script for T-REX Diamond
+ * Universal Interaction Script for T-REX Diamond - New Architecture
  * This script provides common administrative and operational tasks
+ * Works on any network where the diamond has been deployed
  */
 async function main() {
-  console.log("🔧 T-REX Diamond Interaction Script\n");
+  console.log("🔧 T-REX Diamond Interaction Script - New Architecture\n");
 
-  // Get command line arguments - try multiple methods
+  // Get command line arguments
   const args = process.argv.slice(2);
   let command = args[0];
   let cmdArgs = args.slice(1);
@@ -21,7 +22,8 @@ async function main() {
     console.log("📝 Using environment variables for command");
   }
 
-  if (!command) {    console.log("📚 AVAILABLE COMMANDS:");
+  if (!command) {
+    console.log("📚 AVAILABLE COMMANDS:");
     console.log("   setup-issuer <issuerAddress> <topicId>     - Add a trusted issuer");
     console.log("   register-investor <investorAddr> <idAddr>  - Register investor identity");
     console.log("   mint <recipientAddr> <amount>              - Mint tokens to recipient");
@@ -29,34 +31,40 @@ async function main() {
     console.log("   check-agent <agentAddr>                    - Check if address is authorized agent");
     console.log("   freeze <investorAddr>                      - Freeze investor account");
     console.log("   unfreeze <investorAddr>                    - Unfreeze investor account");
-    console.log("   compliance-rules                           - View compliance rules");
-    console.log("   token-info                                 - View token information");
-    console.log("   investor-info <investorAddr>               - View investor information");
-    console.log("   transfer-ownership <newOwnerAddr>          - Transfer ownership");
+    console.log("   balance <address>                          - Check token balance");
+    console.log("   total-supply                               - Check total token supply");
+    console.log("   transfer <toAddr> <amount>                 - Transfer tokens");
+    console.log("   info                                       - Show system information");
     console.log("");
-    console.log("📋 USAGE OPTIONS:");
-    console.log("   Option 1 - Direct node execution:");
-    console.log("     node scripts/interact.js setup-issuer 0x123... 1");
-    console.log("   Option 2 - Using environment variables:");
-    console.log("     $env:TREX_COMMAND='setup-issuer'; $env:TREX_ARGS='0x123... 1'; npm run interact:localhost");
-    console.log("   Option 3 - Interactive mode:");
-    console.log("     npm run interact:localhost (then follow prompts)");
+    console.log("💡 Example: npx hardhat run scripts/interact.js ");
     return;
   }
 
-  // Load deployment information
-  const deploymentsDir = path.join(__dirname, '..', 'deployments');
-  const deploymentFile = path.join(deploymentsDir, `${network.name}-deployment.json`);
+  // Get network and diamond address
+  const networkName = network.name;
+  console.log("🌐 Network:", networkName);
   
-  if (!fs.existsSync(deploymentFile)) {
-    throw new Error(`Deployment file not found: ${deploymentFile}. Please deploy first.`);
+  let diamondAddress;
+  let deploymentInfo = null;
+  
+  const deploymentsDir = path.join(__dirname, '..', 'deployments');
+  const deploymentFile = path.join(deploymentsDir, `${networkName}-deployment.json`);
+  
+  if (fs.existsSync(deploymentFile)) {
+    deploymentInfo = JSON.parse(fs.readFileSync(deploymentFile, 'utf8'));
+    diamondAddress = deploymentInfo.contracts.Diamond;
+    console.log("📄 Using deployment file:", deploymentFile);
+  } else {
+    // For Alastria or manual interaction, use the known address
+    // if (networkName === 'alastria') {
+    //   diamondAddress = "0x8E96e3F80aF9c715C90d35BFFFAA32d330C69528";
+    //   console.log("📍 Using Alastria address:", diamondAddress);
+    // } else {
+    //   throw new Error(`❌ No deployment file found for ${networkName}. Please deploy first.`);
+    // }
   }
 
-  const deploymentInfo = JSON.parse(fs.readFileSync(deploymentFile, 'utf8'));
-  const diamondAddress = deploymentInfo.contracts.Diamond;
-
-  console.log("📍 Network:", network.name);
-  console.log("🏠 Diamond:", diamondAddress);
+  console.log("🏛️  Diamond Address:", diamondAddress);
 
   // Get signer
   const [signer] = await ethers.getSigners();
@@ -70,6 +78,7 @@ async function main() {
   const compliance = await ethers.getContractAt("ComplianceFacet", diamondAddress);
   const claimTopics = await ethers.getContractAt("ClaimTopicsFacet", diamondAddress);
   const trustedIssuers = await ethers.getContractAt("TrustedIssuersFacet", diamondAddress);
+
   // Execute command
   try {
     console.log(`⚡ Executing command: ${command} ${cmdArgs.join(' ')}\n`);
@@ -98,7 +107,8 @@ async function main() {
         }
         await mintTokens(token, cmdArgs[0], cmdArgs[1]);
         break;
-        case "set-agent":
+      
+      case "set-agent":
         if (cmdArgs.length < 2) {
           console.log("❌ Usage: set-agent <agentAddr> <true/false>");
           return;
@@ -130,265 +140,194 @@ async function main() {
         await unfreezeAccount(token, cmdArgs[0]);
         break;
       
-      case "compliance-rules":
-        await viewComplianceRules(compliance);
-        break;
-      
-      case "token-info":
-        await viewTokenInfo(token);
-        break;
-      
-      case "investor-info":
+      case "balance":
         if (cmdArgs.length < 1) {
-          console.log("❌ Usage: investor-info <investorAddr>");
+          console.log("❌ Usage: balance <address>");
           return;
         }
-        await viewInvestorInfo(identity, token, cmdArgs[0]);
+        await checkBalance(token, cmdArgs[0]);
         break;
       
-      case "transfer-ownership":
-        if (cmdArgs.length < 1) {
-          console.log("❌ Usage: transfer-ownership <newOwnerAddr>");
+      case "total-supply":
+        await checkTotalSupply(token);
+        break;
+      
+      case "transfer":
+        if (cmdArgs.length < 2) {
+          console.log("❌ Usage: transfer <toAddr> <amount>");
           return;
         }
-        await transferOwnership(roles, cmdArgs[0]);
+        await transferTokens(token, cmdArgs[0], cmdArgs[1]);
+        break;
+      
+      case "info":
+        await showSystemInfo(token, roles, identity, compliance);
         break;
       
       default:
-        console.log("❌ Unknown command:", command);
-        console.log("Use 'npm run interact' to see available commands");
+        console.log(`❌ Unknown command: ${command}`);
+        console.log("💡 Run without arguments to see available commands");
+        return;
     }
+    
   } catch (error) {
     console.error("❌ Command failed:", error.message);
-    process.exit(1);
+    throw error;
   }
 }
 
-// Command implementations
+// ========================================
+// COMMAND IMPLEMENTATIONS
+// ========================================
+
 async function setupIssuer(trustedIssuers, issuerAddress, topicId) {
-  if (!issuerAddress || !topicId) {
-    throw new Error("Usage: setup-issuer <issuerAddress> <topicId>");
-  }
-
-  console.log("🤝 Setting up trusted issuer...");
-  console.log("   Issuer:", issuerAddress);
-  console.log("   Topic ID:", topicId);
-
-  const tx = await trustedIssuers.addTrustedIssuer(issuerAddress, [parseInt(topicId)]);
-  console.log("   📦 Transaction:", tx.hash);
+  console.log(`🤝 Setting up trusted issuer...`);
+  console.log(`   Issuer: ${issuerAddress}`);
+  console.log(`   Topic ID: ${topicId}`);
+  
+  const tx = await trustedIssuers.addTrustedIssuer(issuerAddress, parseInt(topicId));
+  console.log(`   📦 Transaction: ${tx.hash}`);
   await tx.wait();
-
-  console.log("   ✅ Trusted issuer added successfully!");
-
-  // Verify
-  const issuers = await trustedIssuers.getTrustedIssuers(parseInt(topicId));
-  console.log("   🔍 Verified - Issuers for topic", topicId + ":", issuers.length);
+  console.log(`   ✅ Trusted issuer added successfully!`);
 }
 
-async function registerInvestor(identity, investorAddress, identityAddress) {
-  if (!investorAddress || !identityAddress) {
-    throw new Error("Usage: register-investor <investorAddress> <identityAddress>");
-  }
-
-  console.log("🆔 Registering investor identity...");
-  console.log("   Investor:", investorAddress);
-  console.log("   Identity Contract:", identityAddress);
-
-  // Default country code (840 = USA)
-  const countryCode = 840;
-
-  const tx = await identity.registerIdentity(investorAddress, identityAddress, countryCode);
-  console.log("   📦 Transaction:", tx.hash);
+async function registerInvestor(identity, investorAddr, identityAddr) {
+  console.log(`🆔 Registering investor identity...`);
+  console.log(`   Investor: ${investorAddr}`);
+  console.log(`   Identity: ${identityAddr}`);
+  
+  const tx = await identity.registerIdentity(investorAddr, identityAddr);
+  console.log(`   📦 Transaction: ${tx.hash}`);
   await tx.wait();
-
-  console.log("   ✅ Investor identity registered successfully!");
-
-  // Verify
-  const registeredIdentity = await identity.getIdentity(investorAddress);
-  const country = await identity.getInvestorCountry(investorAddress);
-  console.log("   🔍 Verified - Identity:", registeredIdentity);
-  console.log("   🔍 Verified - Country:", country);
+  console.log(`   ✅ Investor identity registered successfully!`);
 }
 
-async function mintTokens(token, recipientAddress, amount) {
-  if (!recipientAddress || !amount) {
-    throw new Error("Usage: mint <recipientAddress> <amount>");
-  }
-
-  console.log("🪙 Minting tokens...");
-  console.log("   Recipient:", recipientAddress);
-  console.log("   Amount:", amount, "tokens");
-
+async function mintTokens(token, recipientAddr, amount) {
+  console.log(`💰 Minting tokens...`);
+  console.log(`   Recipient: ${recipientAddr}`);
+  console.log(`   Amount: ${amount} tokens`);
+  
   const amountWei = ethers.parseEther(amount);
-  const tx = await token.mint(recipientAddress, amountWei);
-  console.log("   📦 Transaction:", tx.hash);
+  const tx = await token.mint(recipientAddr, amountWei);
+  console.log(`   📦 Transaction: ${tx.hash}`);
   await tx.wait();
-
-  console.log("   ✅ Tokens minted successfully!");
-
-  // Verify
-  const balance = await token.balanceOf(recipientAddress);
-  const totalSupply = await token.totalSupply();
-  console.log("   🔍 Verified - New Balance:", ethers.formatEther(balance), "tokens");
-  console.log("   🔍 Verified - Total Supply:", ethers.formatEther(totalSupply), "tokens");
+  console.log(`   ✅ Tokens minted successfully!`);
 }
 
-async function setAgent(roles, agentAddress, status) {
-  if (!agentAddress || !status) {
-    throw new Error("Usage: set-agent <agentAddress> <true/false>");
-  }
-
+async function setAgent(roles, agentAddr, status) {
+  console.log(`🔐 Setting agent status...`);
+  console.log(`   Agent: ${agentAddr}`);
+  console.log(`   Status: ${status}`);
+  
   const isAgent = status.toLowerCase() === 'true';
+  const tx = await roles.setAgent(agentAddr, isAgent);
+  console.log(`   📦 Transaction: ${tx.hash}`);
+  await tx.wait();
+  console.log(`   ✅ Agent status updated successfully!`);
+}
+
+async function checkAgent(roles, agentAddr) {
+  console.log(`🔍 Checking agent status...`);
+  console.log(`   Address: ${agentAddr}`);
   
-  console.log("👥 Setting agent status...");
-  console.log("   Agent:", agentAddress);
-  console.log("   Status:", isAgent ? "AUTHORIZED" : "REVOKED");
-
-  const tx = await roles.setAgent(agentAddress, isAgent);
-  console.log("   📦 Transaction:", tx.hash);
-  await tx.wait();
-
-  console.log("   ✅ Agent status updated successfully!");
-
-  // Verify
-  const currentStatus = await roles.isAgent(agentAddress);
-  console.log("   🔍 Verified - Current Status:", currentStatus ? "AUTHORIZED" : "NOT AUTHORIZED");
+  const isAgent = await roles.isAgent(agentAddr);
+  console.log(`   📊 Status: ${isAgent ? 'Agent' : 'Not an agent'}`);
 }
 
-async function freezeAccount(token, investorAddress) {
-  if (!investorAddress) {
-    throw new Error("Usage: freeze <investorAddress>");
-  }
-
-  console.log("🧊 Freezing account...");
-  console.log("   Investor:", investorAddress);
-
-  const tx = await token.freezeAccount(investorAddress);
-  console.log("   📦 Transaction:", tx.hash);
-  await tx.wait();
-
-  console.log("   ✅ Account frozen successfully!");
-}
-
-async function unfreezeAccount(token, investorAddress) {
-  if (!investorAddress) {
-    throw new Error("Usage: unfreeze <investorAddress>");
-  }
-
-  console.log("🔥 Unfreezing account...");
-  console.log("   Investor:", investorAddress);
-
-  const tx = await token.unfreezeAccount(investorAddress);
-  console.log("   📦 Transaction:", tx.hash);
-  await tx.wait();
-
-  console.log("   ✅ Account unfrozen successfully!");
-}
-
-async function viewComplianceRules(compliance) {
-  console.log("⚖️  Viewing compliance rules...");
-
-  const rules = await compliance.complianceRules();
+async function freezeAccount(token, investorAddr) {
+  console.log(`❄️  Freezing account...`);
+  console.log(`   Address: ${investorAddr}`);
   
-  console.log("   📊 COMPLIANCE RULES:");
-  console.log("   ├─ Max Balance per Investor:", ethers.formatEther(rules.maxBalance), "tokens");
-  console.log("   ├─ Min Investment Amount:", ethers.formatEther(rules.minBalance), "tokens");
-  console.log("   └─ Max Number of Investors:", rules.maxInvestors.toString());
+  const tx = await token.freeze(investorAddr);
+  console.log(`   📦 Transaction: ${tx.hash}`);
+  await tx.wait();
+  console.log(`   ✅ Account frozen successfully!`);
 }
 
-async function viewTokenInfo(token) {
-  console.log("📄 Viewing token information...");
+async function unfreezeAccount(token, investorAddr) {
+  console.log(`🔥 Unfreezing account...`);
+  console.log(`   Address: ${investorAddr}`);
+  
+  const tx = await token.unfreeze(investorAddr);
+  console.log(`   📦 Transaction: ${tx.hash}`);
+  await tx.wait();
+  console.log(`   ✅ Account unfrozen successfully!`);
+}
 
-  const name = await token.name();
-  const symbol = await token.symbol();
-  const decimals = await token.decimals();
+async function checkBalance(token, address) {
+  console.log(`💰 Checking balance...`);
+  console.log(`   Address: ${address}`);
+  
+  const balance = await token.balanceOf(address);
+  console.log(`   📊 Balance: ${ethers.formatEther(balance)} tokens`);
+}
+
+async function checkTotalSupply(token) {
+  console.log(`📊 Checking total supply...`);
+  
   const totalSupply = await token.totalSupply();
-
-  console.log("   📊 TOKEN INFORMATION:");
-  console.log("   ├─ Name:", name);
-  console.log("   ├─ Symbol:", symbol);
-  console.log("   ├─ Decimals:", decimals.toString());
-  console.log("   └─ Total Supply:", ethers.formatEther(totalSupply), "tokens");
+  console.log(`   📊 Total Supply: ${ethers.formatEther(totalSupply)} tokens`);
 }
 
-async function viewInvestorInfo(identity, token, investorAddress) {
-  if (!investorAddress) {
-    throw new Error("Usage: investor-info <investorAddress>");
-  }
-
-  console.log("👤 Viewing investor information...");
-  console.log("   Address:", investorAddress);
-
-  try {
-    const identityContract = await identity.getIdentity(investorAddress);
-    const country = await identity.getInvestorCountry(investorAddress);
-    const balance = await token.balanceOf(investorAddress);
-    const isVerified = await identity.isVerified(investorAddress);
-
-    console.log("   📊 INVESTOR INFORMATION:");
-    console.log("   ├─ Identity Contract:", identityContract);
-    console.log("   ├─ Country Code:", country.toString());
-    console.log("   ├─ Token Balance:", ethers.formatEther(balance), "tokens");
-    console.log("   ├─ Is Verified:", isVerified ? "✅ YES" : "❌ NO");
-    console.log("   └─ Registration Status:", identityContract !== ethers.ZeroAddress ? "✅ REGISTERED" : "❌ NOT REGISTERED");
-
-  } catch (error) {
-    console.log("   ❌ Error retrieving investor info:", error.message);
-  }
-}
-
-async function transferOwnership(roles, newOwnerAddress) {
-  if (!newOwnerAddress) {
-    throw new Error("Usage: transfer-ownership <newOwnerAddress>");
-  }
-
-  console.log("👑 Transferring ownership...");
-  console.log("   New Owner:", newOwnerAddress);
-
-  const currentOwner = await roles.owner();
-  console.log("   Current Owner:", currentOwner);
-
-  // Confirmation prompt (in real scenario, you might want additional confirmation)
-  console.log("   ⚠️  WARNING: This action is irreversible!");
-
-  const tx = await roles.transferOwnership(newOwnerAddress);
-  console.log("   📦 Transaction:", tx.hash);
-  await tx.wait();
-
-  console.log("   ✅ Ownership transferred successfully!");
-
-  // Verify
-  const verifyOwner = await roles.owner();
-  console.log("   🔍 Verified - New Owner:", verifyOwner);
-}
-
-async function checkAgent(roles, agentAddress) {
-  if (!agentAddress) {
-    throw new Error("Usage: check-agent <agentAddress>");
-  }
-
-  console.log("🔍 Checking agent status...");
-  console.log("   Agent:", agentAddress);
-
-  const isAgent = await roles.isAgent(agentAddress);
-  const owner = await roles.owner();
+async function transferTokens(token, toAddr, amount) {
+  console.log(`💸 Transferring tokens...`);
+  console.log(`   To: ${toAddr}`);
+  console.log(`   Amount: ${amount} tokens`);
   
-  console.log("   📊 AGENT STATUS:");
-  console.log("   ├─ Status:", isAgent ? "✅ AUTHORIZED" : "❌ NOT AUTHORIZED");
-  console.log("   ├─ Can mint tokens:", isAgent ? "Yes" : "No");
-  console.log("   ├─ Can burn tokens:", isAgent ? "Yes" : "No");
-  console.log("   ├─ Can force transfer:", isAgent ? "Yes" : "No");
-  console.log("   ├─ Can freeze accounts:", isAgent ? "Yes" : "No");
-  console.log("   └─ Is owner:", (agentAddress.toLowerCase() === owner.toLowerCase()) ? "Yes" : "No");
+  const amountWei = ethers.parseEther(amount);
+  const tx = await token.transfer(toAddr, amountWei);
+  console.log(`   📦 Transaction: ${tx.hash}`);
+  await tx.wait();
+  console.log(`   ✅ Tokens transferred successfully!`);
 }
 
-// Execute main function
+async function showSystemInfo(token, roles, identity, compliance) {
+  console.log(`📋 System Information`);
+  console.log("=".repeat(50));
+  
+  try {
+    // Basic token info
+    const name = await token.name();
+    const symbol = await token.symbol();
+    const decimals = await token.decimals();
+    const totalSupply = await token.totalSupply();
+    
+    console.log(`📄 Token Name: ${name}`);
+    console.log(`🔤 Token Symbol: ${symbol}`);
+    console.log(`🔢 Decimals: ${decimals}`);
+    console.log(`📊 Total Supply: ${ethers.formatEther(totalSupply)} tokens`);
+    
+    // Roles info
+    const owner = await roles.owner();
+    console.log(`👑 Owner: ${owner}`);
+    
+    // Try to get additional info if available
+    try {
+      const [signer] = await ethers.getSigners();
+      const signerBalance = await token.balanceOf(signer.address);
+      const isSignerAgent = await roles.isAgent(signer.address);
+      
+      console.log(`\n👤 Current Signer Info:`);
+      console.log(`   Address: ${signer.address}`);
+      console.log(`   Balance: ${ethers.formatEther(signerBalance)} tokens`);
+      console.log(`   Is Agent: ${isSignerAgent}`);
+    } catch (e) {
+      // Ignore errors getting signer info
+    }
+    
+  } catch (error) {
+    console.log(`❌ Error getting system info: ${error.message}`);
+  }
+}
+
+// Execute interaction
 main()
   .then(() => {
-    console.log("\n✨ Command completed successfully!");
+    console.log("\n✨ Interaction completed successfully!");
     process.exit(0);
   })
   .catch((error) => {
-    console.error("\n❌ Command failed:", error.message);
+    console.error("\n❌ Interaction failed:");
+    console.error(error);
     process.exit(1);
   });
