@@ -1,25 +1,28 @@
 {
   "network": "alastria",
-  "timestamp": "2025-06-17T14:45:00.000Z",
   "deployer": "0x542dD28258357Cc0a4d3EdC4F6eDA03d93106744",
+  "timestamp": "2025-07-04T14:08:22.171Z",
   "contracts": {
-    "Diamond": "0x7a8E55515de0Ad9e3293E58382BD730aD987d6DA",
-    "DiamondCutFacet": "0x591e24EEc019e41fA8E48c97E586f6D4F0D68840",
-    "TokenFacet": "0x77b1dcC677B3D2299e11E676202Fd93bCB027FCa",
-    "RolesFacet": "0x27e954Bf94a507CaFe740CA807220054B2c41Dc7",
-    "IdentityFacet": "0x8C5A3B7F1194BEA6BA3570d610eD198AfEa8e367",
-    "ComplianceFacet": "0xf3F8BDdd98eD7a48489071B0463Bd8321bBc013F",
-    "ClaimTopicsFacet": "0xb182b81AF6e3e9EbA5dED25139f0d628B04F728B",
-    "TrustedIssuersFacet": "0x74bFcD70a2D8CaDbbb9B750C1057d2440cE52957",
-    "InitDiamond": "0xf4eC6899220168978f2eb2E445Fd9014d354d849"
+    "Diamond": "0x5DE0983421b79c54587F128341b282c5ce49B2D8",
+    "DiamondCutFacet": "0xda6E3466575478672b8cd22bd1ed4EB1DA082484",
+    "TokenFacet": "0x9E4E642274625c15fCB82E6449e98CB702997Df6",
+    "RolesFacet": "0x777586AEe6a2E5849756c55da870b05cEa8d2f43",
+    "IdentityFacet": "0x8bE814039A62cF8348621c32B25401F116cb2B6D",
+    "ComplianceFacet": "0x42964f999407fa764689D2df21544f6365e520F1",
+    "ClaimTopicsFacet": "0x26B645484720C4E00d121DFf86CD696E3A74EB36",
+    "TrustedIssuersFacet": "0x071e0667c9bd43c8DCC6F1155C41ABeEa7739073",
+    "InitDiamond": "0x8F566EFF5d61206eaa5bee68b7aEC69dCA39e192"
   },
   "configuration": {
     "tokenName": "T-REX Security Token",
     "tokenSymbol": "TREX",
-    "maxBalance": "1000000000000000000000000",
-    "minBalance": "1000000000000000000000",
-    "maxInvestors": 100
-  },
-  "status": "deployed",
-  "diamondCutTx": "0x252a0ff10f6039b81332e0764588fc89a3a27dba09534756b555d6331ab4e770"
+    "initialOwner": "0x542dD28258357Cc0a4d3EdC4F6eDA03d93106744",
+    "complianceRules": {
+      "maxBalance": "1000000000000000000000000",
+      "minBalance": "1000000000000000000000",
+      "maxInvestors": 100
+    },
+    "initialAgents": [],
+    "ownerAsAgent": true
+  }
 }

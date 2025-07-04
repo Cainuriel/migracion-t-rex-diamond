@@ -20,6 +20,24 @@ function serializeBigInts(obj) {
   return obj;
 }
 
+/**
+ * Helper function to wait for transaction and add delay to prevent nonce issues
+ */
+const waitForTx = async (txPromise, description) => {
+  try {
+    const tx = await txPromise;
+    console.log(`   🔄 ${description} - TX: ${tx.hash}`);
+    await tx.wait();
+    console.log(`   ✅ ${description} confirmed`);
+    // Add delay to prevent nonce issues
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    return tx;
+  } catch (error) {
+    console.log(`   ❌ ${description} failed:`, error.message);
+    throw error;
+  }
+};
+
 async function main() {
   console.log("🚀 Starting T-REX Diamond Deployment...\n");
   
@@ -318,16 +336,20 @@ async function main() {
   // Register owner as agent if requested
   if (config.ownerAsAgent) {
     console.log("   👤 Registering owner as agent...");
-    await roles.setAgent(deployer.address, true);
-    console.log("   ✅ Owner registered as agent:", deployer.address);
+    await waitForTx(
+      roles.setAgent(deployer.address, true),
+      `Registering owner ${deployer.address} as agent`
+    );
   }
 
   // Set up initial agents if specified
   if (config.initialAgents.length > 0) {
     console.log("   👥 Setting up initial agents...");
     for (const agentAddress of config.initialAgents) {
-      await roles.setAgent(agentAddress, true);
-      console.log("   ✅ Agent added:", agentAddress);
+      await waitForTx(
+        roles.setAgent(agentAddress, true),
+        `Adding agent ${agentAddress}`
+      );
     }
   } else {
     console.log("   💡 No additional initial agents configured.");
@@ -335,26 +357,34 @@ async function main() {
 
   // Set up compliance rules
   console.log("   ⚖️  Setting up compliance rules...");
+
   if (config.complianceRules.maxBalance > 0) {
-    await compliance.setMaxBalance(config.complianceRules.maxBalance);
-    console.log("   ✅ Max balance set to:", ethers.formatEther(config.complianceRules.maxBalance), "tokens");
+    await waitForTx(
+      compliance.setMaxBalance(config.complianceRules.maxBalance),
+      `Setting max balance to ${ethers.formatEther(config.complianceRules.maxBalance)} tokens`
+    );
   }
   
   if (config.complianceRules.minBalance > 0) {
-    await compliance.setMinBalance(config.complianceRules.minBalance);
-    console.log("   ✅ Min balance set to:", ethers.formatEther(config.complianceRules.minBalance), "tokens");
+    await waitForTx(
+      compliance.setMinBalance(config.complianceRules.minBalance),
+      `Setting min balance to ${ethers.formatEther(config.complianceRules.minBalance)} tokens`
+    );
   }
   
   if (config.complianceRules.maxInvestors > 0) {
-    await compliance.setMaxInvestors(config.complianceRules.maxInvestors);
-    console.log("   ✅ Max investors set to:", config.complianceRules.maxInvestors);
+    await waitForTx(
+      compliance.setMaxInvestors(config.complianceRules.maxInvestors),
+      `Setting max investors to ${config.complianceRules.maxInvestors}`
+    );
   }
 
   // Set up basic claim topics (KYC, AML)
   console.log("   📋 Setting up basic claim topics...");
-  await claimTopics.addClaimTopic(1); // KYC
-  await claimTopics.addClaimTopic(2); // AML
-  console.log("   ✅ Basic claim topics added (KYC, AML)");
+
+  await waitForTx(claimTopics.addClaimTopic(1), "Adding KYC claim topic");
+  await waitForTx(claimTopics.addClaimTopic(2), "Adding AML claim topic");
+  console.log("   ✅ Basic claim topics setup completed");
 
   // ========================================
   // STEP 9: DEPLOYMENT SUMMARY

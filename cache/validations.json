@@ -2,529 +2,6 @@
   "version": "3.4",
   "log": [
     {
-      "contracts/abstracts/BaseStorageAccessor.sol:BaseStorageAccessor": {
-        "src": "contracts\\abstracts\\BaseStorageAccessor.sol:7",
-        "inherit": [],
-        "libraries": [],
-        "methods": [
-          "getStorageVersion()",
-          "getStorageNamespace()"
-        ],
-        "linkReferences": [],
-        "errors": [],
-        "layout": {
-          "storage": [],
-          "types": {},
-          "layoutVersion": "1.2",
-          "flat": false,
-          "namespaces": {}
-        },
-        "solcVersion": "0.8.17"
-      },
-      "contracts/abstracts/ComplianceStorageAccessor.sol:ComplianceStorageAccessor": {
-        "src": "contracts\\abstracts\\ComplianceStorageAccessor.sol:10",
-        "inherit": [
-          "contracts/interfaces/storage/IComplianceStorage.sol:IComplianceStorage",
-          "contracts/abstracts/BaseStorageAccessor.sol:BaseStorageAccessor"
-        ],
-        "libraries": [],
-        "methods": [],
-        "linkReferences": [],
-        "errors": [],
-        "layout": {
-          "storage": [],
-          "types": {},
-          "layoutVersion": "1.2",
-          "flat": false,
-          "namespaces": {}
-        },
-        "solcVersion": "0.8.17"
-      },
-      "contracts/abstracts/MultiDomainStorageAccessor.sol:MultiDomainStorageAccessor": {
-        "src": "contracts\\abstracts\\MultiDomainStorageAccessor.sol:11",
-        "inherit": [
-          "contracts/abstracts/ComplianceStorageAccessor.sol:ComplianceStorageAccessor",
-          "contracts/interfaces/storage/IComplianceStorage.sol:IComplianceStorage",
-          "contracts/abstracts/RolesStorageAccessor.sol:RolesStorageAccessor",
-          "contracts/interfaces/storage/IRolesStorage.sol:IRolesStorage",
-          "contracts/abstracts/TokenStorageAccessor.sol:TokenStorageAccessor",
-          "contracts/interfaces/storage/ITokenStorage.sol:ITokenStorage",
-          "contracts/abstracts/BaseStorageAccessor.sol:BaseStorageAccessor"
-        ],
-        "libraries": [],
-        "methods": [
-          "getStorageStatus()"
-        ],
-        "linkReferences": [],
-        "errors": [],
-        "layout": {
-          "storage": [],
-          "types": {},
-          "layoutVersion": "1.2",
-          "flat": false,
-          "namespaces": {}
-        },
-        "solcVersion": "0.8.17"
-      },
-      "contracts/abstracts/RolesStorageAccessor.sol:RolesStorageAccessor": {
-        "src": "contracts\\abstracts\\RolesStorageAccessor.sol:10",
-        "inherit": [
-          "contracts/interfaces/storage/IRolesStorage.sol:IRolesStorage",
-          "contracts/abstracts/BaseStorageAccessor.sol:BaseStorageAccessor"
-        ],
-        "libraries": [],
-        "methods": [],
-        "linkReferences": [],
-        "errors": [],
-        "layout": {
-          "storage": [],
-          "types": {},
-          "layoutVersion": "1.2",
-          "flat": false,
-          "namespaces": {}
-        },
-        "solcVersion": "0.8.17"
-      },
-      "contracts/abstracts/TokenStorageAccessor.sol:TokenStorageAccessor": {
-        "src": "contracts\\abstracts\\TokenStorageAccessor.sol:10",
-        "inherit": [
-          "contracts/interfaces/storage/ITokenStorage.sol:ITokenStorage",
-          "contracts/abstracts/BaseStorageAccessor.sol:BaseStorageAccessor"
-        ],
-        "libraries": [],
-        "methods": [],
-        "linkReferences": [],
-        "errors": [],
-        "layout": {
-          "storage": [],
-          "types": {},
-          "layoutVersion": "1.2",
-          "flat": false,
-          "namespaces": {}
-        },
-        "solcVersion": "0.8.17"
-      },
-      "contracts/examples/OptimizedTokenFacet.sol:OptimizedTokenFacet": {
-        "src": "contracts\\examples\\OptimizedTokenFacet.sol:10",
-        "version": {
-          "withMetadata": "b274d620171cba76303e4aac1fcf75425a05ab6b21341415f21fed43bbff4b61",
-          "withoutMetadata": "437fced406d963ec4149808484d11b5bae0c7fa465a4ace1f41562e411061bfa",
-          "linkedWithoutMetadata": "437fced406d963ec4149808484d11b5bae0c7fa465a4ace1f41562e411061bfa"
-        },
-        "inherit": [
-          "contracts/interfaces/IEIP2535Introspection.sol:IEIP2535Introspection",
-          "contracts/abstracts/MultiDomainStorageAccessor.sol:MultiDomainStorageAccessor",
-          "contracts/abstracts/ComplianceStorageAccessor.sol:ComplianceStorageAccessor",
-          "contracts/interfaces/storage/IComplianceStorage.sol:IComplianceStorage",
-          "contracts/abstracts/RolesStorageAccessor.sol:RolesStorageAccessor",
-          "contracts/interfaces/storage/IRolesStorage.sol:IRolesStorage",
-          "contracts/abstracts/TokenStorageAccessor.sol:TokenStorageAccessor",
-          "contracts/interfaces/storage/ITokenStorage.sol:ITokenStorage",
-          "contracts/abstracts/BaseStorageAccessor.sol:BaseStorageAccessor"
-        ],
-        "libraries": [],
-        "methods": [
-          "name()",
-          "symbol()",
-          "decimals()",
-          "totalSupply()",
-          "balanceOf(address)",
-          "allowance(address,address)",
-          "transfer(address,uint256)",
-          "transferFrom(address,address,uint256)",
-          "approve(address,uint256)",
-          "mint(address,uint256)",
-          "freezeAccount(address)",
-          "unfreezeAccount(address)",
-          "selectorsIntrospection()",
-          "getSelectors()"
-        ],
-        "linkReferences": [],
-        "errors": [],
-        "layout": {
-          "storage": [],
-          "types": {},
-          "layoutVersion": "1.2",
-          "flat": false,
-          "namespaces": {}
-        },
-        "solcVersion": "0.8.17"
-      },
-      "contracts/interfaces/IEIP2535Introspection.sol:IEIP2535Introspection": {
-        "src": "contracts\\interfaces\\IEIP2535Introspection.sol:9",
-        "inherit": [],
-        "libraries": [],
-        "methods": [
-          "selectorsIntrospection()"
-        ],
-        "linkReferences": [],
-        "errors": [],
-        "layout": {
-          "storage": [],
-          "types": {},
-          "layoutVersion": "1.2",
-          "flat": false,
-          "namespaces": {}
-        },
-        "solcVersion": "0.8.17"
-      },
-      "contracts/interfaces/storage/IComplianceStorage.sol:IComplianceStorage": {
-        "src": "contracts\\interfaces\\storage\\IComplianceStorage.sol:6",
-        "inherit": [],
-        "libraries": [],
-        "methods": [],
-        "linkReferences": [],
-        "errors": [],
-        "layout": {
-          "storage": [],
-          "types": {},
-          "layoutVersion": "1.2",
-          "flat": false,
-          "namespaces": {}
-        },
-        "solcVersion": "0.8.17"
-      },
-      "contracts/interfaces/storage/IRolesStorage.sol:IRolesStorage": {
-        "src": "contracts\\interfaces\\storage\\IRolesStorage.sol:6",
-        "inherit": [],
-        "libraries": [],
-        "methods": [],
-        "linkReferences": [],
-        "errors": [],
-        "layout": {
-          "storage": [],
-          "types": {},
-          "layoutVersion": "1.2",
-          "flat": false,
-          "namespaces": {}
-        },
-        "solcVersion": "0.8.17"
-      },
-      "contracts/interfaces/storage/ITokenStorage.sol:ITokenStorage": {
-        "src": "contracts\\interfaces\\storage\\ITokenStorage.sol:6",
-        "inherit": [],
-        "libraries": [],
-        "methods": [],
-        "linkReferences": [],
-        "errors": [],
-        "layout": {
-          "storage": [],
-          "types": {},
-          "layoutVersion": "1.2",
-          "flat": false,
-          "namespaces": {}
-        },
-        "solcVersion": "0.8.17"
-      }
-    },
-    {
-      "contracts/abstracts/BaseStorageAccessor.sol:BaseStorageAccessor": {
-        "src": "contracts\\abstracts\\BaseStorageAccessor.sol:7",
-        "inherit": [],
-        "libraries": [],
-        "methods": [
-          "getStorageVersion()",
-          "getStorageNamespace()"
-        ],
-        "linkReferences": [],
-        "errors": [],
-        "layout": {
-          "storage": [],
-          "types": {},
-          "layoutVersion": "1.2",
-          "flat": false,
-          "namespaces": {}
-        },
-        "solcVersion": "0.8.17"
-      },
-      "contracts/abstracts/ComplianceStorageAccessor.sol:ComplianceStorageAccessor": {
-        "src": "contracts\\abstracts\\ComplianceStorageAccessor.sol:10",
-        "inherit": [
-          "contracts/interfaces/storage/IComplianceStorage.sol:IComplianceStorage",
-          "contracts/abstracts/BaseStorageAccessor.sol:BaseStorageAccessor"
-        ],
-        "libraries": [],
-        "methods": [],
-        "linkReferences": [],
-        "errors": [],
-        "layout": {
-          "storage": [],
-          "types": {},
-          "layoutVersion": "1.2",
-          "flat": false,
-          "namespaces": {}
-        },
-        "solcVersion": "0.8.17"
-      },
-      "contracts/abstracts/MultiDomainStorageAccessor.sol:MultiDomainStorageAccessor": {
-        "src": "contracts\\abstracts\\MultiDomainStorageAccessor.sol:11",
-        "inherit": [
-          "contracts/abstracts/ComplianceStorageAccessor.sol:ComplianceStorageAccessor",
-          "contracts/interfaces/storage/IComplianceStorage.sol:IComplianceStorage",
-          "contracts/abstracts/RolesStorageAccessor.sol:RolesStorageAccessor",
-          "contracts/interfaces/storage/IRolesStorage.sol:IRolesStorage",
-          "contracts/abstracts/TokenStorageAccessor.sol:TokenStorageAccessor",
-          "contracts/interfaces/storage/ITokenStorage.sol:ITokenStorage",
-          "contracts/abstracts/BaseStorageAccessor.sol:BaseStorageAccessor"
-        ],
-        "libraries": [],
-        "methods": [
-          "getStorageStatus()"
-        ],
-        "linkReferences": [],
-        "errors": [],
-        "layout": {
-          "storage": [],
-          "types": {},
-          "layoutVersion": "1.2",
-          "flat": false,
-          "namespaces": {}
-        },
-        "solcVersion": "0.8.17"
-      },
-      "contracts/abstracts/RolesStorageAccessor.sol:RolesStorageAccessor": {
-        "src": "contracts\\abstracts\\RolesStorageAccessor.sol:10",
-        "inherit": [
-          "contracts/interfaces/storage/IRolesStorage.sol:IRolesStorage",
-          "contracts/abstracts/BaseStorageAccessor.sol:BaseStorageAccessor"
-        ],
-        "libraries": [],
-        "methods": [],
-        "linkReferences": [],
-        "errors": [],
-        "layout": {
-          "storage": [],
-          "types": {},
-          "layoutVersion": "1.2",
-          "flat": false,
-          "namespaces": {}
-        },
-        "solcVersion": "0.8.17"
-      },
-      "contracts/abstracts/TokenStorageAccessor.sol:TokenStorageAccessor": {
-        "src": "contracts\\abstracts\\TokenStorageAccessor.sol:10",
-        "inherit": [
-          "contracts/interfaces/storage/ITokenStorage.sol:ITokenStorage",
-          "contracts/abstracts/BaseStorageAccessor.sol:BaseStorageAccessor"
-        ],
-        "libraries": [],
-        "methods": [],
-        "linkReferences": [],
-        "errors": [],
-        "layout": {
-          "storage": [],
-          "types": {},
-          "layoutVersion": "1.2",
-          "flat": false,
-          "namespaces": {}
-        },
-        "solcVersion": "0.8.17"
-      },
-      "contracts/interfaces/storage/IComplianceStorage.sol:IComplianceStorage": {
-        "src": "contracts\\interfaces\\storage\\IComplianceStorage.sol:6",
-        "inherit": [],
-        "libraries": [],
-        "methods": [],
-        "linkReferences": [],
-        "errors": [],
-        "layout": {
-          "storage": [],
-          "types": {},
-          "layoutVersion": "1.2",
-          "flat": false,
-          "namespaces": {}
-        },
-        "solcVersion": "0.8.17"
-      },
-      "contracts/interfaces/storage/IRolesStorage.sol:IRolesStorage": {
-        "src": "contracts\\interfaces\\storage\\IRolesStorage.sol:6",
-        "inherit": [],
-        "libraries": [],
-        "methods": [],
-        "linkReferences": [],
-        "errors": [],
-        "layout": {
-          "storage": [],
-          "types": {},
-          "layoutVersion": "1.2",
-          "flat": false,
-          "namespaces": {}
-        },
-        "solcVersion": "0.8.17"
-      },
-      "contracts/interfaces/storage/ITokenStorage.sol:ITokenStorage": {
-        "src": "contracts\\interfaces\\storage\\ITokenStorage.sol:6",
-        "inherit": [],
-        "libraries": [],
-        "methods": [],
-        "linkReferences": [],
-        "errors": [],
-        "layout": {
-          "storage": [],
-          "types": {},
-          "layoutVersion": "1.2",
-          "flat": false,
-          "namespaces": {}
-        },
-        "solcVersion": "0.8.17"
-      }
-    },
-    {
-      "contracts/abstracts/BaseStorageAccessor.sol:BaseStorageAccessor": {
-        "src": "contracts\\abstracts\\BaseStorageAccessor.sol:7",
-        "inherit": [],
-        "libraries": [],
-        "methods": [
-          "getStorageVersion()",
-          "getStorageNamespace()"
-        ],
-        "linkReferences": [],
-        "errors": [],
-        "layout": {
-          "storage": [],
-          "types": {},
-          "layoutVersion": "1.2",
-          "flat": false,
-          "namespaces": {}
-        },
-        "solcVersion": "0.8.17"
-      },
-      "contracts/abstracts/RolesStorageAccessor.sol:RolesStorageAccessor": {
-        "src": "contracts\\abstracts\\RolesStorageAccessor.sol:10",
-        "inherit": [
-          "contracts/interfaces/storage/IRolesStorage.sol:IRolesStorage",
-          "contracts/abstracts/BaseStorageAccessor.sol:BaseStorageAccessor"
-        ],
-        "libraries": [],
-        "methods": [],
-        "linkReferences": [],
-        "errors": [],
-        "layout": {
-          "storage": [],
-          "types": {},
-          "layoutVersion": "1.2",
-          "flat": false,
-          "namespaces": {}
-        },
-        "solcVersion": "0.8.17"
-      },
-      "contracts/abstracts/TokenStorageAccessor.sol:TokenStorageAccessor": {
-        "src": "contracts\\abstracts\\TokenStorageAccessor.sol:10",
-        "inherit": [
-          "contracts/interfaces/storage/ITokenStorage.sol:ITokenStorage",
-          "contracts/abstracts/BaseStorageAccessor.sol:BaseStorageAccessor"
-        ],
-        "libraries": [],
-        "methods": [],
-        "linkReferences": [],
-        "errors": [],
-        "layout": {
-          "storage": [],
-          "types": {},
-          "layoutVersion": "1.2",
-          "flat": false,
-          "namespaces": {}
-        },
-        "solcVersion": "0.8.17"
-      },
-      "contracts/interfaces/storage/IClaimTopicsStorage.sol:IClaimTopicsStorage": {
-        "src": "contracts\\interfaces\\storage\\IClaimTopicsStorage.sol:6",
-        "inherit": [],
-        "libraries": [],
-        "methods": [],
-        "linkReferences": [],
-        "errors": [],
-        "layout": {
-          "storage": [],
-          "types": {},
-          "layoutVersion": "1.2",
-          "flat": false,
-          "namespaces": {}
-        },
-        "solcVersion": "0.8.17"
-      },
-      "contracts/interfaces/storage/IComplianceStorage.sol:IComplianceStorage": {
-        "src": "contracts\\interfaces\\storage\\IComplianceStorage.sol:6",
-        "inherit": [],
-        "libraries": [],
-        "methods": [],
-        "linkReferences": [],
-        "errors": [],
-        "layout": {
-          "storage": [],
-          "types": {},
-          "layoutVersion": "1.2",
-          "flat": false,
-          "namespaces": {}
-        },
-        "solcVersion": "0.8.17"
-      },
-      "contracts/interfaces/storage/IIdentityStorage.sol:IIdentityStorage": {
-        "src": "contracts\\interfaces\\storage\\IIdentityStorage.sol:6",
-        "inherit": [],
-        "libraries": [],
-        "methods": [],
-        "linkReferences": [],
-        "errors": [],
-        "layout": {
-          "storage": [],
-          "types": {},
-          "layoutVersion": "1.2",
-          "flat": false,
-          "namespaces": {}
-        },
-        "solcVersion": "0.8.17"
-      },
-      "contracts/interfaces/storage/IRolesStorage.sol:IRolesStorage": {
-        "src": "contracts\\interfaces\\storage\\IRolesStorage.sol:6",
-        "inherit": [],
-        "libraries": [],
-        "methods": [],
-        "linkReferences": [],
-        "errors": [],
-        "layout": {
-          "storage": [],
-          "types": {},
-          "layoutVersion": "1.2",
-          "flat": false,
-          "namespaces": {}
-        },
-        "solcVersion": "0.8.17"
-      },
-      "contracts/interfaces/storage/ITokenStorage.sol:ITokenStorage": {
-        "src": "contracts\\interfaces\\storage\\ITokenStorage.sol:6",
-        "inherit": [],
-        "libraries": [],
-        "methods": [],
-        "linkReferences": [],
-        "errors": [],
-        "layout": {
-          "storage": [],
-          "types": {},
-          "layoutVersion": "1.2",
-          "flat": false,
-          "namespaces": {}
-        },
-        "solcVersion": "0.8.17"
-      },
-      "contracts/interfaces/storage/ITrustedIssuersStorage.sol:ITrustedIssuersStorage": {
-        "src": "contracts\\interfaces\\storage\\ITrustedIssuersStorage.sol:6",
-        "inherit": [],
-        "libraries": [],
-        "methods": [],
-        "linkReferences": [],
-        "errors": [],
-        "layout": {
-          "storage": [],
-          "types": {},
-          "layoutVersion": "1.2",
-          "flat": false,
-          "namespaces": {}
-        },
-        "solcVersion": "0.8.17"
-      }
-    },
-    {
       "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:Initializable": {
         "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:58",
         "inherit": [],
@@ -862,6 +339,154 @@
           },
           "layoutVersion": "1.2",
           "flat": true,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/abstracts/BaseStorageAccessor.sol:BaseStorageAccessor": {
+        "src": "contracts\\abstracts\\BaseStorageAccessor.sol:7",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "getStorageVersion()",
+          "getStorageNamespace()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/abstracts/ComplianceStorageAccessor.sol:ComplianceStorageAccessor": {
+        "src": "contracts\\abstracts\\ComplianceStorageAccessor.sol:10",
+        "inherit": [
+          "contracts/interfaces/storage/IComplianceStorage.sol:IComplianceStorage",
+          "contracts/abstracts/BaseStorageAccessor.sol:BaseStorageAccessor"
+        ],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/abstracts/MultiDomainStorageAccessor.sol:MultiDomainStorageAccessor": {
+        "src": "contracts\\abstracts\\MultiDomainStorageAccessor.sol:11",
+        "inherit": [
+          "contracts/abstracts/ComplianceStorageAccessor.sol:ComplianceStorageAccessor",
+          "contracts/interfaces/storage/IComplianceStorage.sol:IComplianceStorage",
+          "contracts/abstracts/RolesStorageAccessor.sol:RolesStorageAccessor",
+          "contracts/interfaces/storage/IRolesStorage.sol:IRolesStorage",
+          "contracts/abstracts/TokenStorageAccessor.sol:TokenStorageAccessor",
+          "contracts/interfaces/storage/ITokenStorage.sol:ITokenStorage",
+          "contracts/abstracts/BaseStorageAccessor.sol:BaseStorageAccessor"
+        ],
+        "libraries": [],
+        "methods": [
+          "getStorageStatus()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/abstracts/RolesStorageAccessor.sol:RolesStorageAccessor": {
+        "src": "contracts\\abstracts\\RolesStorageAccessor.sol:10",
+        "inherit": [
+          "contracts/interfaces/storage/IRolesStorage.sol:IRolesStorage",
+          "contracts/abstracts/BaseStorageAccessor.sol:BaseStorageAccessor"
+        ],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/abstracts/TokenStorageAccessor.sol:TokenStorageAccessor": {
+        "src": "contracts\\abstracts\\TokenStorageAccessor.sol:10",
+        "inherit": [
+          "contracts/interfaces/storage/ITokenStorage.sol:ITokenStorage",
+          "contracts/abstracts/BaseStorageAccessor.sol:BaseStorageAccessor"
+        ],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/examples/OptimizedTokenFacet.sol:OptimizedTokenFacet": {
+        "src": "contracts\\examples\\OptimizedTokenFacet.sol:10",
+        "version": {
+          "withMetadata": "b274d620171cba76303e4aac1fcf75425a05ab6b21341415f21fed43bbff4b61",
+          "withoutMetadata": "437fced406d963ec4149808484d11b5bae0c7fa465a4ace1f41562e411061bfa",
+          "linkedWithoutMetadata": "437fced406d963ec4149808484d11b5bae0c7fa465a4ace1f41562e411061bfa"
+        },
+        "inherit": [
+          "contracts/interfaces/IEIP2535Introspection.sol:IEIP2535Introspection",
+          "contracts/abstracts/MultiDomainStorageAccessor.sol:MultiDomainStorageAccessor",
+          "contracts/abstracts/ComplianceStorageAccessor.sol:ComplianceStorageAccessor",
+          "contracts/interfaces/storage/IComplianceStorage.sol:IComplianceStorage",
+          "contracts/abstracts/RolesStorageAccessor.sol:RolesStorageAccessor",
+          "contracts/interfaces/storage/IRolesStorage.sol:IRolesStorage",
+          "contracts/abstracts/TokenStorageAccessor.sol:TokenStorageAccessor",
+          "contracts/interfaces/storage/ITokenStorage.sol:ITokenStorage",
+          "contracts/abstracts/BaseStorageAccessor.sol:BaseStorageAccessor"
+        ],
+        "libraries": [],
+        "methods": [
+          "name()",
+          "symbol()",
+          "decimals()",
+          "totalSupply()",
+          "balanceOf(address)",
+          "allowance(address,address)",
+          "transfer(address,uint256)",
+          "transferFrom(address,address,uint256)",
+          "approve(address,uint256)",
+          "mint(address,uint256)",
+          "freezeAccount(address)",
+          "unfreezeAccount(address)",
+          "selectorsIntrospection()",
+          "getSelectors()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
           "namespaces": {}
         },
         "solcVersion": "0.8.17"
@@ -1492,6 +1117,102 @@
         },
         "solcVersion": "0.8.17"
       },
+      "contracts/interfaces/storage/IClaimTopicsStorage.sol:IClaimTopicsStorage": {
+        "src": "contracts\\interfaces\\storage\\IClaimTopicsStorage.sol:6",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/interfaces/storage/IComplianceStorage.sol:IComplianceStorage": {
+        "src": "contracts\\interfaces\\storage\\IComplianceStorage.sol:6",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/interfaces/storage/IIdentityStorage.sol:IIdentityStorage": {
+        "src": "contracts\\interfaces\\storage\\IIdentityStorage.sol:6",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/interfaces/storage/IRolesStorage.sol:IRolesStorage": {
+        "src": "contracts\\interfaces\\storage\\IRolesStorage.sol:6",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/interfaces/storage/ITokenStorage.sol:ITokenStorage": {
+        "src": "contracts\\interfaces\\storage\\ITokenStorage.sol:6",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/interfaces/storage/ITrustedIssuersStorage.sol:ITrustedIssuersStorage": {
+        "src": "contracts\\interfaces\\storage\\ITrustedIssuersStorage.sol:6",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
       "contracts/interfaces/structs/IClaimTopicsStructs.sol:IClaimTopicsStructs": {
         "src": "contracts\\interfaces\\structs\\IClaimTopicsStructs.sol:7",
         "inherit": [],
@@ -1661,7 +1382,7 @@
               "label": "_keys",
               "offset": 0,
               "slot": "1",
-              "type": "t_mapping(t_bytes32,t_struct(Key)11248_storage)",
+              "type": "t_mapping(t_bytes32,t_struct(Key)13072_storage)",
               "contract": "Storage",
               "src": "contracts\\onchain-id\\storage\\Storage.sol:10"
             },
@@ -1677,7 +1398,7 @@
               "label": "_executions",
               "offset": 0,
               "slot": "3",
-              "type": "t_mapping(t_uint256,t_struct(Execution)11259_storage)",
+              "type": "t_mapping(t_uint256,t_struct(Execution)13083_storage)",
               "contract": "Storage",
               "src": "contracts\\onchain-id\\storage\\Storage.sol:19"
             },
@@ -1685,7 +1406,7 @@
               "label": "_claims",
               "offset": 0,
               "slot": "4",
-              "type": "t_mapping(t_bytes32,t_struct(Claim)11272_storage)",
+              "type": "t_mapping(t_bytes32,t_struct(Claim)13096_storage)",
               "contract": "Storage",
               "src": "contracts\\onchain-id\\storage\\Storage.sol:22"
             },
@@ -1763,11 +1484,11 @@
               "label": "bytes",
               "numberOfBytes": "32"
             },
-            "t_mapping(t_bytes32,t_struct(Claim)11272_storage)": {
+            "t_mapping(t_bytes32,t_struct(Claim)13096_storage)": {
               "label": "mapping(bytes32 => struct Structs.Claim)",
               "numberOfBytes": "32"
             },
-            "t_mapping(t_bytes32,t_struct(Key)11248_storage)": {
+            "t_mapping(t_bytes32,t_struct(Key)13072_storage)": {
               "label": "mapping(bytes32 => struct Structs.Key)",
               "numberOfBytes": "32"
             },
@@ -1779,7 +1500,7 @@
               "label": "mapping(uint256 => bytes32[])",
               "numberOfBytes": "32"
             },
-            "t_mapping(t_uint256,t_struct(Execution)11259_storage)": {
+            "t_mapping(t_uint256,t_struct(Execution)13083_storage)": {
               "label": "mapping(uint256 => struct Structs.Execution)",
               "numberOfBytes": "32"
             },
@@ -1787,7 +1508,7 @@
               "label": "string",
               "numberOfBytes": "32"
             },
-            "t_struct(Claim)11272_storage": {
+            "t_struct(Claim)13096_storage": {
               "label": "struct Structs.Claim",
               "members": [
                 {
@@ -1829,7 +1550,7 @@
               ],
               "numberOfBytes": "192"
             },
-            "t_struct(Execution)11259_storage": {
+            "t_struct(Execution)13083_storage": {
               "label": "struct Structs.Execution",
               "members": [
                 {
@@ -1865,7 +1586,7 @@
               ],
               "numberOfBytes": "128"
             },
-            "t_struct(Key)11248_storage": {
+            "t_struct(Key)13072_storage": {
               "label": "struct Structs.Key",
               "members": [
                 {
@@ -1956,7 +1677,7 @@
               "label": "_keys",
               "offset": 0,
               "slot": "1",
-              "type": "t_mapping(t_bytes32,t_struct(Key)11248_storage)",
+              "type": "t_mapping(t_bytes32,t_struct(Key)13072_storage)",
               "contract": "Storage",
               "src": "contracts\\onchain-id\\storage\\Storage.sol:10"
             },
@@ -1972,7 +1693,7 @@
               "label": "_executions",
               "offset": 0,
               "slot": "3",
-              "type": "t_mapping(t_uint256,t_struct(Execution)11259_storage)",
+              "type": "t_mapping(t_uint256,t_struct(Execution)13083_storage)",
               "contract": "Storage",
               "src": "contracts\\onchain-id\\storage\\Storage.sol:19"
             },
@@ -1980,7 +1701,7 @@
               "label": "_claims",
               "offset": 0,
               "slot": "4",
-              "type": "t_mapping(t_bytes32,t_struct(Claim)11272_storage)",
+              "type": "t_mapping(t_bytes32,t_struct(Claim)13096_storage)",
               "contract": "Storage",
               "src": "contracts\\onchain-id\\storage\\Storage.sol:22"
             },
@@ -2046,11 +1767,11 @@
               "label": "bytes",
               "numberOfBytes": "32"
             },
-            "t_mapping(t_bytes32,t_struct(Claim)11272_storage)": {
+            "t_mapping(t_bytes32,t_struct(Claim)13096_storage)": {
               "label": "mapping(bytes32 => struct Structs.Claim)",
               "numberOfBytes": "32"
             },
-            "t_mapping(t_bytes32,t_struct(Key)11248_storage)": {
+            "t_mapping(t_bytes32,t_struct(Key)13072_storage)": {
               "label": "mapping(bytes32 => struct Structs.Key)",
               "numberOfBytes": "32"
             },
@@ -2058,7 +1779,7 @@
               "label": "mapping(uint256 => bytes32[])",
               "numberOfBytes": "32"
             },
-            "t_mapping(t_uint256,t_struct(Execution)11259_storage)": {
+            "t_mapping(t_uint256,t_struct(Execution)13083_storage)": {
               "label": "mapping(uint256 => struct Structs.Execution)",
               "numberOfBytes": "32"
             },
@@ -2066,7 +1787,7 @@
               "label": "string",
               "numberOfBytes": "32"
             },
-            "t_struct(Claim)11272_storage": {
+            "t_struct(Claim)13096_storage": {
               "label": "struct Structs.Claim",
               "members": [
                 {
@@ -2108,7 +1829,7 @@
               ],
               "numberOfBytes": "192"
             },
-            "t_struct(Execution)11259_storage": {
+            "t_struct(Execution)13083_storage": {
               "label": "struct Structs.Execution",
               "members": [
                 {
@@ -2144,7 +1865,7 @@
               ],
               "numberOfBytes": "128"
             },
-            "t_struct(Key)11248_storage": {
+            "t_struct(Key)13072_storage": {
               "label": "struct Structs.Key",
               "members": [
                 {
@@ -2247,7 +1968,7 @@
               "label": "trustedIssuers",
               "offset": 0,
               "slot": "2",
-              "type": "t_array(t_contract(IClaimIssuer)10722)dyn_storage",
+              "type": "t_array(t_contract(IClaimIssuer)12546)dyn_storage",
               "contract": "Verifier",
               "src": "contracts\\onchain-id\\verifiers\\Verifier.sol:13"
             },
@@ -2263,7 +1984,7 @@
               "label": "claimTopicsToTrustedIssuers",
               "offset": 0,
               "slot": "4",
-              "type": "t_mapping(t_uint256,t_array(t_contract(IClaimIssuer)10722)dyn_storage)",
+              "type": "t_mapping(t_uint256,t_array(t_contract(IClaimIssuer)12546)dyn_storage)",
               "contract": "Verifier",
               "src": "contracts\\onchain-id\\verifiers\\Verifier.sol:19"
             }
@@ -2273,7 +1994,7 @@
               "label": "address",
               "numberOfBytes": "20"
             },
-            "t_array(t_contract(IClaimIssuer)10722)dyn_storage": {
+            "t_array(t_contract(IClaimIssuer)12546)dyn_storage": {
               "label": "contract IClaimIssuer[]",
               "numberOfBytes": "32"
             },
@@ -2281,7 +2002,7 @@
               "label": "uint256[]",
               "numberOfBytes": "32"
             },
-            "t_contract(IClaimIssuer)10722": {
+            "t_contract(IClaimIssuer)12546": {
               "label": "contract IClaimIssuer",
               "numberOfBytes": "20"
             },
@@ -2289,7 +2010,7 @@
               "label": "mapping(address => uint256[])",
               "numberOfBytes": "32"
             },
-            "t_mapping(t_uint256,t_array(t_contract(IClaimIssuer)10722)dyn_storage)": {
+            "t_mapping(t_uint256,t_array(t_contract(IClaimIssuer)12546)dyn_storage)": {
               "label": "mapping(uint256 => contract IClaimIssuer[])",
               "numberOfBytes": "32"
             },
@@ -2527,7 +2248,7 @@
               "label": "idFactory",
               "offset": 0,
               "slot": "1",
-              "type": "t_contract(IdFactory)10158",
+              "type": "t_contract(IdFactory)11982",
               "contract": "Gateway",
               "src": "contracts\\onchain-id\\gateway\\Gateway.sol:32"
             },
@@ -2561,7 +2282,7 @@
               "label": "bytes",
               "numberOfBytes": "32"
             },
-            "t_contract(IdFactory)10158": {
+            "t_contract(IdFactory)11982": {
               "label": "contract IdFactory",
               "numberOfBytes": "20"
             },
@@ -2826,7 +2547,7 @@
               "label": "_keys",
               "offset": 0,
               "slot": "1",
-              "type": "t_mapping(t_bytes32,t_struct(Key)11248_storage)",
+              "type": "t_mapping(t_bytes32,t_struct(Key)13072_storage)",
               "contract": "Storage",
               "src": "contracts\\onchain-id\\storage\\Storage.sol:10"
             },
@@ -2842,7 +2563,7 @@
               "label": "_executions",
               "offset": 0,
               "slot": "3",
-              "type": "t_mapping(t_uint256,t_struct(Execution)11259_storage)",
+              "type": "t_mapping(t_uint256,t_struct(Execution)13083_storage)",
               "contract": "Storage",
               "src": "contracts\\onchain-id\\storage\\Storage.sol:19"
             },
@@ -2850,7 +2571,7 @@
               "label": "_claims",
               "offset": 0,
               "slot": "4",
-              "type": "t_mapping(t_bytes32,t_struct(Claim)11272_storage)",
+              "type": "t_mapping(t_bytes32,t_struct(Claim)13096_storage)",
               "contract": "Storage",
               "src": "contracts\\onchain-id\\storage\\Storage.sol:22"
             },
@@ -2916,11 +2637,11 @@
               "label": "bytes",
               "numberOfBytes": "32"
             },
-            "t_mapping(t_bytes32,t_struct(Claim)11272_storage)": {
+            "t_mapping(t_bytes32,t_struct(Claim)13096_storage)": {
               "label": "mapping(bytes32 => struct Structs.Claim)",
               "numberOfBytes": "32"
             },
-            "t_mapping(t_bytes32,t_struct(Key)11248_storage)": {
+            "t_mapping(t_bytes32,t_struct(Key)13072_storage)": {
               "label": "mapping(bytes32 => struct Structs.Key)",
               "numberOfBytes": "32"
             },
@@ -2928,7 +2649,7 @@
               "label": "mapping(uint256 => bytes32[])",
               "numberOfBytes": "32"
             },
-            "t_mapping(t_uint256,t_struct(Execution)11259_storage)": {
+            "t_mapping(t_uint256,t_struct(Execution)13083_storage)": {
               "label": "mapping(uint256 => struct Structs.Execution)",
               "numberOfBytes": "32"
             },
@@ -2936,7 +2657,7 @@
               "label": "string",
               "numberOfBytes": "32"
             },
-            "t_struct(Claim)11272_storage": {
+            "t_struct(Claim)13096_storage": {
               "label": "struct Structs.Claim",
               "members": [
                 {
@@ -2978,7 +2699,7 @@
               ],
               "numberOfBytes": "192"
             },
-            "t_struct(Execution)11259_storage": {
+            "t_struct(Execution)13083_storage": {
               "label": "struct Structs.Execution",
               "members": [
                 {
@@ -3014,7 +2735,7 @@
               ],
               "numberOfBytes": "128"
             },
-            "t_struct(Key)11248_storage": {
+            "t_struct(Key)13072_storage": {
               "label": "struct Structs.Key",
               "members": [
                 {
@@ -3120,7 +2841,7 @@
               "label": "trustedIssuers",
               "offset": 0,
               "slot": "2",
-              "type": "t_array(t_contract(IClaimIssuer)10722)dyn_storage",
+              "type": "t_array(t_contract(IClaimIssuer)12546)dyn_storage",
               "contract": "Verifier",
               "src": "contracts\\onchain-id\\verifiers\\Verifier.sol:13"
             },
@@ -3136,7 +2857,7 @@
               "label": "claimTopicsToTrustedIssuers",
               "offset": 0,
               "slot": "4",
-              "type": "t_mapping(t_uint256,t_array(t_contract(IClaimIssuer)10722)dyn_storage)",
+              "type": "t_mapping(t_uint256,t_array(t_contract(IClaimIssuer)12546)dyn_storage)",
               "contract": "Verifier",
               "src": "contracts\\onchain-id\\verifiers\\Verifier.sol:19"
             }
@@ -3146,7 +2867,7 @@
               "label": "address",
               "numberOfBytes": "20"
             },
-            "t_array(t_contract(IClaimIssuer)10722)dyn_storage": {
+            "t_array(t_contract(IClaimIssuer)12546)dyn_storage": {
               "label": "contract IClaimIssuer[]",
               "numberOfBytes": "32"
             },
@@ -3154,7 +2875,7 @@
               "label": "uint256[]",
               "numberOfBytes": "32"
             },
-            "t_contract(IClaimIssuer)10722": {
+            "t_contract(IClaimIssuer)12546": {
               "label": "contract IClaimIssuer",
               "numberOfBytes": "20"
             },
@@ -3162,7 +2883,7 @@
               "label": "mapping(address => uint256[])",
               "numberOfBytes": "32"
             },
-            "t_mapping(t_uint256,t_array(t_contract(IClaimIssuer)10722)dyn_storage)": {
+            "t_mapping(t_uint256,t_array(t_contract(IClaimIssuer)12546)dyn_storage)": {
               "label": "mapping(uint256 => contract IClaimIssuer[])",
               "numberOfBytes": "32"
             },
@@ -3189,132 +2910,6 @@
         "methods": [
           "version()"
         ],
-        "linkReferences": [],
-        "errors": [],
-        "layout": {
-          "storage": [],
-          "types": {},
-          "layoutVersion": "1.2",
-          "flat": false,
-          "namespaces": {}
-        },
-        "solcVersion": "0.8.17"
-      },
-      "contracts/storage/ClaimTopicsStorage.sol:LibClaimTopicsStorage": {
-        "src": "contracts\\storage\\ClaimTopicsStorage.sol:13",
-        "version": {
-          "withMetadata": "f76b59434cbf1ae7205e8621d1bbf0b8ee4037b410f78468ebbf3cfb01dc9c89",
-          "withoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db",
-          "linkedWithoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db"
-        },
-        "inherit": [],
-        "libraries": [],
-        "methods": [],
-        "linkReferences": [],
-        "errors": [],
-        "layout": {
-          "storage": [],
-          "types": {},
-          "layoutVersion": "1.2",
-          "flat": false,
-          "namespaces": {}
-        },
-        "solcVersion": "0.8.17"
-      },
-      "contracts/storage/ComplianceStorage.sol:LibComplianceStorage": {
-        "src": "contracts\\storage\\ComplianceStorage.sol:21",
-        "version": {
-          "withMetadata": "d774a44748c63c6a0325b83e109a0bb0ff9cf0a0b3188a50c06daed0847e89cb",
-          "withoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db",
-          "linkedWithoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db"
-        },
-        "inherit": [],
-        "libraries": [],
-        "methods": [],
-        "linkReferences": [],
-        "errors": [],
-        "layout": {
-          "storage": [],
-          "types": {},
-          "layoutVersion": "1.2",
-          "flat": false,
-          "namespaces": {}
-        },
-        "solcVersion": "0.8.17"
-      },
-      "contracts/storage/IdentityStorage.sol:LibIdentityStorage": {
-        "src": "contracts\\storage\\IdentityStorage.sol:14",
-        "version": {
-          "withMetadata": "0129e8cadb49db7197e63145774984e3c05f3409b4c774927c3d1af0278c1188",
-          "withoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db",
-          "linkedWithoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db"
-        },
-        "inherit": [],
-        "libraries": [],
-        "methods": [],
-        "linkReferences": [],
-        "errors": [],
-        "layout": {
-          "storage": [],
-          "types": {},
-          "layoutVersion": "1.2",
-          "flat": false,
-          "namespaces": {}
-        },
-        "solcVersion": "0.8.17"
-      },
-      "contracts/storage/RolesStorage.sol:LibRolesStorage": {
-        "src": "contracts\\storage\\RolesStorage.sol:14",
-        "version": {
-          "withMetadata": "62b113e190db0e344794d8773d1a6edcd58ca11e971f5583551bc378c2256c7a",
-          "withoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db",
-          "linkedWithoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db"
-        },
-        "inherit": [],
-        "libraries": [],
-        "methods": [],
-        "linkReferences": [],
-        "errors": [],
-        "layout": {
-          "storage": [],
-          "types": {},
-          "layoutVersion": "1.2",
-          "flat": false,
-          "namespaces": {}
-        },
-        "solcVersion": "0.8.17"
-      },
-      "contracts/storage/TokenStorage.sol:LibTokenStorage": {
-        "src": "contracts\\storage\\TokenStorage.sol:21",
-        "version": {
-          "withMetadata": "abcebc881ead68c217b876e03d5ae98394034f3c3ebc970340a39a6875ea6f0b",
-          "withoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db",
-          "linkedWithoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db"
-        },
-        "inherit": [],
-        "libraries": [],
-        "methods": [],
-        "linkReferences": [],
-        "errors": [],
-        "layout": {
-          "storage": [],
-          "types": {},
-          "layoutVersion": "1.2",
-          "flat": false,
-          "namespaces": {}
-        },
-        "solcVersion": "0.8.17"
-      },
-      "contracts/storage/TrustedIssuersStorage.sol:LibTrustedIssuersStorage": {
-        "src": "contracts\\storage\\TrustedIssuersStorage.sol:14",
-        "version": {
-          "withMetadata": "5fe9eec7fe395a714ced867c369ae467f116c7dd44e56cb64f2efaddc7f231fc",
-          "withoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db",
-          "linkedWithoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db"
-        },
-        "inherit": [],
-        "libraries": [],
-        "methods": [],
         "linkReferences": [],
         "errors": [],
         "layout": {
