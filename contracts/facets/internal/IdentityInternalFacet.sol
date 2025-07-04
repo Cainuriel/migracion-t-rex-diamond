@@ -7,15 +7,12 @@ import { LibTrustedIssuersStorage } from "../../storage/TrustedIssuersStorage.so
 import { LibRolesStorage } from "../../storage/RolesStorage.sol";
 import { IIdentity } from "../../onchain-id/interface/IIdentity.sol";
 import { IClaimIssuer } from "../../onchain-id/interface/IClaimIssuer.sol";
+import { IIdentityEvents } from "../../interfaces/events/IIdentityEvents.sol";
 
 /// @title IdentityInternalFacet - Internal business logic for Identity domain
 /// @dev Contains all the business logic for investor identity management
 /// @dev This facet is not directly exposed in the diamond interface
-contract IdentityInternalFacet {
-    event IdentityRegistered(address indexed investor, address identity, uint16 country);
-    event IdentityUpdated(address indexed investor, address newIdentity);
-    event IdentityRemoved(address indexed investor);
-    event CountryUpdated(address indexed investor, uint16 country);
+contract IdentityInternalFacet is IIdentityEvents {
 
     // ================== INTERNAL IDENTITY OPERATIONS ==================    /// @notice Internal function to register an investor identity
     /// @param investor Investor address

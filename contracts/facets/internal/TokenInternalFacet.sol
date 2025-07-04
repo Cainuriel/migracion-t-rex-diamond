@@ -3,14 +3,12 @@ pragma solidity 0.8.17;
 
 import { LibTokenStorage, TokenStorage } from "../../storage/TokenStorage.sol";
 import { LibRolesStorage, RolesStorage } from "../../storage/RolesStorage.sol";
+import { ITokenEvents } from "../../interfaces/events/ITokenEvents.sol";
 
 /// @title TokenInternalFacet - Internal business logic for Token domain
 /// @dev Contains all the business logic for token operations
 /// @dev This facet is not directly exposed in the diamond interface
-contract TokenInternalFacet {
-    event Transfer(address indexed from, address indexed to, uint256 value);
-    event Approval(address indexed owner, address indexed spender, uint256 value);
-    event AccountFrozen(address indexed user, bool frozen);
+contract TokenInternalFacet is ITokenEvents {
 
     // ================== INTERNAL TOKEN OPERATIONS ==================
 

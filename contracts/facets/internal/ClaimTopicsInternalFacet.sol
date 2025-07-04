@@ -3,13 +3,12 @@ pragma solidity 0.8.17;
 
 import { LibClaimTopicsStorage, ClaimTopicsStorage } from "../../storage/ClaimTopicsStorage.sol";
 import { LibRolesStorage } from "../../storage/RolesStorage.sol";
+import { IClaimTopicsEvents } from "../../interfaces/events/IClaimTopicsEvents.sol";
 
 /// @title ClaimTopicsInternalFacet - Internal business logic for ClaimTopics domain
 /// @dev Contains all the business logic for claim topics management
 /// @dev This facet is not directly exposed in the diamond interface
-contract ClaimTopicsInternalFacet {
-    event ClaimTopicAdded(uint256 indexed topic);
-    event ClaimTopicRemoved(uint256 indexed topic);
+contract ClaimTopicsInternalFacet is IClaimTopicsEvents {
 
     // ================== INTERNAL CLAIM TOPICS OPERATIONS ==================
 

@@ -3,13 +3,12 @@ pragma solidity 0.8.17;
 
 import { LibTrustedIssuersStorage, TrustedIssuersStorage } from "../../storage/TrustedIssuersStorage.sol";
 import { LibRolesStorage } from "../../storage/RolesStorage.sol";
+import { ITrustedIssuersEvents } from "../../interfaces/events/ITrustedIssuersEvents.sol";
 
 /// @title TrustedIssuersInternalFacet - Internal business logic for TrustedIssuers domain
 /// @dev Contains all the business logic for trusted issuers management
 /// @dev This facet is not directly exposed in the diamond interface
-contract TrustedIssuersInternalFacet {
-    event TrustedIssuerAdded(address indexed issuer, uint256[] claimTopics);
-    event TrustedIssuerRemoved(address indexed issuer);
+contract TrustedIssuersInternalFacet is ITrustedIssuersEvents {
 
     // ================== INTERNAL TRUSTED ISSUERS OPERATIONS ==================
 

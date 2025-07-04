@@ -2,15 +2,16 @@
 pragma solidity 0.8.17;
 
 import { LibRolesStorage, RolesStorage } from "../../storage/RolesStorage.sol";
+import { IRolesEvents } from "../../interfaces/events/IRolesEvents.sol";
 
 /// @title RolesInternalFacet - Internal business logic for Roles domain
-/// @dev Contains all the business logic for ownership and agent management
+/// @dev Contains all the business logic for role management and access control
 /// @dev This facet is not directly exposed in the diamond interface
-contract RolesInternalFacet {
-    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
-    event AgentSet(address indexed agent, bool status);
+contract RolesInternalFacet is IRolesEvents {
 
-    // ================== INTERNAL ROLES OPERATIONS ==================    /// @notice Internal function to initialize roles
+    // ================== INTERNAL ROLES OPERATIONS ==================
+
+    /// @notice Internal function to initialize roles
     /// @param initialOwner Initial owner address
     function _setInitialOwner(address initialOwner) internal {
         require(initialOwner != address(0), "RolesInternal: owner is the zero address");

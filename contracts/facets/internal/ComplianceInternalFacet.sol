@@ -5,14 +5,12 @@ import { LibComplianceStorage, ComplianceStorage } from "../../storage/Complianc
 import { LibTokenStorage } from "../../storage/TokenStorage.sol";
 import { LibIdentityStorage } from "../../storage/IdentityStorage.sol";
 import { LibRolesStorage } from "../../storage/RolesStorage.sol";
+import { IComplianceEvents } from "../../interfaces/events/IComplianceEvents.sol";
 
 /// @title ComplianceInternalFacet - Internal business logic for Compliance domain
-/// @dev Contains all the business logic for compliance rules and checks
+/// @dev Contains all the business logic for compliance checks and rules
 /// @dev This facet is not directly exposed in the diamond interface
-contract ComplianceInternalFacet {
-    event MaxBalanceSet(uint256 max);
-    event MinBalanceSet(uint256 min);
-    event MaxInvestorsSet(uint256 max);
+contract ComplianceInternalFacet is IComplianceEvents {
 
     // ================== INTERNAL COMPLIANCE OPERATIONS ==================
 

@@ -98,6 +98,54 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.InitDiamond__factory>;
     getContractFactory(
+      name: "IClaimTopicsErrors",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IClaimTopicsErrors__factory>;
+    getContractFactory(
+      name: "IComplianceErrors",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IComplianceErrors__factory>;
+    getContractFactory(
+      name: "IIdentityErrors",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IIdentityErrors__factory>;
+    getContractFactory(
+      name: "IRolesErrors",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IRolesErrors__factory>;
+    getContractFactory(
+      name: "ITokenErrors",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ITokenErrors__factory>;
+    getContractFactory(
+      name: "ITrustedIssuersErrors",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ITrustedIssuersErrors__factory>;
+    getContractFactory(
+      name: "IClaimTopicsEvents",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IClaimTopicsEvents__factory>;
+    getContractFactory(
+      name: "IComplianceEvents",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IComplianceEvents__factory>;
+    getContractFactory(
+      name: "IIdentityEvents",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IIdentityEvents__factory>;
+    getContractFactory(
+      name: "IRolesEvents",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IRolesEvents__factory>;
+    getContractFactory(
+      name: "ITokenEvents",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ITokenEvents__factory>;
+    getContractFactory(
+      name: "ITrustedIssuersEvents",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ITrustedIssuersEvents__factory>;
+    getContractFactory(
       name: "IDiamondCut",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IDiamondCut__factory>;
@@ -272,6 +320,66 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.InitDiamond>;
     getContractAt(
+      name: "IClaimTopicsErrors",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IClaimTopicsErrors>;
+    getContractAt(
+      name: "IComplianceErrors",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IComplianceErrors>;
+    getContractAt(
+      name: "IIdentityErrors",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IIdentityErrors>;
+    getContractAt(
+      name: "IRolesErrors",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IRolesErrors>;
+    getContractAt(
+      name: "ITokenErrors",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ITokenErrors>;
+    getContractAt(
+      name: "ITrustedIssuersErrors",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ITrustedIssuersErrors>;
+    getContractAt(
+      name: "IClaimTopicsEvents",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IClaimTopicsEvents>;
+    getContractAt(
+      name: "IComplianceEvents",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IComplianceEvents>;
+    getContractAt(
+      name: "IIdentityEvents",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IIdentityEvents>;
+    getContractAt(
+      name: "IRolesEvents",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IRolesEvents>;
+    getContractAt(
+      name: "ITokenEvents",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ITokenEvents>;
+    getContractAt(
+      name: "ITrustedIssuersEvents",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ITrustedIssuersEvents>;
+    getContractAt(
       name: "IDiamondCut",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
@@ -442,6 +550,54 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.InitDiamond>;
     deployContract(
+      name: "IClaimTopicsErrors",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IClaimTopicsErrors>;
+    deployContract(
+      name: "IComplianceErrors",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IComplianceErrors>;
+    deployContract(
+      name: "IIdentityErrors",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IIdentityErrors>;
+    deployContract(
+      name: "IRolesErrors",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IRolesErrors>;
+    deployContract(
+      name: "ITokenErrors",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ITokenErrors>;
+    deployContract(
+      name: "ITrustedIssuersErrors",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ITrustedIssuersErrors>;
+    deployContract(
+      name: "IClaimTopicsEvents",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IClaimTopicsEvents>;
+    deployContract(
+      name: "IComplianceEvents",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IComplianceEvents>;
+    deployContract(
+      name: "IIdentityEvents",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IIdentityEvents>;
+    deployContract(
+      name: "IRolesEvents",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IRolesEvents>;
+    deployContract(
+      name: "ITokenEvents",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ITokenEvents>;
+    deployContract(
+      name: "ITrustedIssuersEvents",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ITrustedIssuersEvents>;
+    deployContract(
       name: "IDiamondCut",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.IDiamondCut>;
@@ -615,6 +771,66 @@ declare module "hardhat/types/runtime" {
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.InitDiamond>;
+    deployContract(
+      name: "IClaimTopicsErrors",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IClaimTopicsErrors>;
+    deployContract(
+      name: "IComplianceErrors",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IComplianceErrors>;
+    deployContract(
+      name: "IIdentityErrors",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IIdentityErrors>;
+    deployContract(
+      name: "IRolesErrors",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IRolesErrors>;
+    deployContract(
+      name: "ITokenErrors",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ITokenErrors>;
+    deployContract(
+      name: "ITrustedIssuersErrors",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ITrustedIssuersErrors>;
+    deployContract(
+      name: "IClaimTopicsEvents",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IClaimTopicsEvents>;
+    deployContract(
+      name: "IComplianceEvents",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IComplianceEvents>;
+    deployContract(
+      name: "IIdentityEvents",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IIdentityEvents>;
+    deployContract(
+      name: "IRolesEvents",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IRolesEvents>;
+    deployContract(
+      name: "ITokenEvents",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ITokenEvents>;
+    deployContract(
+      name: "ITrustedIssuersEvents",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ITrustedIssuersEvents>;
     deployContract(
       name: "IDiamondCut",
       args: any[],

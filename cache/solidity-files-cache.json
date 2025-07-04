@@ -452,8 +452,8 @@
       ]
     },
     "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\facets\\internal\\TrustedIssuersInternalFacet.sol": {
-      "lastModificationDate": 1750177417049,
-      "contentHash": "c8b45be345373ebc51b8f30058818c9d",
+      "lastModificationDate": 1751630757817,
+      "contentHash": "5c04814ed595e7d12615914447849c68",
       "sourceName": "contracts/facets/internal/TrustedIssuersInternalFacet.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -481,7 +481,8 @@
       },
       "imports": [
         "../../storage/TrustedIssuersStorage.sol",
-        "../../storage/RolesStorage.sol"
+        "../../storage/RolesStorage.sol",
+        "../../interfaces/events/ITrustedIssuersEvents.sol"
       ],
       "versionPragmas": [
         "0.8.17"
@@ -491,7 +492,7 @@
       ]
     },
     "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\facets\\TrustedIssuersFacet.sol": {
-      "lastModificationDate": 1750178364740,
+      "lastModificationDate": 1750402877838,
       "contentHash": "771e816205bcfa4611c810e961284e85",
       "sourceName": "contracts/facets/TrustedIssuersFacet.sol",
       "solcConfig": {
@@ -566,7 +567,7 @@
       ]
     },
     "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\facets\\TokenFacet.sol": {
-      "lastModificationDate": 1750178340652,
+      "lastModificationDate": 1750402877837,
       "contentHash": "fd24452f4e7760ad293d9c583a0e9a88",
       "sourceName": "contracts/facets/TokenFacet.sol",
       "solcConfig": {
@@ -606,8 +607,8 @@
       ]
     },
     "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\facets\\internal\\TokenInternalFacet.sol": {
-      "lastModificationDate": 1750177417048,
-      "contentHash": "a70d30f40e8a4d7656c71ef299787b5d",
+      "lastModificationDate": 1751630757812,
+      "contentHash": "3510d4c0e0d2568964882677962b304d",
       "sourceName": "contracts/facets/internal/TokenInternalFacet.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -635,7 +636,8 @@
       },
       "imports": [
         "../../storage/TokenStorage.sol",
-        "../../storage/RolesStorage.sol"
+        "../../storage/RolesStorage.sol",
+        "../../interfaces/events/ITokenEvents.sol"
       ],
       "versionPragmas": [
         "0.8.17"
@@ -645,8 +647,8 @@
       ]
     },
     "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\facets\\internal\\ComplianceInternalFacet.sol": {
-      "lastModificationDate": 1750177417049,
-      "contentHash": "43c4f3763b3e86758733e7f213d0b66d",
+      "lastModificationDate": 1751630835076,
+      "contentHash": "f2945c472e2410d4c091a7d5d304c7c3",
       "sourceName": "contracts/facets/internal/ComplianceInternalFacet.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -676,7 +678,8 @@
         "../../storage/ComplianceStorage.sol",
         "../../storage/TokenStorage.sol",
         "../../storage/IdentityStorage.sol",
-        "../../storage/RolesStorage.sol"
+        "../../storage/RolesStorage.sol",
+        "../../interfaces/events/IComplianceEvents.sol"
       ],
       "versionPragmas": [
         "0.8.17"
@@ -686,8 +689,8 @@
       ]
     },
     "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\facets\\internal\\IdentityInternalFacet.sol": {
-      "lastModificationDate": 1751624742992,
-      "contentHash": "ebdd0e5b5ec0b665d436a80467f37080",
+      "lastModificationDate": 1751630757817,
+      "contentHash": "a5ea3f9d56fc29b24f305f777bae878a",
       "sourceName": "contracts/facets/internal/IdentityInternalFacet.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -719,7 +722,8 @@
         "../../storage/TrustedIssuersStorage.sol",
         "../../storage/RolesStorage.sol",
         "../../onchain-id/interface/IIdentity.sol",
-        "../../onchain-id/interface/IClaimIssuer.sol"
+        "../../onchain-id/interface/IClaimIssuer.sol",
+        "../../interfaces/events/IIdentityEvents.sol"
       ],
       "versionPragmas": [
         "0.8.17"
@@ -878,8 +882,8 @@
       ]
     },
     "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\facets\\internal\\ClaimTopicsInternalFacet.sol": {
-      "lastModificationDate": 1750177417049,
-      "contentHash": "8844b78a1eb38517c063d6180d361663",
+      "lastModificationDate": 1751630757817,
+      "contentHash": "7acc3fc30ced205c79e36ef9cb3e7d89",
       "sourceName": "contracts/facets/internal/ClaimTopicsInternalFacet.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -907,7 +911,8 @@
       },
       "imports": [
         "../../storage/ClaimTopicsStorage.sol",
-        "../../storage/RolesStorage.sol"
+        "../../storage/RolesStorage.sol",
+        "../../interfaces/events/IClaimTopicsEvents.sol"
       ],
       "versionPragmas": [
         "0.8.17"
@@ -917,7 +922,7 @@
       ]
     },
     "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\facets\\ClaimTopicsFacet.sol": {
-      "lastModificationDate": 1750178463018,
+      "lastModificationDate": 1750402877831,
       "contentHash": "0649882d41f1a7823baef0f362d15097",
       "sourceName": "contracts/facets/ClaimTopicsFacet.sol",
       "solcConfig": {
@@ -995,7 +1000,7 @@
       ]
     },
     "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\facets\\ComplianceFacet.sol": {
-      "lastModificationDate": 1750178441532,
+      "lastModificationDate": 1750402877834,
       "contentHash": "59bfef67d8125eecc32b04cb0c484494",
       "sourceName": "contracts/facets/ComplianceFacet.sol",
       "solcConfig": {
@@ -1034,8 +1039,8 @@
       ]
     },
     "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\facets\\internal\\RolesInternalFacet.sol": {
-      "lastModificationDate": 1750177417047,
-      "contentHash": "fc112ef372ff6d3f66a6a9fc050ce6bc",
+      "lastModificationDate": 1751630951923,
+      "contentHash": "04ec8ea6e99e40bb66e7c2ded649cc98",
       "sourceName": "contracts/facets/internal/RolesInternalFacet.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -1062,7 +1067,8 @@
         }
       },
       "imports": [
-        "../../storage/RolesStorage.sol"
+        "../../storage/RolesStorage.sol",
+        "../../interfaces/events/IRolesEvents.sol"
       ],
       "versionPragmas": [
         "0.8.17"
@@ -1072,7 +1078,7 @@
       ]
     },
     "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\facets\\RolesFacet.sol": {
-      "lastModificationDate": 1750178386428,
+      "lastModificationDate": 1750402877836,
       "contentHash": "b7afa768cf2f1bfb91c9a7cb4630dd26",
       "sourceName": "contracts/facets/RolesFacet.sol",
       "solcConfig": {
@@ -1185,8 +1191,8 @@
       "artifacts": []
     },
     "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\onchain-id\\interface\\IIdentity.sol": {
-      "lastModificationDate": 1749742598587,
-      "contentHash": "6d893dfbaf1c607098d1670bfd65b963",
+      "lastModificationDate": 1751626415347,
+      "contentHash": "f111e0920071b47208a4bca8d4346d0f",
       "sourceName": "contracts/onchain-id/interface/IIdentity.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -1224,8 +1230,8 @@
       ]
     },
     "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\onchain-id\\interface\\IClaimIssuer.sol": {
-      "lastModificationDate": 1749742598532,
-      "contentHash": "251acb30c5129cfee749a1f001f8dcb4",
+      "lastModificationDate": 1751626415346,
+      "contentHash": "6240bac5df422c868b79290991dd0a1d",
       "sourceName": "contracts/onchain-id/interface/IClaimIssuer.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -1262,8 +1268,8 @@
       ]
     },
     "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\onchain-id\\interface\\IERC734.sol": {
-      "lastModificationDate": 1749742598576,
-      "contentHash": "0750ad5923271af0a35515856aed138d",
+      "lastModificationDate": 1751626415346,
+      "contentHash": "3949e15bd65921278f45e67763dad035",
       "sourceName": "contracts/onchain-id/interface/IERC734.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -1298,8 +1304,8 @@
       ]
     },
     "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\onchain-id\\interface\\IERC735.sol": {
-      "lastModificationDate": 1749742598585,
-      "contentHash": "1a32851ce8fb5a36dbee414691df1453",
+      "lastModificationDate": 1751626415346,
+      "contentHash": "be94ac88b6ad581162c0075da216d1f7",
       "sourceName": "contracts/onchain-id/interface/IERC735.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -1334,8 +1340,8 @@
       ]
     },
     "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\onchain-id\\verifiers\\Verifier.sol": {
-      "lastModificationDate": 1749742598653,
-      "contentHash": "17c4b18c9c174840d59b41b6ca967d87",
+      "lastModificationDate": 1751626415349,
+      "contentHash": "230eb8d1b55e840174dd7c252abaaed9",
       "sourceName": "contracts/onchain-id/verifiers/Verifier.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -1447,8 +1453,8 @@
       ]
     },
     "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\onchain-id\\_testContracts\\VerifierUser.sol": {
-      "lastModificationDate": 1749742598662,
-      "contentHash": "6a85e9fcc479191bb3040bfbe095e293",
+      "lastModificationDate": 1751626415343,
+      "contentHash": "5f754e18bab874e418e0a51bfb90c362",
       "sourceName": "contracts/onchain-id/_testContracts/VerifierUser.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -1485,8 +1491,8 @@
       ]
     },
     "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\onchain-id\\proxy\\ImplementationAuthority.sol": {
-      "lastModificationDate": 1749742598620,
-      "contentHash": "04b1bdbff6a4eb09972ffa0aebcff411",
+      "lastModificationDate": 1751626415347,
+      "contentHash": "27aa2d1707d0b331386de67624f479aa",
       "sourceName": "contracts/onchain-id/proxy/ImplementationAuthority.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -1524,8 +1530,8 @@
       ]
     },
     "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\onchain-id\\interface\\IImplementationAuthority.sol": {
-      "lastModificationDate": 1749742598613,
-      "contentHash": "29478863f3be6f3d50c9c44968b2fa11",
+      "lastModificationDate": 1751626415347,
+      "contentHash": "0a44b6c6f92568589a57f4bc66398320",
       "sourceName": "contracts/onchain-id/interface/IImplementationAuthority.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -1560,8 +1566,8 @@
       ]
     },
     "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\onchain-id\\proxy\\IdentityProxy.sol": {
-      "lastModificationDate": 1751625611304,
-      "contentHash": "fb8afc9c4a5cc645a0f7c82cee1fe809",
+      "lastModificationDate": 1751626415347,
+      "contentHash": "a84942212de80f3c73b6886800161a5a",
       "sourceName": "contracts/onchain-id/proxy/IdentityProxy.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -1598,8 +1604,8 @@
       ]
     },
     "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\onchain-id\\factory\\IdFactory.sol": {
-      "lastModificationDate": 1751625231931,
-      "contentHash": "16a7aabe42fbaec5d872168355cb1bba",
+      "lastModificationDate": 1751626415344,
+      "contentHash": "6a80db4d17dc471bca40722cb9626076",
       "sourceName": "contracts/onchain-id/factory/IdFactory.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -1639,8 +1645,8 @@
       ]
     },
     "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\onchain-id\\factory\\IIdFactory.sol": {
-      "lastModificationDate": 1749742598603,
-      "contentHash": "8a8116f1ab94e124b62225ccaeccdcf1",
+      "lastModificationDate": 1751626415344,
+      "contentHash": "9f80ed2deb0bcf02ee5bd0e9ea266715",
       "sourceName": "contracts/onchain-id/factory/IIdFactory.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -1675,8 +1681,8 @@
       ]
     },
     "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\onchain-id\\gateway\\Gateway.sol": {
-      "lastModificationDate": 1749742598517,
-      "contentHash": "7546001a3181a14ebeadcf2faa0ea7db",
+      "lastModificationDate": 1751626415344,
+      "contentHash": "a0391ce39626322a0ad3aeef1f469e1b",
       "sourceName": "contracts/onchain-id/gateway/Gateway.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -1864,8 +1870,8 @@
       ]
     },
     "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\onchain-id\\Identity.sol": {
-      "lastModificationDate": 1749742598547,
-      "contentHash": "ee14b07d6a40b87679719a4c304082f2",
+      "lastModificationDate": 1751626415342,
+      "contentHash": "0aefda70a609abf674d9719873fa5706",
       "sourceName": "contracts/onchain-id/Identity.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -1905,8 +1911,8 @@
       ]
     },
     "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\onchain-id\\version\\Version.sol": {
-      "lastModificationDate": 1749742598670,
-      "contentHash": "9d941eeb6be39fadac69fe3d8f6734cf",
+      "lastModificationDate": 1751626415349,
+      "contentHash": "8798f8b6685d2c7c96373689391c3573",
       "sourceName": "contracts/onchain-id/version/Version.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -1941,8 +1947,8 @@
       ]
     },
     "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\onchain-id\\storage\\Storage.sol": {
-      "lastModificationDate": 1749742598630,
-      "contentHash": "282efc885e0c72081b7c5317743adb34",
+      "lastModificationDate": 1751626415348,
+      "contentHash": "445d975e9cbf1ee61a69afa38948de36",
       "sourceName": "contracts/onchain-id/storage/Storage.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -1979,8 +1985,8 @@
       ]
     },
     "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\onchain-id\\storage\\Structs.sol": {
-      "lastModificationDate": 1749742598636,
-      "contentHash": "883b103bb52a7d42d64e3ccf1086634e",
+      "lastModificationDate": 1751626415348,
+      "contentHash": "9642c0db236bb0a0d02bf65bbe8b322e",
       "sourceName": "contracts/onchain-id/storage/Structs.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -2015,8 +2021,8 @@
       ]
     },
     "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\onchain-id\\ClaimIssuer.sol": {
-      "lastModificationDate": 1749742598505,
-      "contentHash": "1acacaaa0db62819af62ff81e5139fff",
+      "lastModificationDate": 1751626415341,
+      "contentHash": "0867a0cb6f3f13ad8e6d3b3c214d12bd",
       "sourceName": "contracts/onchain-id/ClaimIssuer.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -2054,8 +2060,8 @@
       ]
     },
     "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\onchain-id\\Test.sol": {
-      "lastModificationDate": 1749742598642,
-      "contentHash": "e242a53ccce7d63484cc9107194589db",
+      "lastModificationDate": 1751626415342,
+      "contentHash": "1d1ae08570ca6389609668f0d5ce1efb",
       "sourceName": "contracts/onchain-id/Test.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -2087,6 +2093,654 @@
       ],
       "artifacts": [
         "Test"
+      ]
+    },
+    "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\interfaces\\events\\ITrustedIssuersEvents.sol": {
+      "lastModificationDate": 1751630757817,
+      "contentHash": "c9285712855fab905a39f67dc83427a0",
+      "sourceName": "contracts/interfaces/events/ITrustedIssuersEvents.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "0.8.17"
+      ],
+      "artifacts": [
+        "ITrustedIssuersEvents"
+      ]
+    },
+    "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\interfaces\\events\\ITokenEvents.sol": {
+      "lastModificationDate": 1751630757817,
+      "contentHash": "ac667b545a81ce64457e9197e909ceb0",
+      "sourceName": "contracts/interfaces/events/ITokenEvents.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "0.8.17"
+      ],
+      "artifacts": [
+        "ITokenEvents"
+      ]
+    },
+    "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\interfaces\\events\\IComplianceEvents.sol": {
+      "lastModificationDate": 1751630757817,
+      "contentHash": "342b26343758c912e977624724462a20",
+      "sourceName": "contracts/interfaces/events/IComplianceEvents.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "0.8.17"
+      ],
+      "artifacts": [
+        "IComplianceEvents"
+      ]
+    },
+    "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\interfaces\\events\\IIdentityEvents.sol": {
+      "lastModificationDate": 1751630757817,
+      "contentHash": "69ef0bfe6deea5d439892947bc885a5a",
+      "sourceName": "contracts/interfaces/events/IIdentityEvents.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "0.8.17"
+      ],
+      "artifacts": [
+        "IIdentityEvents"
+      ]
+    },
+    "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\interfaces\\events\\IClaimTopicsEvents.sol": {
+      "lastModificationDate": 1751630757817,
+      "contentHash": "11f4376aa3d31515b640d655bf39cd17",
+      "sourceName": "contracts/interfaces/events/IClaimTopicsEvents.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "0.8.17"
+      ],
+      "artifacts": [
+        "IClaimTopicsEvents"
+      ]
+    },
+    "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\interfaces\\events\\IRolesEvents.sol": {
+      "lastModificationDate": 1751630757817,
+      "contentHash": "a94cf4da43bd1e0e186f5ad5cdc6fa00",
+      "sourceName": "contracts/interfaces/events/IRolesEvents.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "0.8.17"
+      ],
+      "artifacts": [
+        "IRolesEvents"
+      ]
+    },
+    "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\interfaces\\errors\\IClaimTopicsErrors.sol": {
+      "lastModificationDate": 1751630757817,
+      "contentHash": "96c6cad0bbb737327b8508e7abee8e62",
+      "sourceName": "contracts/interfaces/errors/IClaimTopicsErrors.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "0.8.17"
+      ],
+      "artifacts": [
+        "IClaimTopicsErrors"
+      ]
+    },
+    "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\interfaces\\errors\\IComplianceErrors.sol": {
+      "lastModificationDate": 1751630757817,
+      "contentHash": "78e21ee5ea3b4e2151b299a957d3b7d3",
+      "sourceName": "contracts/interfaces/errors/IComplianceErrors.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "0.8.17"
+      ],
+      "artifacts": [
+        "IComplianceErrors"
+      ]
+    },
+    "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\interfaces\\errors\\IIdentityErrors.sol": {
+      "lastModificationDate": 1751630757817,
+      "contentHash": "8530912d005b5f9183d993b803df6444",
+      "sourceName": "contracts/interfaces/errors/IIdentityErrors.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "0.8.17"
+      ],
+      "artifacts": [
+        "IIdentityErrors"
+      ]
+    },
+    "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\interfaces\\errors\\IRolesErrors.sol": {
+      "lastModificationDate": 1751630757817,
+      "contentHash": "9e195613d9439c6c29e16e307ce4e3b0",
+      "sourceName": "contracts/interfaces/errors/IRolesErrors.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "0.8.17"
+      ],
+      "artifacts": [
+        "IRolesErrors"
+      ]
+    },
+    "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\interfaces\\errors\\ITokenErrors.sol": {
+      "lastModificationDate": 1751630757817,
+      "contentHash": "ee04ade0541487e263f6758d2b0d68a3",
+      "sourceName": "contracts/interfaces/errors/ITokenErrors.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "0.8.17"
+      ],
+      "artifacts": [
+        "ITokenErrors"
+      ]
+    },
+    "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\interfaces\\errors\\ITrustedIssuersErrors.sol": {
+      "lastModificationDate": 1751630757831,
+      "contentHash": "f346df61a8746cbc90c4f7acf31972d9",
+      "sourceName": "contracts/interfaces/errors/ITrustedIssuersErrors.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "0.8.17"
+      ],
+      "artifacts": [
+        "ITrustedIssuersErrors"
+      ]
+    },
+    "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\interfaces\\structs\\IClaimTopicsStructs.sol": {
+      "lastModificationDate": 1751630757831,
+      "contentHash": "cb3d09a71b7e579bf1d305d99497e5aa",
+      "sourceName": "contracts/interfaces/structs/IClaimTopicsStructs.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "0.8.17"
+      ],
+      "artifacts": [
+        "IClaimTopicsStructs"
+      ]
+    },
+    "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\interfaces\\structs\\IComplianceStructs.sol": {
+      "lastModificationDate": 1751630757831,
+      "contentHash": "4dd421a6c58b86b9755f2318551ead97",
+      "sourceName": "contracts/interfaces/structs/IComplianceStructs.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "0.8.17"
+      ],
+      "artifacts": [
+        "IComplianceStructs"
+      ]
+    },
+    "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\interfaces\\structs\\IIdentityStructs.sol": {
+      "lastModificationDate": 1751630757831,
+      "contentHash": "5fe1654dea47dd46bb649937a18f70e5",
+      "sourceName": "contracts/interfaces/structs/IIdentityStructs.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "0.8.17"
+      ],
+      "artifacts": [
+        "IIdentityStructs"
+      ]
+    },
+    "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\interfaces\\structs\\IRolesStructs.sol": {
+      "lastModificationDate": 1751630757831,
+      "contentHash": "ce9fc6b31e98e35d5200946a4d4ba6e7",
+      "sourceName": "contracts/interfaces/structs/IRolesStructs.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "0.8.17"
+      ],
+      "artifacts": [
+        "IRolesStructs"
+      ]
+    },
+    "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\interfaces\\structs\\ITokenStructs.sol": {
+      "lastModificationDate": 1751630757831,
+      "contentHash": "8abbb258d3961095635366f619f73824",
+      "sourceName": "contracts/interfaces/structs/ITokenStructs.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "0.8.17"
+      ],
+      "artifacts": [
+        "ITokenStructs"
+      ]
+    },
+    "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\interfaces\\structs\\ITrustedIssuersStructs.sol": {
+      "lastModificationDate": 1751630757831,
+      "contentHash": "ab39638eb2957549f399a0c5c0230eda",
+      "sourceName": "contracts/interfaces/structs/ITrustedIssuersStructs.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "0.8.17"
+      ],
+      "artifacts": [
+        "ITrustedIssuersStructs"
       ]
     }
   }

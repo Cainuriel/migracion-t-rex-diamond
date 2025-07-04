@@ -1,0 +1,85 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "IComplianceErrors",
+  "sourceName": "contracts/interfaces/errors/IComplianceErrors.sol",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "parameter",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "InvalidComplianceParameter",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "newBalance",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "maxBalance",
+          "type": "uint256"
+        }
+      ],
+      "name": "MaxBalanceExceeded",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "currentInvestors",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "maxInvestors",
+          "type": "uint256"
+        }
+      ],
+      "name": "MaxInvestorsExceeded",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "newBalance",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "minBalance",
+          "type": "uint256"
+        }
+      ],
+      "name": "MinBalanceViolated",
+      "type": "error"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}
