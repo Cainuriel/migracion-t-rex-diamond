@@ -2,11 +2,12 @@
 pragma solidity 0.8.17;
 
 import { ITrustedIssuersEvents } from "../../interfaces/events/ITrustedIssuersEvents.sol";
+import { ITrustedIssuersErrors } from "../../interfaces/errors/ITrustedIssuersErrors.sol";
 
 /// @title TrustedIssuersInternalFacet - Internal business logic for TrustedIssuers domain
 /// @dev Contains all the business logic for trusted issuers management
 /// @dev This facet is not directly exposed in the diamond interface
-contract TrustedIssuersInternalFacet is ITrustedIssuersEvents {
+contract TrustedIssuersInternalFacet is ITrustedIssuersEvents, ITrustedIssuersErrors {
 
     // ================== STORAGE STRUCTURES ==================
 
@@ -60,8 +61,8 @@ contract TrustedIssuersInternalFacet is ITrustedIssuersEvents {
     /// @param issuer Issuer address to add
     /// @param topics Array of topic identifiers
     function _addTrustedIssuer(address issuer, uint256[] calldata topics) internal {
-        require(issuer != address(0), "TrustedIssuersInternal: issuer is zero address");
-        require(topics.length > 0, "TrustedIssuersInternal: no topics provided");
+        if (issuer == address(0)) revert ZeroAddress();
+        if (topics.length == 0) revert EmptyClaimTopics();
         
         TrustedIssuersStorage storage tis = _getTrustedIssuersStorage();
         
@@ -92,7 +93,7 @@ contract TrustedIssuersInternalFacet is ITrustedIssuersEvents {
     /// @notice Internal function to remove trusted issuer
     /// @param issuer Issuer address to remove
     function _removeTrustedIssuer(address issuer) internal {
-        require(issuer != address(0), "TrustedIssuersInternal: issuer is zero address");
+        if (issuer == address(0)) revert ZeroAddress();
         
         TrustedIssuersStorage storage tis = _getTrustedIssuersStorage();
         
@@ -122,10 +123,10 @@ contract TrustedIssuersInternalFacet is ITrustedIssuersEvents {
     /// @param issuer Issuer address
     /// @param topic Topic identifier
     function _removeTrustedIssuerForTopic(address issuer, uint256 topic) internal {
-        require(issuer != address(0), "TrustedIssuersInternal: issuer is zero address");
+        if (issuer == address(0)) revert ZeroAddress();
         
         TrustedIssuersStorage storage tis = _getTrustedIssuersStorage();
-        require(tis.issuerStatus[issuer][topic], "TrustedIssuersInternal: issuer not trusted for topic");
+        if (!tis.issuerStatus[issuer][topic]) revert TrustedIssuerNotFound(issuer);
         
         address[] storage issuers = tis.trustedIssuers[topic];
         
@@ -202,13 +203,13 @@ contract TrustedIssuersInternalFacet is ITrustedIssuersEvents {
     /// @notice Internal check for owner authorization
     /// @param caller Address calling the function
     function _onlyOwner(address caller) internal view {
-        require(caller == _getRolesStorage().owner, "TrustedIssuersInternal: Not owner");
+        if (caller != _getRolesStorage().owner) revert Unauthorized(caller);
     }
 
     /// @notice Internal check for agent or owner authorization
     /// @param caller Address calling the function
     function _onlyAgentOrOwner(address caller) internal view {
         RolesStorage storage rs = _getRolesStorage();
-        require(caller == rs.owner || rs.agents[caller], "TrustedIssuersInternal: Not authorized");
+        if (caller != rs.owner && !rs.agents[caller]) revert Unauthorized(caller);
     }
 }

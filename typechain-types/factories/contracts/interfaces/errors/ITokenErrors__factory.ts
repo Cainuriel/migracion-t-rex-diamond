@@ -17,7 +17,7 @@ const _abi = [
         type: "address",
       },
     ],
-    name: "AccountFrozen",
+    name: "FrozenAccount",
     type: "error",
   },
   {

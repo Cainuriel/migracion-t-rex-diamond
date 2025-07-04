@@ -4,11 +4,12 @@ pragma solidity 0.8.17;
 import { IIdentity } from "../../onchain-id/interface/IIdentity.sol";
 import { IClaimIssuer } from "../../onchain-id/interface/IClaimIssuer.sol";
 import { IIdentityEvents } from "../../interfaces/events/IIdentityEvents.sol";
+import { IIdentityErrors } from "../../interfaces/errors/IIdentityErrors.sol";
 
 /// @title IdentityInternalFacet - Internal business logic for Identity domain
 /// @dev Contains all the business logic for investor identity management
 /// @dev This facet is not directly exposed in the diamond interface
-contract IdentityInternalFacet is IIdentityEvents {
+contract IdentityInternalFacet is IIdentityEvents, IIdentityErrors {
 
     // ================== STORAGE STRUCTURES ==================
 
@@ -104,11 +105,11 @@ contract IdentityInternalFacet is IIdentityEvents {
     /// @param identity Identity contract address
     /// @param country Country code
     function _registerIdentity(address investor, address identity, uint16 country) internal {
-        require(investor != address(0), "IdentityInternal: investor is zero address");
-        require(identity != address(0), "IdentityInternal: identity is zero address");
+        if (investor == address(0)) revert ZeroAddress();
+        if (identity == address(0)) revert ZeroAddress();
         
         IdentityStorage storage ids = _getIdentityStorage();
-        require(ids.investorIdentities[investor] == address(0), "IdentityInternal: Already registered");
+        if (ids.investorIdentities[investor] != address(0)) revert AlreadyRegistered(investor);
         
         ids.investorIdentities[investor] = identity;
         ids.investorCountries[investor] = country;
@@ -120,10 +121,10 @@ contract IdentityInternalFacet is IIdentityEvents {
     /// @param investor Investor address
     /// @param newIdentity New identity contract address
     function _updateIdentity(address investor, address newIdentity) internal {
-        require(newIdentity != address(0), "IdentityInternal: identity is zero address");
+        if (newIdentity == address(0)) revert ZeroAddress();
         
         IdentityStorage storage ids = _getIdentityStorage();
-        require(ids.investorIdentities[investor] != address(0), "IdentityInternal: Not registered");
+        if (ids.investorIdentities[investor] == address(0)) revert NotRegistered(investor);
         
         ids.investorIdentities[investor] = newIdentity;
         emit IdentityUpdated(investor, newIdentity);

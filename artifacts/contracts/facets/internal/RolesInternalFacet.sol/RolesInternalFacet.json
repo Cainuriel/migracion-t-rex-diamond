@@ -4,6 +4,55 @@
   "sourceName": "contracts/facets/internal/RolesInternalFacet.sol",
   "abi": [
     {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "agent",
+          "type": "address"
+        }
+      ],
+      "name": "AgentAlreadySet",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "agent",
+          "type": "address"
+        }
+      ],
+      "name": "AgentNotSet",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "currentOwner",
+          "type": "address"
+        }
+      ],
+      "name": "SameOwner",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "caller",
+          "type": "address"
+        }
+      ],
+      "name": "Unauthorized",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ZeroAddress",
+      "type": "error"
+    },
+    {
       "anonymous": false,
       "inputs": [
         {
@@ -42,8 +91,8 @@
       "type": "event"
     }
   ],
-  "bytecode": "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea2646970667358221220185c849a6505cd1678b2b8d5927d36d09749ebf751735644d64a029a0c60dd3864736f6c63430008110033",
-  "deployedBytecode": "0x6080604052600080fdfea2646970667358221220185c849a6505cd1678b2b8d5927d36d09749ebf751735644d64a029a0c60dd3864736f6c63430008110033",
+  "bytecode": "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea2646970667358221220e13d6f698eb3faaa1bb09a4ac9a4d47fbef199180a991a2338b9ece515fe1c6c64736f6c63430008110033",
+  "deployedBytecode": "0x6080604052600080fdfea2646970667358221220e13d6f698eb3faaa1bb09a4ac9a4d47fbef199180a991a2338b9ece515fe1c6c64736f6c63430008110033",
   "linkReferences": {},
   "deployedLinkReferences": {}
 }

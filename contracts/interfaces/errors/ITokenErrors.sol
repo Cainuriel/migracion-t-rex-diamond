@@ -7,7 +7,7 @@ pragma solidity 0.8.17;
 interface ITokenErrors {
     /// @notice Thrown when trying to transfer from a frozen account
     /// @param account The frozen account address
-    error AccountFrozen(address account);
+    error FrozenAccount(address account);
 
     /// @notice Thrown when trying to transfer more tokens than available
     /// @param available The available balance

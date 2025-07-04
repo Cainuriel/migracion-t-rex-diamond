@@ -2,11 +2,12 @@
 pragma solidity 0.8.17;
 
 import { IRolesEvents } from "../../interfaces/events/IRolesEvents.sol";
+import { IRolesErrors } from "../../interfaces/errors/IRolesErrors.sol";
 
 /// @title RolesInternalFacet - Internal business logic for Roles domain
 /// @dev Contains all the business logic for role management and access control
 /// @dev This facet is not directly exposed in the diamond interface
-contract RolesInternalFacet is IRolesEvents {
+contract RolesInternalFacet is IRolesEvents, IRolesErrors {
 
     // ================== STORAGE STRUCTURES ==================
 
@@ -38,11 +39,11 @@ contract RolesInternalFacet is IRolesEvents {
     /// @notice Internal function to initialize roles
     /// @param initialOwner Initial owner address
     function _setInitialOwner(address initialOwner) internal {
-        require(initialOwner != address(0), "RolesInternal: owner is the zero address");
+        if (initialOwner == address(0)) revert ZeroAddress();
         RolesStorage storage rs = _getRolesStorage();
         
         // Ensure not already initialized
-        require(rs.owner == address(0), "RolesInternal: already initialized");
+        if (rs.owner != address(0)) revert SameOwner(rs.owner);
         
         rs.owner = initialOwner;
         emit OwnershipTransferred(address(0), initialOwner);
@@ -51,7 +52,7 @@ contract RolesInternalFacet is IRolesEvents {
     /// @notice Internal function to transfer ownership
     /// @param newOwner New owner address
     function _transferOwnership(address newOwner) internal {
-        require(newOwner != address(0), "RolesInternal: new owner is the zero address");
+        if (newOwner == address(0)) revert ZeroAddress();
         RolesStorage storage rs = _getRolesStorage();
         
         address previousOwner = rs.owner;
@@ -64,7 +65,7 @@ contract RolesInternalFacet is IRolesEvents {
     /// @param agent Agent address
     /// @param status True to grant agent role, false to revoke
     function _setAgent(address agent, bool status) internal {
-        require(agent != address(0), "RolesInternal: agent is the zero address");
+        if (agent == address(0)) revert ZeroAddress();
         RolesStorage storage rs = _getRolesStorage();
         
         rs.agents[agent] = status;
@@ -99,12 +100,12 @@ contract RolesInternalFacet is IRolesEvents {
     /// @notice Internal check for owner-only functions
     /// @param caller Address calling the function
     function _onlyOwner(address caller) internal view {
-        require(caller == _owner(), "RolesInternal: Not owner");
+        if (caller != _owner()) revert Unauthorized(caller);
     }
 
     /// @notice Internal check for owner or agent functions
     /// @param caller Address calling the function
     function _onlyAgentOrOwner(address caller) internal view {
-        require(_isAuthorized(caller), "RolesInternal: Not authorized");
+        if (!_isAuthorized(caller)) revert Unauthorized(caller);
     }
 }
