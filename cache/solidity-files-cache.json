@@ -417,8 +417,8 @@
       ]
     },
     "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\facets\\internal\\TrustedIssuersInternalFacet.sol": {
-      "lastModificationDate": 1751633338292,
-      "contentHash": "f61f51e078c44fea9bcf7a89505eb582",
+      "lastModificationDate": 1751639801788,
+      "contentHash": "f90eecdaa8d56d901d7f481f0be6e1c0",
       "sourceName": "contracts/facets/internal/TrustedIssuersInternalFacet.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -445,7 +445,8 @@
         }
       },
       "imports": [
-        "../../interfaces/events/ITrustedIssuersEvents.sol"
+        "../../interfaces/events/ITrustedIssuersEvents.sol",
+        "../../interfaces/errors/ITrustedIssuersErrors.sol"
       ],
       "versionPragmas": [
         "0.8.17"
@@ -491,8 +492,8 @@
       ]
     },
     "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\facets\\TokenFacet.sol": {
-      "lastModificationDate": 1751633338289,
-      "contentHash": "ae36c5ad9279dcda404149bc428b2d02",
+      "lastModificationDate": 1751640028694,
+      "contentHash": "07a5213d8374a233d8595ff28692fb07",
       "sourceName": "contracts/facets/TokenFacet.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -530,8 +531,8 @@
       ]
     },
     "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\facets\\internal\\TokenInternalFacet.sol": {
-      "lastModificationDate": 1751633338292,
-      "contentHash": "fa945f0623a07f8a11dc4e7cbe0531a1",
+      "lastModificationDate": 1751640011209,
+      "contentHash": "2bf2f57e4dd0a80db87f9d6c8be118fb",
       "sourceName": "contracts/facets/internal/TokenInternalFacet.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -558,7 +559,8 @@
         }
       },
       "imports": [
-        "../../interfaces/events/ITokenEvents.sol"
+        "../../interfaces/events/ITokenEvents.sol",
+        "../../interfaces/errors/ITokenErrors.sol"
       ],
       "versionPragmas": [
         "0.8.17"
@@ -644,8 +646,8 @@
       ]
     },
     "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\facets\\internal\\RolesInternalFacet.sol": {
-      "lastModificationDate": 1751633338292,
-      "contentHash": "fc289b505011935a46a2d5035b6c41a8",
+      "lastModificationDate": 1751639986956,
+      "contentHash": "124cf6e48eb5ce6fec3a7d6bc43be411",
       "sourceName": "contracts/facets/internal/RolesInternalFacet.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -672,7 +674,8 @@
         }
       },
       "imports": [
-        "../../interfaces/events/IRolesEvents.sol"
+        "../../interfaces/events/IRolesEvents.sol",
+        "../../interfaces/errors/IRolesErrors.sol"
       ],
       "versionPragmas": [
         "0.8.17"
@@ -1024,8 +1027,8 @@
       ]
     },
     "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\facets\\internal\\IdentityInternalFacet.sol": {
-      "lastModificationDate": 1751633338292,
-      "contentHash": "e3edc0a8b3c3a330dff97219fe32eea2",
+      "lastModificationDate": 1751639847280,
+      "contentHash": "49fe4910ce458f81151d7fb1e5b9ee49",
       "sourceName": "contracts/facets/internal/IdentityInternalFacet.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -1054,7 +1057,8 @@
       "imports": [
         "../../onchain-id/interface/IIdentity.sol",
         "../../onchain-id/interface/IClaimIssuer.sol",
-        "../../interfaces/events/IIdentityEvents.sol"
+        "../../interfaces/events/IIdentityEvents.sol",
+        "../../interfaces/errors/IIdentityErrors.sol"
       ],
       "versionPragmas": [
         "0.8.17"
@@ -2339,8 +2343,8 @@
       ]
     },
     "C:\\Users\\Fernando\\Documents\\solidity\\alastria\\T-REX\\migracion-t-rex-diamond\\contracts\\interfaces\\errors\\ITokenErrors.sol": {
-      "lastModificationDate": 1751631603938,
-      "contentHash": "ee04ade0541487e263f6758d2b0d68a3",
+      "lastModificationDate": 1751640150064,
+      "contentHash": "104712b6a49dfee595d74c40fc268c40",
       "sourceName": "contracts/interfaces/errors/ITokenErrors.sol",
       "solcConfig": {
         "version": "0.8.17",

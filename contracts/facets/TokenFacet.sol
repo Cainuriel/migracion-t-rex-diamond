@@ -72,7 +72,7 @@ contract TokenFacet is TokenInternalFacet, IEIP2535Introspection {
     /// @return Success flag
     function transferFrom(address from, address to, uint256 amount) external returns (bool) {
         uint256 currentAllowance = _allowance(from, msg.sender);
-        require(currentAllowance >= amount, "TokenFacet: allowance exceeded");
+        if (currentAllowance < amount) revert InsufficientAllowance(currentAllowance, amount);
         
         _approve(from, msg.sender, currentAllowance - amount);
         _transfer(from, to, amount);

@@ -16,6 +16,55 @@ import type {
 
 const _abi = [
   {
+    inputs: [
+      {
+        internalType: "address",
+        name: "investor",
+        type: "address",
+      },
+    ],
+    name: "AlreadyRegistered",
+    type: "error",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint16",
+        name: "country",
+        type: "uint16",
+      },
+    ],
+    name: "InvalidCountry",
+    type: "error",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "identity",
+        type: "address",
+      },
+    ],
+    name: "InvalidIdentity",
+    type: "error",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "investor",
+        type: "address",
+      },
+    ],
+    name: "NotRegistered",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "ZeroAddress",
+    type: "error",
+  },
+  {
     anonymous: false,
     inputs: [
       {
@@ -94,7 +143,7 @@ const _abi = [
 ] as const;
 
 const _bytecode =
-  "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea2646970667358221220ddefe9c4a02964af11f0a5f096e9cec8c2be6b7b7857aa87f380f77f53c2572164736f6c63430008110033";
+  "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea2646970667358221220d87ba58eaa4dc9516ee2258f210c6134e12bd322c14de37b55270a027212015764736f6c63430008110033";
 
 type IdentityInternalFacetConstructorParams =
   | [signer?: Signer]

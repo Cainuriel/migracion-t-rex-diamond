@@ -16,6 +16,60 @@ import type {
 
 const _abi = [
   {
+    inputs: [],
+    name: "EmptyClaimTopics",
+    type: "error",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "issuer",
+        type: "address",
+      },
+    ],
+    name: "InvalidIssuer",
+    type: "error",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "issuer",
+        type: "address",
+      },
+    ],
+    name: "TrustedIssuerAlreadyExists",
+    type: "error",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "issuer",
+        type: "address",
+      },
+    ],
+    name: "TrustedIssuerNotFound",
+    type: "error",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "caller",
+        type: "address",
+      },
+    ],
+    name: "Unauthorized",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "ZeroAddress",
+    type: "error",
+  },
+  {
     anonymous: false,
     inputs: [
       {
@@ -50,7 +104,7 @@ const _abi = [
 ] as const;
 
 const _bytecode =
-  "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea26469706673582212208917f60b70b9497a95c0fb1852e019fdaa88beb3df5ea5318e2655ac121c781764736f6c63430008110033";
+  "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea2646970667358221220878b3da4461603d2397b41760d65dd80754e91cd93c73cef89d27ef3cf618abe64736f6c63430008110033";
 
 type TrustedIssuersInternalFacetConstructorParams =
   | [signer?: Signer]

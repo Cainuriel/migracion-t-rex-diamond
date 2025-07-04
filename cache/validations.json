@@ -77,6 +77,607 @@
         },
         "solcVersion": "0.8.17"
       },
+      "contracts/facets/RolesFacet.sol:RolesFacet": {
+        "src": "contracts\\facets\\RolesFacet.sol:11",
+        "version": {
+          "withMetadata": "f76968a9c1fd57d8ce4dd4b58c9564c2feb6ff0e299279bf9ae2992617e17e99",
+          "withoutMetadata": "ac8b04b9c0c219124971932a28863db026c1e5c997801f1e3538cf0f3041a882",
+          "linkedWithoutMetadata": "ac8b04b9c0c219124971932a28863db026c1e5c997801f1e3538cf0f3041a882"
+        },
+        "inherit": [
+          "contracts/interfaces/IEIP2535Introspection.sol:IEIP2535Introspection",
+          "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:Initializable",
+          "contracts/facets/internal/RolesInternalFacet.sol:RolesInternalFacet",
+          "contracts/interfaces/errors/IRolesErrors.sol:IRolesErrors",
+          "contracts/interfaces/events/IRolesEvents.sol:IRolesEvents"
+        ],
+        "libraries": [],
+        "methods": [
+          "initializeRoles(address)",
+          "transferOwnership(address)",
+          "owner()",
+          "setAgent(address,bool)",
+          "isAgent(address)",
+          "selectorsIntrospection()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [
+            {
+              "label": "_initialized",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_uint8",
+              "contract": "Initializable",
+              "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:63",
+              "retypedFrom": "bool"
+            },
+            {
+              "label": "_initializing",
+              "offset": 1,
+              "slot": "0",
+              "type": "t_bool",
+              "contract": "Initializable",
+              "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:68"
+            }
+          ],
+          "types": {
+            "t_bool": {
+              "label": "bool",
+              "numberOfBytes": "1"
+            },
+            "t_uint8": {
+              "label": "uint8",
+              "numberOfBytes": "1"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/facets/TokenFacet.sol:TokenFacet": {
+        "src": "contracts\\facets\\TokenFacet.sol:10",
+        "version": {
+          "withMetadata": "d999cf717585942983c95b1bead7aa1a249a4cf2f7402d8c0251067c32e51e12",
+          "withoutMetadata": "c16c071dfcf32467e98aa559311854f4d7fd489f13f0ab56e953ff232baa6ea3",
+          "linkedWithoutMetadata": "c16c071dfcf32467e98aa559311854f4d7fd489f13f0ab56e953ff232baa6ea3"
+        },
+        "inherit": [
+          "contracts/interfaces/IEIP2535Introspection.sol:IEIP2535Introspection",
+          "contracts/facets/internal/TokenInternalFacet.sol:TokenInternalFacet",
+          "contracts/interfaces/errors/ITokenErrors.sol:ITokenErrors",
+          "contracts/interfaces/events/ITokenEvents.sol:ITokenEvents"
+        ],
+        "libraries": [],
+        "methods": [
+          "name()",
+          "symbol()",
+          "decimals()",
+          "totalSupply()",
+          "balanceOf(address)",
+          "transfer(address,uint256)",
+          "approve(address,uint256)",
+          "transferFrom(address,address,uint256)",
+          "allowance(address,address)",
+          "mint(address,uint256)",
+          "burn(address,uint256)",
+          "forceTransfer(address,address,uint256)",
+          "freezeAccount(address)",
+          "unfreezeAccount(address)",
+          "isFrozen(address)",
+          "selectorsIntrospection()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/facets/internal/RolesInternalFacet.sol:RolesInternalFacet": {
+        "src": "contracts\\facets\\internal\\RolesInternalFacet.sol:10",
+        "version": {
+          "withMetadata": "5254e7bb3bf2a6b46f6364979cf4ef5d10cc886e1ae2a1488eeb25599da198c6",
+          "withoutMetadata": "ac0db523ddc3e330f735df7b3b0b24460531c71290a891170e840f8f67d5ff6b",
+          "linkedWithoutMetadata": "ac0db523ddc3e330f735df7b3b0b24460531c71290a891170e840f8f67d5ff6b"
+        },
+        "inherit": [
+          "contracts/interfaces/errors/IRolesErrors.sol:IRolesErrors",
+          "contracts/interfaces/events/IRolesEvents.sol:IRolesEvents"
+        ],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/facets/internal/TokenInternalFacet.sol:TokenInternalFacet": {
+        "src": "contracts\\facets\\internal\\TokenInternalFacet.sol:10",
+        "version": {
+          "withMetadata": "2a55d0581244ecd1958d7bda9c17be6db43ae3f60d4434b5a2fda03cdf744f2f",
+          "withoutMetadata": "ac0db523ddc3e330f735df7b3b0b24460531c71290a891170e840f8f67d5ff6b",
+          "linkedWithoutMetadata": "ac0db523ddc3e330f735df7b3b0b24460531c71290a891170e840f8f67d5ff6b"
+        },
+        "inherit": [
+          "contracts/interfaces/errors/ITokenErrors.sol:ITokenErrors",
+          "contracts/interfaces/events/ITokenEvents.sol:ITokenEvents"
+        ],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/interfaces/IEIP2535Introspection.sol:IEIP2535Introspection": {
+        "src": "contracts\\interfaces\\IEIP2535Introspection.sol:9",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "selectorsIntrospection()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/interfaces/errors/IRolesErrors.sol:IRolesErrors": {
+        "src": "contracts\\interfaces\\errors\\IRolesErrors.sol:7",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/interfaces/errors/ITokenErrors.sol:ITokenErrors": {
+        "src": "contracts\\interfaces\\errors\\ITokenErrors.sol:7",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/interfaces/events/IRolesEvents.sol:IRolesEvents": {
+        "src": "contracts\\interfaces\\events\\IRolesEvents.sol:7",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/interfaces/events/ITokenEvents.sol:ITokenEvents": {
+        "src": "contracts\\interfaces\\events\\ITokenEvents.sol:7",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      }
+    },
+    {
+      "contracts/facets/IdentityFacet.sol:IdentityFacet": {
+        "src": "contracts\\facets\\IdentityFacet.sol:10",
+        "version": {
+          "withMetadata": "3acdcc6b618f759afec0848e514b2bba6f9fb04331e7a827f7ba74f58cd129fa",
+          "withoutMetadata": "08f30a2eef2e5f6c28d830205a407817469d696b1b7349e2121f0622b0c1603d",
+          "linkedWithoutMetadata": "08f30a2eef2e5f6c28d830205a407817469d696b1b7349e2121f0622b0c1603d"
+        },
+        "inherit": [
+          "contracts/interfaces/IEIP2535Introspection.sol:IEIP2535Introspection",
+          "contracts/facets/internal/IdentityInternalFacet.sol:IdentityInternalFacet",
+          "contracts/interfaces/errors/IIdentityErrors.sol:IIdentityErrors",
+          "contracts/interfaces/events/IIdentityEvents.sol:IIdentityEvents"
+        ],
+        "libraries": [],
+        "methods": [
+          "registerIdentity(address,address,uint16)",
+          "updateIdentity(address,address)",
+          "updateCountry(address,uint16)",
+          "deleteIdentity(address)",
+          "isVerified(address)",
+          "getInvestorCountry(address)",
+          "getIdentity(address)",
+          "selectorsIntrospection()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/facets/TrustedIssuersFacet.sol:TrustedIssuersFacet": {
+        "src": "contracts\\facets\\TrustedIssuersFacet.sol:10",
+        "version": {
+          "withMetadata": "7b56dc218a8c3ba1db74a8dc70e836780299c06fef84765cf48cf9b6203d346d",
+          "withoutMetadata": "df0dae14dcb5040f79b6da9b4d0bc579d43e14f3e41e1f7aa75e248df89d069b",
+          "linkedWithoutMetadata": "df0dae14dcb5040f79b6da9b4d0bc579d43e14f3e41e1f7aa75e248df89d069b"
+        },
+        "inherit": [
+          "contracts/interfaces/IEIP2535Introspection.sol:IEIP2535Introspection",
+          "contracts/facets/internal/TrustedIssuersInternalFacet.sol:TrustedIssuersInternalFacet",
+          "contracts/interfaces/errors/ITrustedIssuersErrors.sol:ITrustedIssuersErrors",
+          "contracts/interfaces/events/ITrustedIssuersEvents.sol:ITrustedIssuersEvents"
+        ],
+        "libraries": [],
+        "methods": [
+          "addTrustedIssuer(address,uint256[])",
+          "removeTrustedIssuer(address,uint256)",
+          "getTrustedIssuers(uint256)",
+          "selectorsIntrospection()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/facets/internal/IdentityInternalFacet.sol:IdentityInternalFacet": {
+        "src": "contracts\\facets\\internal\\IdentityInternalFacet.sol:12",
+        "version": {
+          "withMetadata": "76dca50c455c55a559016af0c1257338319c8b235704a346b20afea9685a2029",
+          "withoutMetadata": "ac0db523ddc3e330f735df7b3b0b24460531c71290a891170e840f8f67d5ff6b",
+          "linkedWithoutMetadata": "ac0db523ddc3e330f735df7b3b0b24460531c71290a891170e840f8f67d5ff6b"
+        },
+        "inherit": [
+          "contracts/interfaces/errors/IIdentityErrors.sol:IIdentityErrors",
+          "contracts/interfaces/events/IIdentityEvents.sol:IIdentityEvents"
+        ],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/facets/internal/TrustedIssuersInternalFacet.sol:TrustedIssuersInternalFacet": {
+        "src": "contracts\\facets\\internal\\TrustedIssuersInternalFacet.sol:10",
+        "version": {
+          "withMetadata": "5f6ca15ed599d7cbdb4417d56dd89efa6737eb65a1980e9852d576e3308f6237",
+          "withoutMetadata": "ac0db523ddc3e330f735df7b3b0b24460531c71290a891170e840f8f67d5ff6b",
+          "linkedWithoutMetadata": "ac0db523ddc3e330f735df7b3b0b24460531c71290a891170e840f8f67d5ff6b"
+        },
+        "inherit": [
+          "contracts/interfaces/errors/ITrustedIssuersErrors.sol:ITrustedIssuersErrors",
+          "contracts/interfaces/events/ITrustedIssuersEvents.sol:ITrustedIssuersEvents"
+        ],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/interfaces/IEIP2535Introspection.sol:IEIP2535Introspection": {
+        "src": "contracts\\interfaces\\IEIP2535Introspection.sol:9",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "selectorsIntrospection()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/interfaces/errors/IIdentityErrors.sol:IIdentityErrors": {
+        "src": "contracts\\interfaces\\errors\\IIdentityErrors.sol:7",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/interfaces/errors/ITrustedIssuersErrors.sol:ITrustedIssuersErrors": {
+        "src": "contracts\\interfaces\\errors\\ITrustedIssuersErrors.sol:7",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/interfaces/events/IIdentityEvents.sol:IIdentityEvents": {
+        "src": "contracts\\interfaces\\events\\IIdentityEvents.sol:7",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/interfaces/events/ITrustedIssuersEvents.sol:ITrustedIssuersEvents": {
+        "src": "contracts\\interfaces\\events\\ITrustedIssuersEvents.sol:7",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/onchain-id/interface/IClaimIssuer.sol:IClaimIssuer": {
+        "src": "contracts\\onchain-id\\interface\\IClaimIssuer.sol:6",
+        "inherit": [
+          "contracts/onchain-id/interface/IIdentity.sol:IIdentity",
+          "contracts/onchain-id/interface/IERC735.sol:IERC735",
+          "contracts/onchain-id/interface/IERC734.sol:IERC734"
+        ],
+        "libraries": [],
+        "methods": [
+          "revokeClaim(bytes32,address)",
+          "revokeClaimBySignature(bytes)",
+          "isClaimRevoked(bytes)",
+          "isClaimValid(address,uint256,bytes,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/onchain-id/interface/IERC734.sol:IERC734": {
+        "src": "contracts\\onchain-id\\interface\\IERC734.sol:7",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "addKey(bytes32,uint256,uint256)",
+          "approve(uint256,bool)",
+          "removeKey(bytes32,uint256)",
+          "execute(address,uint256,bytes)",
+          "getKey(bytes32)",
+          "getKeyPurposes(bytes32)",
+          "getKeysByPurpose(uint256)",
+          "keyHasPurpose(bytes32,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/onchain-id/interface/IERC735.sol:IERC735": {
+        "src": "contracts\\onchain-id\\interface\\IERC735.sol:7",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "addClaim(uint256,uint256,address,bytes,bytes,string)",
+          "removeClaim(bytes32)",
+          "getClaim(bytes32)",
+          "getClaimIdsByTopic(uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/onchain-id/interface/IIdentity.sol:IIdentity": {
+        "src": "contracts\\onchain-id\\interface\\IIdentity.sol:8",
+        "inherit": [
+          "contracts/onchain-id/interface/IERC735.sol:IERC735",
+          "contracts/onchain-id/interface/IERC734.sol:IERC734"
+        ],
+        "libraries": [],
+        "methods": [
+          "isClaimValid(address,uint256,bytes,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      }
+    },
+    {
+      "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:Initializable": {
+        "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:58",
+        "inherit": [],
+        "libraries": [
+          "@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol:AddressUpgradeable"
+        ],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [
+            {
+              "label": "_initialized",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_uint8",
+              "contract": "Initializable",
+              "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:63",
+              "retypedFrom": "bool"
+            },
+            {
+              "label": "_initializing",
+              "offset": 1,
+              "slot": "0",
+              "type": "t_bool",
+              "contract": "Initializable",
+              "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:68"
+            }
+          ],
+          "types": {
+            "t_bool": {
+              "label": "bool",
+              "numberOfBytes": "1"
+            },
+            "t_uint8": {
+              "label": "uint8",
+              "numberOfBytes": "1"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
+      "@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol:AddressUpgradeable": {
+        "src": "@openzeppelin\\contracts-upgradeable\\utils\\AddressUpgradeable.sol:9",
+        "version": {
+          "withMetadata": "7834828060f66da0039d30efb993f5f2643830d689ce2cdff803e8bbc308450e",
+          "withoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db",
+          "linkedWithoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "delegatecall",
+            "src": "@openzeppelin\\contracts-upgradeable\\utils\\AddressUpgradeable.sol:185"
+          },
+          {
+            "kind": "delegatecall",
+            "src": "@openzeppelin\\contracts-upgradeable\\utils\\AddressUpgradeable.sol:185"
+          }
+        ],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.17"
+      },
       "@openzeppelin/contracts/access/Ownable.sol:Ownable": {
         "src": "@openzeppelin\\contracts\\access\\Ownable.sol:20",
         "inherit": [

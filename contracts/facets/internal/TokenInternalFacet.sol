@@ -2,11 +2,12 @@
 pragma solidity 0.8.17;
 
 import { ITokenEvents } from "../../interfaces/events/ITokenEvents.sol";
+import { ITokenErrors } from "../../interfaces/errors/ITokenErrors.sol";
 
 /// @title TokenInternalFacet - Internal business logic for Token domain
 /// @dev Contains all the business logic for token operations
 /// @dev This facet is not directly exposed in the diamond interface
-contract TokenInternalFacet is ITokenEvents {
+contract TokenInternalFacet is ITokenEvents, ITokenErrors {
 
     // ================== STORAGE STRUCTURES ==================
 
