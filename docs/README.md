@@ -30,12 +30,6 @@ Esta complejidad **requiere una comprensión estructurada y progresiva**. La pre
 - 🔄 Soporte multi-jurisdiccional
 - 🔄 Optimizaciones de gas adicionales
 
-### 📋 **Roadmap Futuro**
-- 📋 Auditoría de seguridad profesional
-- 📋 Integración con exchanges y wallets
-- 📋 Herramientas de governance avanzadas
-- 📋 SDK para desarrolladores
-
 ---
 
 ## 📚 Ruta de Aprendizaje Recomendada
