@@ -23,6 +23,8 @@
 
 Este proyecto implementa una versión **completamente refactorizada** del estándar **ERC-3643 (T-REX)** utilizando el patrón **Diamond (EIP-2535)** con una arquitectura modular avanzada que elimina las limitaciones de storage y mejora significativamente la extensibilidad del sistema.
 
+Para comprender la arquitectura y el protocolo, revisa la [documentación completa en `docs/`](docs/README.md).
+
 > ⚠️ **ATENCIÓN:** Configure su red personalizada en `hardhat.config.ts` adaptándola a sus necesidades. Para pruebas rápidas, utilice las redes de prueba disponibles.
 
 ---

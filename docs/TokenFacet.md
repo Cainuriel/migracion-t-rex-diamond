@@ -1,25 +1,31 @@
-# TokenFacet Documentation
+# TokenFacet
+
+The **TokenFacet** provides the external interface for all token operations in the T-REX Diamond protocol. It implements the ERC-20 standard with ERC-3643 security token extensions, offering comprehensive token management functionality while maintaining clean separation between interface and business logic.
 
 ## Overview
 
-The `TokenFacet` is the core token functionality facet of the T-REX Diamond implementation, providing **ERC-20** standard compliance with enhanced **ERC-3643** (T-REX) features for security token management. This facet handles all token operations including transfers, minting, burning, and account freezing capabilities.
+TokenFacet serves as the user-facing interface for token operations, delegating complex business logic to TokenInternalFacet. This separation ensures clean API design, efficient gas usage, and maintainable code architecture within the Diamond pattern.
 
-## Architecture & Purpose
+## Architecture
 
-### Primary Responsibilities
-- **ERC-20 Compliance**: Implements standard token functions (transfer, approve, etc.)
-- **Security Token Features**: Adds freezing, forced transfers, and compliance checks
-- **Administrative Controls**: Provides mint/burn capabilities for authorized agents
-- **Investor Management**: Integrates with investor registry for compliance validation
+### Contract Structure
+```
+TokenFacet (External Interface)
+├── TokenInternalFacet (Business Logic)
+├── ITokenEvents (Events Interface)
+├── ITokenErrors (Errors Interface)
+└── Diamond Storage (Token Data)
+```
 
-### Storage Integration
-- Uses `LibAppStorage.diamondStorage()` for accessing shared state
-- Manages token balances, allowances, and investor status
-- Maintains total supply and metadata (name, symbol, decimals)
+### Design Pattern
+- **External Interface**: Clean, ERC-20 compliant public API
+- **Internal Logic**: Complex business rules and storage management
+- **Modular Events**: Centralized event definitions
+- **Custom Errors**: Gas-efficient error handling
 
-## Key Functions
+## Core Functionality
 
-### Standard ERC-20 Functions
+### Standard ERC-20 Interface
 
 #### View Functions
 ```solidity
@@ -38,9 +44,9 @@ function transferFrom(address from, address to, uint256 amount) external returns
 function approve(address spender, uint256 amount) external returns (bool)
 ```
 
-### Security Token Extensions
+### ERC-3643 Security Token Extensions
 
-#### Administrative Functions (onlyAgentOrOwner)
+#### Administrative Functions
 ```solidity
 function mint(address to, uint256 amount) external onlyAgentOrOwner
 function burn(address from, uint256 amount) external onlyAgentOrOwner
@@ -111,25 +117,84 @@ event AccountFrozen(address indexed user, bool frozen);
 
 ### State Consistency
 - Uses diamond storage pattern for consistent state access
-- Atomic operations ensure state integrity
-- Event emission provides audit trail
+```solidity
+function freezeAccount(address account) external onlyAgentOrOwner
+function unfreezeAccount(address account) external onlyAgentOrOwner
+function isFrozen(address account) external view returns (bool)
+```
 
-## Integration with T-REX System
+#### Compliance Integration
+```solidity
+function holderCount() external view returns (uint256)
+function holderAt(uint256 index) external view returns (address)
+```
 
-### Compliance Layer
-- All transfers can be subject to compliance rules (via ComplianceFacet)
-- Identity verification requirements (via IdentityFacet)
-- Trusted issuer validation for claims
+## Access Control
 
-### Role-Based Permissions
-- Works with `RolesFacet` for granular permission management
-- Agent system allows operational delegation
-- Owner retains administrative oversight
+### Permission Levels
+- **Public**: Standard ERC-20 functions available to all users
+- **Agent or Owner**: Administrative functions for authorized personnel
+- **Internal**: Business logic accessible only within the Diamond
 
-### Storage Coordination
-- Shares `AppStorage` with other facets
-- Maintains consistency across investor registry
-- Coordinates with compliance and identity systems
+### Security Features
+- Role-based access control through RolesInternalFacet
+- Input validation with custom errors
+- Compliance checks before state changes
+- Event emission for audit trails
+
+## Integration Patterns
+
+### With ComplianceFacet
+```solidity
+// Transfer validation through compliance rules
+function transfer(address to, uint256 amount) external returns (bool) {
+    return _transfer(msg.sender, to, amount);
+}
+
+// Internal validation includes compliance checks
+function _transfer(address from, address to, uint256 amount) internal {
+    // Compliance validation happens in TokenInternalFacet
+    ComplianceInternalFacet(address(this))._validateTransfer(from, to, amount);
+    // ... transfer logic
+}
+```
+
+### With IdentityFacet
+```solidity
+// Identity verification before operations
+function mint(address to, uint256 amount) external onlyAgentOrOwner {
+    // Verify recipient identity in TokenInternalFacet
+    IdentityInternalFacet(address(this))._requireValidIdentity(to);
+    _mint(to, amount);
+}
+```
+
+## Events and Errors
+
+### Standard ERC-20 Events
+```solidity
+event Transfer(address indexed from, address indexed to, uint256 value);
+event Approval(address indexed owner, address indexed spender, uint256 value);
+```
+
+### ERC-3643 Extensions
+```solidity
+event Mint(address indexed to, uint256 value);
+event Burn(address indexed from, uint256 value);
+event ForcedTransfer(address indexed from, address indexed to, uint256 value);
+event AccountFrozen(address indexed account);
+event AccountUnfrozen(address indexed account);
+```
+
+### Custom Errors
+```solidity
+error ZeroAddress();
+error ZeroAmount();
+error InsufficientBalance(address account, uint256 available, uint256 required);
+error InsufficientAllowance(address owner, address spender, uint256 available, uint256 required);
+error AccountFrozen(address account);
+error ComplianceViolation(address from, address to, uint256 amount);
+```
 
 ## Usage Examples
 
@@ -157,18 +222,57 @@ tokenFacet.freezeAccount(suspiciousAddress);
 tokenFacet.forceTransfer(violator, treasury, balance);
 ```
 
+### Compliance-Aware Operations
+```javascript
+// Check compliance before transfer
+try {
+    await tokenFacet.transfer(recipient, amount);
+    console.log("Transfer completed successfully");
+} catch (error) {
+    if (error.message.includes("ComplianceViolation")) {
+        console.log("Transfer blocked by compliance rules");
+    }
+}
+```
+
 ## Best Practices
 
-1. **Always verify identity**: Ensure recipients have valid identity claims
-2. **Check compliance**: Validate transfers meet regulatory requirements  
-3. **Monitor frozen accounts**: Track freezing events for audit trails
-4. **Manage agent roles**: Regularly review agent permissions
-5. **Coordinate with facets**: Ensure consistency across the diamond system
+### For Developers
+1. **Validate inputs**: Always check addresses and amounts before operations
+2. **Handle errors**: Implement proper error handling for custom errors
+3. **Monitor events**: Listen to events for real-time updates
+4. **Understand roles**: Verify user permissions before calling restricted functions
 
-## Upgradeability
+### For Administrators
+1. **Identity verification**: Ensure all token holders have valid identities
+2. **Compliance monitoring**: Regular compliance checks and rule updates
+3. **Agent management**: Carefully manage agent permissions and access
+4. **Audit trails**: Monitor all administrative actions through events
 
-The TokenFacet can be upgraded through the Diamond pattern:
-- Function selectors can be modified via `DiamondCutFacet`
+### For Integration
+1. **Use interfaces**: Interact through well-defined interfaces
+2. **Batch operations**: Group multiple operations for gas efficiency
+3. **Error handling**: Implement comprehensive error handling
+4. **State monitoring**: Track contract state changes through events
+
+## Upgradeability and Migration
+
+### Diamond Upgrades
+- TokenFacet can be upgraded through DiamondCutFacet
+- Storage remains intact during function upgrades
+- New functionality can be added without affecting existing operations
+
+### Migration Considerations
+- Storage layout compatibility must be maintained
+- Event signatures should remain consistent
+- Access control patterns should be preserved
+
+## Related Documentation
+- [Token Contract](./TokenContract.md) - Complete token system overview
+- [Diamond Infrastructure](./DiamondInfrastructure.md) - Diamond architecture
+- [Compliance Contract](./ComplianceContract.md) - Compliance integration
+- [Identity Contract](./IdentityContract.md) - Identity management
+- [Architecture Overview](./Architecture.md) - System architecture
 - Storage remains persistent through `AppStorage`
 - New functionality can be added without losing state
 - Critical security functions should be carefully reviewed before upgrades
