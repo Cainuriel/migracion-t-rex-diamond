@@ -1,16 +1,4 @@
-# 📖 Guía de Lectura - T-REX Diamond Protocol
-
-> **⚠️ IMPORTANTE**: Este es un protocolo complejo que implementa una arquitectura avanzada. Es **fundamental** seguir esta guía de lectura paso a paso para comprender completamente el sistema antes de trabajar con él.
-
-## 🎯 Propósito de Esta Guía
-
-El **T-REX Diamond Protocol** es una implementación sofisticada que combina:
-- **ERC-3643** (T-REX): Estándar de seguridad para tokens regulados
-- **EIP-2535** (Diamond Standard): Arquitectura modular y actualizable
-- **OnChain-ID**: Sistema de identidad descentralizada
-- **Compliance Engine**: Motor de cumplimiento regulatorio automatizado
-
-Esta complejidad **requiere una comprensión estructurada y progresiva**. La presente guía te llevará desde los conceptos fundamentales hasta los detalles de implementación más avanzados.
+# 📖 Guía de Lectura - ERC-3643 Diamond Protocol
 
 ---
 
@@ -32,7 +20,7 @@ Esta complejidad **requiere una comprensión estructurada y progresiva**. La pre
 
 ---
 
-## 📚 Ruta de Aprendizaje Recomendada
+
 
 ### 🎯 **Fase 1: Fundamentos** (Comprensión Básica)
 
@@ -40,7 +28,7 @@ Esta complejidad **requiere una comprensión estructurada y progresiva**. La pre
 📄 **[Architecture.md](./Architecture.md)**
 
 - **Propósito**: Comprende la visión general del sistema
-- **Qué aprenderás**:
+
   - Por qué elegimos Diamond Pattern
   - Cómo funciona ERC-3643
   - Beneficios de nuestra arquitectura
@@ -50,7 +38,7 @@ Esta complejidad **requiere una comprensión estructurada y progresiva**. La pre
 📄 **[DiamondInfrastructure.md](./DiamondInfrastructure.md)**
 
 - **Propósito**: Domina la base técnica del sistema
-- **Qué aprenderás**:
+
   - Implementación del EIP-2535
   - Gestión de storage aislado
   - Mecanismos de upgrade
@@ -117,32 +105,6 @@ Esta complejidad **requiere una comprensión estructurada y progresiva**. La pre
 - *(Otros facets para referencia específica)*
 
 ---
-
-## 🎯 **Rutas de Lectura por Perfil**
-
-### 👔 **Para Stakeholders/Management**
-
-1. [Architecture.md](./Architecture.md) - Visión general
-2. [TokenContract.md](./TokenContract.md) - Funcionalidad principal
-3. [ComplianceContract.md](./ComplianceContract.md) - Cumplimiento regulatorio
-
-### 🔐 **Para Compliance Officers**
-
-1. [Architecture.md](./Architecture.md) - Contexto técnico
-2. [IdentityContract.md](./IdentityContract.md) - Verificación de identidad
-3. [ComplianceContract.md](./ComplianceContract.md) - Reglas y validación
-4. [ClaimTopicsContract.md](./ClaimTopicsContract.md) - Requisitos de verificación
-5. [TrustedIssuersContract.md](./TrustedIssuersContract.md) - Autoridades certificadoras
-
-### 💻 **Para Desarrolladores**
-
-1. **Toda la documentación en orden secuencial**
-2. **Enfoque especial en**: [DiamondInfrastructure.md](./DiamondInfrastructure.md) y [ExtendingProtocol.md](./ExtendingProtocol.md)
-
-### 🔍 **Para Auditores**
-**Tiempo total**: ~8-10 horas (análisis profundo)
-1. **Lectura completa** + análisis de código fuente
-2. **Enfoque especial en**: Seguridad, access control, storage patterns
 
 ---
 
